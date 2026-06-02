@@ -37,13 +37,12 @@
         
         <!-- NAVBAR FISSA CON MENU A TENDINA -->
         <nav class="navbar">
-            <div class="logo">M & S</div>
+            <div class="logo">Antonio & Giulia</div>
             <div>
-                <!-- Il menu a tendina che salta alle sezioni -->
                 <select class="menu-tendina" onchange="navigaASezione(this.value)">
                     <option value="">Naviga nel sito...</option>
-                    <option value="#cartoncino1">1. Copertina & Foto</option>
-                    <option value="#cartoncino2">2. Il Giorno (Mappa)</option>
+                    <option value="#cartoncino1">1. Copertina</option>
+                    <option value="#cartoncino2">2. La Cerimonia</option>
                     <option value="#cartoncino3">3. Info & Contatti</option>
                     <option value="#cartoncino4">4. Iban & Regali</option>
                 </select>
@@ -55,25 +54,27 @@
             
             <!-- CARTONCINO 1: COPERTINA E FOTO -->
             <article id="cartoncino1" class="cartoncino">
-                <h1>Giulia & Antonio</h1>
-                <p class="sottotitolo">Ci Sposiamo</p>
+                <h1>Antonio & Giulia</h1>
+                <p class="sottotitolo">Ci Sposiamo — 3 Luglio 2027</p>
                 <div class="placeholder-foto">
-                    [ Qui inseriremo la vostra prima Foto / Disegno della partecipazione ]
+                    [ Qui inseriremo il Disegno 1 della partecipazione ]
                 </div>
                 <p>Benvenuti nel nostro sito di matrimonio. Abbiamo racchiuso in queste pagine digitali tutti i dettagli del nostro giorno più bello.</p>
             </article>
 
-            <!-- CARTONCINO 2: IL GIORNO E MAPPA -->
+            <!-- CARTONCINO 2: LA CERIMONIA -->
             <article id="cartoncino2" class="cartoncino">
-                <h2>Il Grande Giorno</h2>
-                <p><strong>La Cerimonia e il Ricevimento</strong></p>
-                <p>Tutte le informazioni su orari e luoghi dell'evento.</p>
+                <h2>La Cerimonia</h2>
+                <p><strong>Santuario di Santa Maria del Monte</strong></p>
+                <p>Ci scambieremo le promesse alle ore <strong>14:30</strong></p>
+                <p>Località Santa Maria del Monte, Varese (VA)</p>
                 
                 <div class="placeholder-foto">
-                    [ Qui inseriremo la Mappa Interattiva di Google Maps ]
+                    [ Qui inseriremo il Disegno 2 della partecipazione ]
                 </div>
                 
-                <a href="#" class="btn-mappa" target="_blank">Apri su Google Maps</a>
+                <!-- LINK REALE DI GOOGLE MAPS INSERITO QUI -->
+                <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn-mappa" target="_blank">Apri Navigatore Google Maps</a>
             </article>
 
             <!-- CARTONCINO 3: INFO E CONTATTI -->
@@ -81,7 +82,7 @@
                 <h2>Informazioni Utili</h2>
                 <p>Dettagli logistici, conferme di presenza (RSVP), scadenze e contatti telefonici per qualsiasi dubbio.</p>
                 <div class="placeholder-foto">
-                    [ Qui inseriremo i dettagli dei Contatti o il Modulo ]
+                    [ Qui inseriremo il Disegno 3 della partecipazione ]
                 </div>
             </article>
 
@@ -90,7 +91,7 @@
                 <h2>Il nostro Sogno</h2>
                 <p>Se desiderate contribuire al nostro viaggio di nozze o al nostro futuro insieme, qui troverete tutti i dettagli bancari.</p>
                 <div class="placeholder-foto">
-                    [ Qui inseriremo l'IBAN e i dettagli del viaggio ]
+                    [ Qui inseriremo il Disegno 4 della partecipazione ]
                 </div>
             </article>
 
@@ -99,7 +100,6 @@
 
     <!-- SCRIPT PER LOGICHE (PASSWORD E NAVIGAZIONE) -->
     <script>
-        // Controllo Password
         function controllaPassword() {
             const passwordInserita = document.getElementById('password-input').value;
             const passwordCorretta = "Ilmioamore2027"; 
@@ -112,7 +112,6 @@
             }
         }
 
-        // Permette al menu a tendina di spostare la pagina sul cartoncino giusto
         function navigaASezione(idSezione) {
             if (idSezione) {
                 const elemento = document.querySelector(idSezione);
@@ -122,7 +121,6 @@
             }
         }
 
-        // Tasto Invio per password
         document.getElementById('password-input').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') { controllaPassword(); }
         });
