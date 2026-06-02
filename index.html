@@ -32,11 +32,11 @@
 
     <div id="sito-vero">
         
-        <nav class="navbar">
+        <nav class="navbar" id="navbar-scorrimento">
             <div class="logo">Antonio & Giulia</div>
             <div>
                 <select class="menu-tendina" onchange="navigaASezione(this.value)">
-                    <option value="">Naviga nel sito...</option>
+                    <option value="">Naviga...</option>
                     <option value="#cartoncino1">1. Copertina</option>
                     <option value="#cartoncino2">2. Sezione Speciale</option>
                     <option value="#cartoncino3">3. Il Giorno</option>
@@ -103,6 +103,7 @@
             if (passwordInserita === passwordCorretta) {
                 document.getElementById('schermata-blocco').style.display = 'none';
                 document.getElementById('sito-vero').style.display = 'block';
+                inizializzaNavbarScomparsa();
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }
@@ -115,6 +116,25 @@
                     elemento.scrollIntoView({ behavior: 'smooth' });
                 }
             }
+        }
+
+        // LOGICA EFFETTO SCOMPARSA NAVBAR (COMPARE SOLO SE SEI FERMO)
+        function inizializzaNavbarScomparsa() {
+            const navbar = document.getElementById('navbar-scorrimento');
+            let isScrolling;
+
+            window.addEventListener('scroll', function() {
+                // Appena l'utente si muove, aggiunge la classe che la nasconde verso l'alto
+                navbar.classList.add('navbar-nascosta');
+
+                // Cancella il timer precedente mentre l'utente continua a scorrere
+                window.clearTimeout(isScrolling);
+
+                // Imposta un timer: dopo 150 millisecondi che sei fermo, la barra riappare
+                isScrolling = setTimeout(function() {
+                    navbar.classList.remove('navbar-nascosta');
+                }, 150);
+            }, false);
         }
 
         document.getElementById('password-input').addEventListener('keypress', function (e) {
