@@ -1,7 +1,5 @@
-/* IMPORTAZIONE DEI FONT ELEGANTI DA GOOGLE FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap');
 
-/* RESET GENERALE */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,19 +13,19 @@ html {
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #faf6f0; 
-    color: #1e2921; 
+    color: #1a241d; /* Verde pino scurissimo, quasi nero per massima leggibilità */
     line-height: 1.6;
 }
 
-/* NAVBAR SOTTILE E PULITA */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fefbf7; /* Avorio pieno */
+    background-color: #fefbf7;
     padding: 14px 20px;
-    box-shadow: 0 2px 10px rgba(47, 62, 51, 0.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     z-index: 1000;
     display: flex;
     justify-content: space-between;
@@ -53,19 +51,18 @@ body {
     cursor: pointer;
 }
 
-/* STRUTTURA DEL PAPIRO FLUIDO */
 .papiro-container {
     margin-top: 60px;
 }
 
-/* SEZIONE ALLUNGATA CON SCORRIMENTO */
+/* CARATTERISTICHE CARTONCINI/SEZIONI */
 .cartoncino {
     min-height: 180vh; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    padding: 140px 20px; 
+    padding: 120px 20px; 
     text-align: center;
     background-size: cover; 
     background-repeat: no-repeat;
@@ -74,62 +71,55 @@ body {
     scroll-margin-top: 60px;
 }
 
-/* INQUADRATURA DEI DISEGNI */
 #cartoncino1 { background-image: url('disegno1.png'); background-position: center bottom; }
 #cartoncino2 { background-image: url('disegno2.png'); background-position: center center; }
 #cartoncino3 { background-image: url('disegno3.png'); background-position: center bottom; }
 #cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
 
-
-/* NUOVO CARTONCINO TIPOGRAFICO COPRENTE (Massima Leggibilità) */
+/* IL CASSETTO DEL TESTO TOTALMENTE PROTETTO */
 .contenuto-cartoncino {
-    background-color: #fefbf7; /* OPACO AL 100%: Il disegno sotto non può più disturbare il testo */
-    padding: 45px 35px;
-    max-width: 520px; /* Leggermente più stretto per farlo sembrare un vero invito */
-    width: 90%;
-    margin-top: 20px; 
-    border-radius: 4px; /* Taglio netto da cartone tipografico */
-    
-    /* Doppio bordo elegante nei colori del matrimonio */
+    background-color: #ffffff; /* Bianco puro opaco: cancella totalmente il disegno sotto le scritte */
+    padding: 40px 30px;
+    max-width: 480px; 
+    width: 92%;
+    margin-top: 30px; 
+    border-radius: 4px; 
     border: 1px solid #eae5dd;
-    outline: 4px solid rgba(143, 168, 155, 0.15); /* Profilo esterno verde eucalipto chiarissimo */
-    outline-offset: -12px; /* Rientrato rispetto al bordo per fare l'effetto cornice */
-    
-    /* Ombra decisa che stacca il cartoncino dallo sfondo del disegno */
-    box-shadow: 0 15px 35px rgba(47, 62, 51, 0.18);
+    outline: 4px solid rgba(143, 168, 155, 0.2); 
+    outline-offset: -12px; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* Forte stacco d'ombra dallo sfondo */
 }
 
-
-/* STILE DEI TESTI NETTI E DEFINITI */
+/* TESTI INTERNI AL CARTONCINO */
 h1, h2 {
     font-family: 'Playfair Display', serif;
-    color: #3b5c7a; /* Azzurro Delphinium */
+    color: #2c465e; /* Blu Delphinium scuro e contrastato */
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-bottom: 12px;
 }
 
-h1 { font-size: 2.3em; }
-h2 { font-size: 1.7em; }
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.6em; }
 
 .sottotitolo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.15em;
+    font-size: 1.1em;
     font-style: italic;
-    color: #556b5c; /* Verde eucalipto */
-    margin-bottom: 25px;
+    color: #4a6353; /* Verde foglia scuro */
+    margin-bottom: 20px;
 }
 
 p { 
     font-size: 0.95em; 
-    font-weight: 400; 
-    color: #2f3e33;
+    font-weight: 500; /* Spessore medio per farlo leggere benissimo */
+    color: #2b362e; 
     margin-bottom: 14px;
 }
 
 strong {
     font-weight: 700;
-    color: #1e2921;
+    color: #141c16;
 }
 
 .nota-pernotto {
@@ -138,7 +128,7 @@ strong {
     color: #556b5c;
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px dashed rgba(212, 195, 179, 0.6);
+    border-top: 1px dashed #eae5dd;
 }
 
 /* BOTTONI MAPPA */
@@ -155,32 +145,30 @@ strong {
     background-color: #3b5c7a; 
     color: white;
     text-decoration: none;
-    padding: 10px 22px;
+    padding: 10px 20px;
     border-radius: 4px;
     font-weight: 500;
     font-size: 0.85em;
-    transition: all 0.2s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .btn-mappa:hover { 
     background-color: #2a4359;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* ADATTAMENTO SMARTPHONE */
+/* MOBILE */
 @media (max-width: 768px) {
     .cartoncino {
-        min-height: 160vh; 
-        padding: 90px 15px;
+        min-height: 150vh; 
+        padding: 80px 15px;
     }
     .contenuto-cartoncino {
         margin-top: 10px;
-        padding: 35px 20px;
-        outline-offset: -8px; /* Cornice leggermente più stretta su mobile */
+        padding: 30px 20px;
+        outline-offset: -8px;
     }
-    h1 { font-size: 1.8em; }
-    h2 { font-size: 1.4em; }
+    h1 { font-size: 1.7em; }
+    h2 { font-size: 1.35em; }
     p { font-size: 0.9em; }
     .btn-mappa { width: 100%; text-align: center; }
 }
