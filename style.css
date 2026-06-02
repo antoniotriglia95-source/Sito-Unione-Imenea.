@@ -25,24 +25,25 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(254, 251, 247, 0.95);
-    padding: 12px 20px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.02);
+    background-color: #fefbf7; /* Avorio pieno */
+    padding: 14px 20px;
+    box-shadow: 0 2px 10px rgba(47, 62, 51, 0.05);
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #f2ece4;
 }
 
 .navbar .logo {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 1.1em;
-    color: #466b8c; 
+    font-size: 1.15em;
+    color: #3b5c7a; 
 }
 
 .menu-tendina {
-    padding: 6px 10px;
+    padding: 6px 12px;
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #d4c3b3;
     background-color: white;
@@ -54,7 +55,7 @@ body {
 
 /* STRUTTURA DEL PAPIRO FLUIDO */
 .papiro-container {
-    margin-top: 50px;
+    margin-top: 60px;
 }
 
 /* SEZIONE ALLUNGATA CON SCORRIMENTO */
@@ -64,13 +65,13 @@ body {
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    padding: 120px 20px; 
+    padding: 140px 20px; 
     text-align: center;
     background-size: cover; 
     background-repeat: no-repeat;
     background-attachment: scroll; 
     position: relative;
-    scroll-margin-top: 50px;
+    scroll-margin-top: 60px;
 }
 
 /* INQUADRATURA DEI DISEGNI */
@@ -80,54 +81,50 @@ body {
 #cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
 
 
-/* POTENZIAMENTO EFFETTO VETRO SATINATO (SFONDO TRASPARENTE SFOCATO) */
+/* NUOVO CARTONCINO TIPOGRAFICO COPRENTE (Massima Leggibilità) */
 .contenuto-cartoncino {
-    /* Sfondo avorio molto trasparente (0.65) per far passare i colori sotto */
-    background-color: rgba(254, 251, 247, 0.65); 
+    background-color: #fefbf7; /* OPACO AL 100%: Il disegno sotto non può più disturbare il testo */
+    padding: 45px 35px;
+    max-width: 520px; /* Leggermente più stretto per farlo sembrare un vero invito */
+    width: 90%;
+    margin-top: 20px; 
+    border-radius: 4px; /* Taglio netto da cartone tipografico */
     
-    padding: 40px 30px;
-    max-width: 550px;
-    width: 92%;
-    margin-top: 40px; 
-    border-radius: 12px; /* Angoli più morbidi stile vetro */
+    /* Doppio bordo elegante nei colori del matrimonio */
+    border: 1px solid #eae5dd;
+    outline: 4px solid rgba(143, 168, 155, 0.15); /* Profilo esterno verde eucalipto chiarissimo */
+    outline-offset: -12px; /* Rientrato rispetto al bordo per fare l'effetto cornice */
     
-    /* EFFETTO SFOCATURA REALE (Aumentato a 10px per renderlo super evidente) */
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); /* Compatibilità per iPhone/Safari */
-    
-    /* Bordino luminoso trasparente che simula il taglio del vetro */
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    
-    /* Ombra leggerissima per dare profondità */
-    box-shadow: 0 8px 32px 0 rgba(47, 62, 51, 0.08);
+    /* Ombra decisa che stacca il cartoncino dallo sfondo del disegno */
+    box-shadow: 0 15px 35px rgba(47, 62, 51, 0.18);
 }
 
 
-/* STILE DEI TESTI */
+/* STILE DEI TESTI NETTI E DEFINITI */
 h1, h2 {
     font-family: 'Playfair Display', serif;
     color: #3b5c7a; /* Azzurro Delphinium */
     font-weight: 700;
     letter-spacing: 0.5px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-h1 { font-size: 2.4em; }
-h2 { font-size: 1.8em; }
+h1 { font-size: 2.3em; }
+h2 { font-size: 1.7em; }
 
 .sottotitolo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.2em;
+    font-size: 1.15em;
     font-style: italic;
     color: #556b5c; /* Verde eucalipto */
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 p { 
-    font-size: 1em; 
-    font-weight: 500; /* Testo un po' più corposo */
-    color: #1e2921;
-    margin-bottom: 12px;
+    font-size: 0.95em; 
+    font-weight: 400; 
+    color: #2f3e33;
+    margin-bottom: 14px;
 }
 
 strong {
@@ -138,10 +135,10 @@ strong {
 .nota-pernotto {
     font-size: 0.85em;
     font-style: italic;
-    color: #4a5d50;
-    margin-top: 18px;
-    padding-top: 12px;
-    border-top: 1px dashed rgba(74, 93, 80, 0.3);
+    color: #556b5c;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(212, 195, 179, 0.6);
 }
 
 /* BOTTONI MAPPA */
@@ -149,7 +146,7 @@ strong {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 25px;
     flex-wrap: wrap; 
 }
 
@@ -158,30 +155,32 @@ strong {
     background-color: #3b5c7a; 
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 10px 22px;
+    border-radius: 4px;
     font-weight: 500;
-    font-size: 0.9em;
-    transition: background 0.2s, transform 0.1s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 0.85em;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 .btn-mappa:hover { 
     background-color: #2a4359;
-    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* ADATTAMENTO SMARTPHONE */
 @media (max-width: 768px) {
     .cartoncino {
         min-height: 160vh; 
-        padding: 80px 15px;
+        padding: 90px 15px;
     }
     .contenuto-cartoncino {
-        margin-top: 20px;
-        padding: 30px 20px;
+        margin-top: 10px;
+        padding: 35px 20px;
+        outline-offset: -8px; /* Cornice leggermente più stretta su mobile */
     }
-    h1 { font-size: 1.9em; }
-    h2 { font-size: 1.5em; }
-    p { font-size: 0.95em; }
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.4em; }
+    p { font-size: 0.9em; }
     .btn-mappa { width: 100%; text-align: center; }
 }
