@@ -57,39 +57,39 @@ body {
     margin-top: 50px;
 }
 
-/* SEZIONE A SCHERMO INTERO */
+/* SEZIONE ALLUNGATA PER DARE PIÙ SPAZIO ALLO SCORRIMENTO */
 .cartoncino {
-    min-height: 100vh;
+    min-height: 130vh; /* Aumentato da 100 a 130 per far scorrere di più la pagina */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
+    
     background-size: cover; 
     background-repeat: no-repeat;
+    background-attachment: fixed; /* Attiva l'effetto di scorrimento profondo (Parallax) */
     position: relative;
     scroll-margin-top: 50px;
 }
 
-/* REGOLAZIONE DECONTRATTA E INQUADRATURA DEI DISEGNI 
-   (Qui diciamo al codice esattamente quale parte mostrare)
-*/
+/* REGOLAZIONE E INQUADRATURA DEI DISEGNI */
 #cartoncino1 { 
     background-image: url('disegno1.png'); 
-    background-position: center bottom; /* Mostra la metà INFERIORE */
+    background-position: center bottom; 
 }
 #cartoncino2 { 
     background-image: url('disegno2.png'); 
-    background-position: center center; /* Mostra il CENTRO, taglia sopra e sotto */
+    background-position: center center; 
 }
 #cartoncino3 { 
     background-image: url('disegno3.png'); 
-    background-position: center bottom; /* Mostra la metà INFERIORE */
+    background-position: center bottom; 
 }
 #cartoncino4 { 
     background-image: url('disegno4.png'); 
-    background-position: center 70%; /* Metà inferiore con un pochino in più verso l'alto */
+    background-position: center 70%; 
 }
 
 /* CONTENITORE TESTO TRASPARENTE */
@@ -98,7 +98,7 @@ body {
     padding: 20px;
     max-width: 550px;
     width: 100%;
-    margin-top: 30px; 
+    margin-top: 40px; 
 }
 
 /* STILE DEI TESTI RIPROPORZIONATI */
@@ -168,16 +168,13 @@ strong {
 /* ADATTAMENTO OTTIMIZZATO PER SMARTPHONE */
 @media (max-width: 768px) {
     .cartoncino {
-        padding: 40px 15px;
+        min-height: 120vh; /* Spazio di scorrimento aumentato anche su mobile */
+        padding: 60px 15px;
+        /* Su alcuni telefoni il 'fixed' blocca lo sfondo, lo teniamo attivo per testare l'effetto */
+        background-attachment: fixed; 
     }
-    /* Mantiene le stesse logiche di taglio millimetrico anche su mobile */
-    #cartoncino1 { background-position: center bottom; }
-    #cartoncino2 { background-position: center center; }
-    #cartoncino3 { background-position: center bottom; }
-    #cartoncino4 { background-position: center 70%; }
-
     .contenuto-cartoncino {
-        margin-top: 10px;
+        margin-top: 20px;
         padding: 10px;
     }
     h1 { font-size: 1.8em; }
