@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;700&family=Playfair+Display:ital,wght=0,500;0,700;1,400&display=swap');
 
 * {
     box-sizing: border-box;
@@ -13,7 +13,7 @@ html {
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #faf6f0; 
-    color: #1a241d; /* Verde pino scurissimo, quasi nero per massima leggibilità */
+    color: #1a241d; 
     line-height: 1.6;
 }
 
@@ -55,13 +55,13 @@ body {
     margin-top: 60px;
 }
 
-/* CARATTERISTICHE CARTONCINI/SEZIONI */
+/* CARATTERISTICHE GENERALI DELLE SEZIONI */
 .cartoncino {
     min-height: 180vh; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
-    align-items: center;
+    align-items: center; /* Di base tutto al centro */
     padding: 120px 20px; 
     text-align: center;
     background-size: cover; 
@@ -71,14 +71,33 @@ body {
     scroll-margin-top: 60px;
 }
 
-#cartoncino1 { background-image: url('disegno1.png'); background-position: center bottom; }
-#cartoncino2 { background-image: url('disegno2.png'); background-position: center center; }
-#cartoncino3 { background-image: url('disegno3.png'); background-position: center bottom; }
-#cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
+/* STRATEGIA DISEGNI E ALTEZZE */
+#cartoncino1 { 
+    background-image: url('disegno1.png'); 
+    background-position: center bottom; 
+}
 
-/* IL CASSETTO DEL TESTO TOTALMENTE PROTETTO */
+#cartoncino2 { 
+    background-image: url('disegno2.png'); 
+    background-position: center center;
+    align-items: flex-start; /* Sposta il contenuto di questa sezione a sinistra */
+    padding-left: 10%; /* Lascia un margine elegante dal bordo sinistro dello schermo */
+}
+
+#cartoncino3 { 
+    background-image: url('disegno3.png'); 
+    background-position: center bottom; /* Taglia il sopra e mostra solo il fondo */
+    min-height: 160vh; /* Accorciato del 10% rispetto ai 180vh degli altri */
+}
+
+#cartoncino4 { 
+    background-image: url('disegno4.png'); 
+    background-position: center 70%; 
+}
+
+/* IL CASSETTO DEL TESTO OPCO */
 .contenuto-cartoncino {
-    background-color: #ffffff; /* Bianco puro opaco: cancella totalmente il disegno sotto le scritte */
+    background-color: #ffffff; 
     padding: 40px 30px;
     max-width: 480px; 
     width: 92%;
@@ -87,13 +106,20 @@ body {
     border: 1px solid #eae5dd;
     outline: 4px solid rgba(143, 168, 155, 0.2); 
     outline-offset: -12px; 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* Forte stacco d'ombra dallo sfondo */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    text-align: center;
 }
 
-/* TESTI INTERNI AL CARTONCINO */
+/* SPOSTAMENTO PERSONALIZZATO VERSO IL BASSO PER LE SEZIONI 3 E 4 */
+#cartoncino3 .contenuto-cartoncino,
+#cartoncino4 .contenuto-cartoncino {
+    margin-top: 25vh; /* Spinge il box più in basso (al 25% dell'altezza schermo) senza esagerare */
+}
+
+/* TESTI INTERNI */
 h1, h2 {
     font-family: 'Playfair Display', serif;
-    color: #2c465e; /* Blu Delphinium scuro e contrastato */
+    color: #2c465e; 
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-bottom: 12px;
@@ -106,13 +132,13 @@ h2 { font-size: 1.6em; }
     font-family: 'Playfair Display', serif;
     font-size: 1.1em;
     font-style: italic;
-    color: #4a6353; /* Verde foglia scuro */
+    color: #4a6353; 
     margin-bottom: 20px;
 }
 
 p { 
     font-size: 0.95em; 
-    font-weight: 500; /* Spessore medio per farlo leggere benissimo */
+    font-weight: 500; 
     color: #2b362e; 
     margin-bottom: 14px;
 }
@@ -156,12 +182,29 @@ strong {
     background-color: #2a4359;
 }
 
-/* MOBILE */
+/* ADATTAMENTO SMARTPHONE */
 @media (max-width: 768px) {
     .cartoncino {
         min-height: 150vh; 
         padding: 80px 15px;
     }
+    
+    /* Su mobile rimettiamo il box 2 al centro per evitare che tagli lo schermo */
+    #cartoncino2 { 
+        align-items: center; 
+        padding-left: 15px;
+    }
+    
+    #cartoncino3 { 
+        min-height: 135vh; /* Proporzionalmente più corto anche su mobile */
+    }
+    
+    /* Abbassamento leggermente ridotto su mobile per non andare fuori schermo */
+    #cartoncino3 .contenuto-cartoncino,
+    #cartoncino4 .contenuto-cartoncino {
+        margin-top: 15vh; 
+    }
+    
     .contenuto-cartoncino {
         margin-top: 10px;
         padding: 30px 20px;
