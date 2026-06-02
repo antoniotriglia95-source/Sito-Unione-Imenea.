@@ -15,7 +15,7 @@ html {
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #faf6f0; 
-    color: #1e2921; /* Verde eucalipto ancora più scuro per fare contrasto */
+    color: #1e2921; 
     line-height: 1.6;
 }
 
@@ -25,7 +25,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(254, 251, 247, 0.96);
+    background-color: rgba(254, 251, 247, 0.95);
     padding: 12px 20px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.02);
     z-index: 1000;
@@ -38,7 +38,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.1em;
-    color: #466b8c; /* Azzurro Delphinium leggermente più intenso per la navbar */
+    color: #466b8c; 
 }
 
 .menu-tendina {
@@ -79,27 +79,37 @@ body {
 #cartoncino3 { background-image: url('disegno3.png'); background-position: center bottom; }
 #cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
 
-/* IL SEGRETO DELLA LEGGIBILITÀ: Un velo finissimo color avorio che protegge il testo */
+
+/* POTENZIAMENTO EFFETTO VETRO SATINATO (SFONDO TRASPARENTE SFOCATO) */
 .contenuto-cartoncino {
-    background-color: rgba(254, 251, 247, 0.85); /* Trasparente all'85%: protegge il testo ma fa vedere il disegno */
-    padding: 35px 25px;
+    /* Sfondo avorio molto trasparente (0.65) per far passare i colori sotto */
+    background-color: rgba(254, 251, 247, 0.65); 
+    
+    padding: 40px 30px;
     max-width: 550px;
     width: 92%;
     margin-top: 40px; 
-    border-radius: 8px;
-    backdrop-filter: blur(2px); /* Sfoca leggermente lo sfondo dietro al testo per staccarlo dal disegno */
-    border: 1px solid rgba(212, 195, 179, 0.3);
+    border-radius: 12px; /* Angoli più morbidi stile vetro */
+    
+    /* EFFETTO SFOCATURA REALE (Aumentato a 10px per renderlo super evidente) */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Compatibilità per iPhone/Safari */
+    
+    /* Bordino luminoso trasparente che simula il taglio del vetro */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    
+    /* Ombra leggerissima per dare profondità */
+    box-shadow: 0 8px 32px 0 rgba(47, 62, 51, 0.08);
 }
 
-/* STILE DEI TESTI E OMBRE DI LETTURA */
+
+/* STILE DEI TESTI */
 h1, h2 {
     font-family: 'Playfair Display', serif;
-    color: #3b5c7a; /* Azzurro Delphinium pieno */
+    color: #3b5c7a; /* Azzurro Delphinium */
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-bottom: 15px;
-    /* Ombra chiara per staccarsi dal disegno */
-    text-shadow: 1px 1px 2px rgba(254, 251, 247, 0.9); 
 }
 
 h1 { font-size: 2.4em; }
@@ -115,10 +125,9 @@ h2 { font-size: 1.8em; }
 
 p { 
     font-size: 1em; 
-    font-weight: 400; /* Testo leggermente più spesso per leggerlo subito */
+    font-weight: 500; /* Testo un po' più corposo */
     color: #1e2921;
     margin-bottom: 12px;
-    text-shadow: 1px 1px 1px rgba(254, 251, 247, 0.8);
 }
 
 strong {
@@ -132,10 +141,10 @@ strong {
     color: #4a5d50;
     margin-top: 18px;
     padding-top: 12px;
-    border-top: 1px dashed rgba(74, 93, 80, 0.2);
+    border-top: 1px dashed rgba(74, 93, 80, 0.3);
 }
 
-/* GRUPPO BOTTONI MAPPE */
+/* BOTTONI MAPPA */
 .bottoni-gruppo {
     display: flex;
     justify-content: center;
@@ -169,10 +178,10 @@ strong {
     }
     .contenuto-cartoncino {
         margin-top: 20px;
-        padding: 25px 15px;
+        padding: 30px 20px;
     }
     h1 { font-size: 1.9em; }
     h2 { font-size: 1.5em; }
-    p { font-size: 0.9em; }
+    p { font-size: 0.95em; }
     .btn-mappa { width: 100%; text-align: center; }
 }
