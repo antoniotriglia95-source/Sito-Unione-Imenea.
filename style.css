@@ -14,8 +14,8 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #faf6f0; /* Colore avorio coordinato */
-    color: #2f3e33; /* Verde eucalipto scuro per i testi */
+    background-color: #faf6f0; 
+    color: #2f3e33; 
     line-height: 1.6;
 }
 
@@ -38,7 +38,7 @@ body {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.1em;
-    color: #5b83a6; /* Azzurro Delphinium */
+    color: #5b83a6; 
 }
 
 .menu-tendina {
@@ -57,61 +57,67 @@ body {
     margin-top: 50px;
 }
 
-/* SEZIONE A SCHERMO INTERO: IL DISEGNO SEGUE IL SITO */
+/* SEZIONE A SCHERMO INTERO */
 .cartoncino {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Testo in alto */
+    justify-content: flex-start; 
     align-items: center;
     padding: 60px 20px;
     text-align: center;
-    
-    /* Copre lo schermo in modo uniforme eliminando le bande giganti */
     background-size: cover; 
-    background-position: center top; 
     background-repeat: no-repeat;
     position: relative;
     scroll-margin-top: 50px;
 }
 
-/* ASSEGNAZIONE SFONDI (I vostri 4 disegni) */
-#cartoncino1 { background-image: url('disegno1.png'); }
-#cartoncino2 { background-image: url('disegno2.png'); }
-#cartoncino3 { background-image: url('disegno3.png'); }
-#cartoncino4 { background-image: url('disegno4.png'); }
+/* REGOLAZIONE DECONTRATTA E INQUADRATURA DEI DISEGNI 
+   (Qui diciamo al codice esattamente quale parte mostrare)
+*/
+#cartoncino1 { 
+    background-image: url('disegno1.png'); 
+    background-position: center bottom; /* Mostra la metà INFERIORE */
+}
+#cartoncino2 { 
+    background-image: url('disegno2.png'); 
+    background-position: center center; /* Mostra il CENTRO, taglia sopra e sotto */
+}
+#cartoncino3 { 
+    background-image: url('disegno3.png'); 
+    background-position: center bottom; /* Mostra la metà INFERIORE */
+}
+#cartoncino4 { 
+    background-image: url('disegno4.png'); 
+    background-position: center 70%; /* Metà inferiore con un pochino in più verso l'alto */
+}
 
-/* ELIMINATA LA STRISCIA BIANCA E LE OMBRE - ORA IL TESTO GALLEGGIA SUL DISEGNO */
+/* CONTENITORE TESTO TRASPARENTE */
 .contenuto-cartoncino {
-    background-color: transparent; /* Completamente invisibile */
+    background-color: transparent; 
     padding: 20px;
     max-width: 550px;
     width: 100%;
-    margin-top: 30px; /* Spazio controllato dall'alto per non uscire */
+    margin-top: 30px; 
 }
 
 /* STILE DEI TESTI RIPROPORZIONATI */
 h1, h2 {
     font-family: 'Playfair Display', serif;
-    color: #5b83a6; /* Azzurro Delphinium */
+    color: #5b83a6; 
     font-weight: 400;
     letter-spacing: 0.5px;
     margin-bottom: 10px;
 }
 
-h1 { 
-    font-size: 2.2em; 
-}
-
-h2 { 
-    font-size: 1.6em; 
-}
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.6em; }
 
 .sottotitolo {
     font-family: 'Playfair Display', serif;
     font-size: 1.1em;
     font-style: italic;
-    color: #8fa89b; /* Verde eucalipto delicato */
+    color: #8fa89b; 
     margin-bottom: 20px;
 }
 
@@ -127,7 +133,6 @@ strong {
     color: #2f3e33;
 }
 
-/* NOTA CON ASTERISCO DEL PERNOTTO */
 .nota-pernotto {
     font-size: 0.8em;
     font-style: italic;
@@ -142,12 +147,12 @@ strong {
     justify-content: center;
     gap: 12px;
     margin-top: 15px;
-    flex-wrap: wrap; /* Se lo schermo è piccolo li mette uno sotto l'altro */
+    flex-wrap: wrap; 
 }
 
 .btn-mappa {
     display: inline-block;
-    background-color: #5b83a6; /* Azzurro Delphinium */
+    background-color: #5b83a6; 
     color: white;
     text-decoration: none;
     padding: 8px 16px;
@@ -160,12 +165,17 @@ strong {
     background-color: #446888; 
 }
 
-/* ADATTAMENTO OTTIMIZZATO PER SMARTPHONE (Evita che il testo esca dal disegno) */
+/* ADATTAMENTO OTTIMIZZATO PER SMARTPHONE */
 @media (max-width: 768px) {
     .cartoncino {
-        background-size: 100% 100%; /* Forza il disegno a stare millimetricamente nello schermo del telefono */
         padding: 40px 15px;
     }
+    /* Mantiene le stesse logiche di taglio millimetrico anche su mobile */
+    #cartoncino1 { background-position: center bottom; }
+    #cartoncino2 { background-position: center center; }
+    #cartoncino3 { background-position: center bottom; }
+    #cartoncino4 { background-position: center 70%; }
+
     .contenuto-cartoncino {
         margin-top: 10px;
         padding: 10px;
