@@ -11,8 +11,8 @@ html {
 
 body {
     font-family: 'Georgia', serif;
-    background-color: #faf6f0; /* Colore avorio di base */
-    color: #2f3e33; /* Verde eucalipto scuro per i testi */
+    background-color: #faf6f0; /* Sfondo avorio caldo generale */
+    color: #2f3e33; /* Verde eucalipto scuro per massima leggibilità */
     line-height: 1.7;
 }
 
@@ -48,85 +48,107 @@ body {
     cursor: pointer;
 }
 
-/* LA STRUTTURA A PAPIRO CON SFONDI A TUTTO SCHERMO */
+/* STRUTTURA A SEZIONI */
 .papiro-container {
-    margin-top: 60px; /* Spazio per non coprire la navbar */
+    margin-top: 60px;
 }
 
-/* IL SINGOLO CARTONCINO DIVENTA UNA SEZIONE A TUTTO SCHERMO */
 .cartoncino {
-    min-height: 100vh; /* Forza ogni sezione a occupare tutta l'altezza dello schermo */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* SPOSTA IL TESTO NELLA PARTE SUPERIORE */
     align-items: center;
-    padding: 60px 20px;
+    padding: 40px 20px;
     text-align: center;
-    background-size: cover; /* L'immagine si adatta a tutto schermo senza deformarsi */
-    background-position: center; /* Centra l'immagine sullo sfondo */
+    
+    /* SISTEMAZIONE IMMAGINE DI SFONDO (No Zoom, Intera e Centrata) */
+    background-size: contain; 
+    background-position: center center; 
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Crea l'effetto scorrimento magico (Parallax) su PC */
+    background-attachment: fixed;
+    background-color: #faf6f0; /* Riempie lo spazio attorno all'immagine con l'avorio */
     position: relative;
     scroll-margin-top: 60px;
 }
 
-/* OGNI CARTONCINO HA IL SUO DISEGNO COME SFONDO */
+/* ASSEGNAZIONE SFONDI */
 #cartoncino1 { background-image: url('disegno1.png'); }
 #cartoncino2 { background-image: url('disegno2.png'); }
 #cartoncino3 { background-image: url('disegno3.png'); }
 #cartoncino4 { background-image: url('disegno4.png'); }
 
-/* UN BOX ELEGANTE PER CONTENERE I TESTI SOPRA LO SFONDO E RENDERLI LEGGEBILI */
+/* IL BOX TESTO DIVENTA UN CARTONCINO NEUTRO COORDINATO */
 .contenuto-cartoncino {
-    background-color: rgba(255, 255, 255, 0.9); /* Bianco leggermente trasparente per far intravedere il disegno dietro */
-    padding: 40px;
-    border-radius: 4px;
+    background-color: rgba(254, 251, 247, 0.93); /* Colore avorio/rosa caldo della partecipazione, semi-trasparente */
+    padding: 30px;
+    border-radius: 6px;
     max-width: 600px;
     width: 90%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(47, 62, 51, 0.1); /* Ombra delicata fusa con l'eucalipto */
     border: 1px solid #eae5dd;
+    margin-top: 20px; /* Distanza dalla navbar in alto */
 }
 
-/* TITOLI E TESTI */
+/* TITOLI E DETTAGLI DELPHINIUM */
 h1, h2 {
     color: #5b83a6; /* Azzurro chiaro Delphinium */
     font-weight: normal;
     letter-spacing: 1px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-h1 { font-size: 2.5em; }
-h2 { font-size: 1.8em; }
+h1 { font-size: 2.3em; }
+h2 { font-size: 1.7em; }
 
 .sottotitolo {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-style: italic;
-    color: #777;
-    margin-bottom: 20px;
+    color: #8fa89b; /* Verde eucalipto delicato */
+    margin-bottom: 15px;
 }
 
-p { margin-bottom: 15px; color: #333; }
+p { margin-bottom: 12px; color: #2f3e33; }
 
-/* BOTTONE NAVIGATORE MAPPA */
+/* NOTA CON ASTERISCO */
+.nota-pernotto {
+    font-size: 0.9em;
+    font-style: italic;
+    color: #556b5c;
+    margin-top: 15px;
+    border-top: 1px dashed #d4c3b3;
+    padding-top: 10px;
+}
+
+/* BOTTONI DOPPI (CHIESA E VILLA) */
+.bottoni-gruppo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
 .btn-mappa {
     display: inline-block;
     background-color: #5b83a6; /* Azzurro Delphinium */
     color: white;
     text-decoration: none;
-    padding: 12px 25px;
+    padding: 10px 20px;
     border-radius: 4px;
-    margin-top: 15px;
     transition: background 0.2s;
     font-weight: bold;
+    font-size: 0.95em;
 }
 .btn-mappa:hover { background-color: #446888; }
 
-/* Adattamento per i telefoni (disattiva il fixed che a volte crea problemi su mobile) */
+/* FIX PER MOBILE */
 @media (max-width: 768px) {
     .cartoncino {
-        background-attachment: scroll;
+        background-attachment: scroll; /* Migliora la resa dello sfondo sui telefoni */
+        min-height: 85vh;
     }
     .contenuto-cartoncino {
-        padding: 25px 15px;
+        padding: 20px 15px;
+        margin-top: 10px;
     }
 }
