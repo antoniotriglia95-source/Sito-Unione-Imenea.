@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;700&family=Playfair+Display:ital,wght=0,500;0,700;1,400&display=swap');
+/* IMPORTAZIONE DEI NUOVI FONT ELEGANTI E ROMANTICI */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Proza+Libre:wght@400;500;600&display=swap');
 
 * {
     box-sizing: border-box;
@@ -11,7 +12,7 @@ html {
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Proza Libre', sans-serif;
     background-color: #faf6f0; 
     color: #1a241d; 
     line-height: 1.6;
@@ -34,20 +35,21 @@ body {
 }
 
 .navbar .logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
     font-style: italic;
-    font-size: 1.15em;
+    font-size: 1.4em;
     color: #3b5c7a; 
 }
 
 .menu-tendina {
     padding: 6px 12px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Proza Libre', sans-serif;
     border: 1px solid #d4c3b3;
     background-color: white;
     color: #2f3e33;
     border-radius: 4px;
-    font-size: 0.85em;
+    font-size: 0.8em;
     cursor: pointer;
 }
 
@@ -55,13 +57,13 @@ body {
     margin-top: 60px;
 }
 
-/* CARATTERISTICHE GENERALI DELLE SEZIONI */
+/* CARATTERISTICHE STRUTTURALI DEL PAPIRO */
 .cartoncino {
     min-height: 180vh; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
-    align-items: center; /* Di base tutto al centro */
+    align-items: center; 
     padding: 120px 20px; 
     text-align: center;
     background-size: cover; 
@@ -71,7 +73,7 @@ body {
     scroll-margin-top: 60px;
 }
 
-/* STRATEGIA DISEGNI E ALTEZZE */
+/* CORREZIONE DI DISEGNI ED INQUADRATURE */
 #cartoncino1 { 
     background-image: url('disegno1.png'); 
     background-position: center bottom; 
@@ -80,14 +82,14 @@ body {
 #cartoncino2 { 
     background-image: url('disegno2.png'); 
     background-position: center center;
-    align-items: flex-start; /* Sposta il contenuto di questa sezione a sinistra */
-    padding-left: 10%; /* Lascia un margine elegante dal bordo sinistro dello schermo */
+    align-items: flex-start; /* SPOSTA IL BOX DI TESTO A SINISTRA */
+    padding-left: 8%; 
 }
 
 #cartoncino3 { 
     background-image: url('disegno3.png'); 
-    background-position: center bottom; /* Taglia il sopra e mostra solo il fondo */
-    min-height: 160vh; /* Accorciato del 10% rispetto ai 180vh degli altri */
+    background-position: center bottom; 
+    min-height: 160vh; /* ACCORCIATO DEL 10% */
 }
 
 #cartoncino4 { 
@@ -95,64 +97,65 @@ body {
     background-position: center 70%; 
 }
 
-/* IL CASSETTO DEL TESTO OPCO */
+/* I CARTONCINI DEL TESTO */
 .contenuto-cartoncino {
     background-color: #ffffff; 
-    padding: 40px 30px;
+    padding: 45px 35px;
     max-width: 480px; 
     width: 92%;
-    margin-top: 30px; 
+    margin-top: 40px; 
     border-radius: 4px; 
     border: 1px solid #eae5dd;
-    outline: 4px solid rgba(143, 168, 155, 0.2); 
+    outline: 4px solid rgba(143, 168, 155, 0.18); 
     outline-offset: -12px; 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* SPOSTAMENTO PERSONALIZZATO VERSO IL BASSO PER LE SEZIONI 3 E 4 */
+/* ABBASSAMENTO STRATEGICO MA CONTROLLATO PER LE SEZIONI 3 E 4 */
 #cartoncino3 .contenuto-cartoncino,
 #cartoncino4 .contenuto-cartoncino {
-    margin-top: 25vh; /* Spinge il box più in basso (al 25% dell'altezza schermo) senza esagerare */
+    margin-top: 25vh; 
 }
 
-/* TESTI INTERNI */
+/* FORMATTAZIONE DI DETTAGLIO DEI TESTI (MOLTO PIÙ ELEGANTI) */
 h1, h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     color: #2c465e; 
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-bottom: 12px;
 }
 
-h1 { font-size: 2.2em; }
-h2 { font-size: 1.6em; }
+h1 { font-size: 3.2em; line-height: 1.1; } /* Più grande e d'impatto essendo Cormorant */
+h2 { font-size: 2.3em; line-height: 1.2; }
 
 .sottotitolo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
     font-style: italic;
     color: #4a6353; 
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    line-height: 1.3;
 }
 
 p { 
-    font-size: 0.95em; 
-    font-weight: 500; 
+    font-size: 0.9em; 
+    font-weight: 400; 
     color: #2b362e; 
     margin-bottom: 14px;
 }
 
 strong {
-    font-weight: 700;
+    font-weight: 600;
     color: #141c16;
 }
 
 .nota-pernotto {
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-style: italic;
     color: #556b5c;
-    margin-top: 20px;
+    margin-top: 22px;
     padding-top: 15px;
     border-top: 1px dashed #eae5dd;
 }
@@ -174,7 +177,7 @@ strong {
     padding: 10px 20px;
     border-radius: 4px;
     font-weight: 500;
-    font-size: 0.85em;
+    font-size: 0.8em;
     transition: background 0.2s;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -182,24 +185,23 @@ strong {
     background-color: #2a4359;
 }
 
-/* ADATTAMENTO SMARTPHONE */
+/* MOBILES */
 @media (max-width: 768px) {
     .cartoncino {
-        min-height: 150vh; 
+        min-height: 140vh; 
         padding: 80px 15px;
     }
     
-    /* Su mobile rimettiamo il box 2 al centro per evitare che tagli lo schermo */
+    /* Su smartphone i testi tornano giustamente in mezzo per comodità di schermo */
     #cartoncino2 { 
         align-items: center; 
         padding-left: 15px;
     }
     
     #cartoncino3 { 
-        min-height: 135vh; /* Proporzionalmente più corto anche su mobile */
+        min-height: 125vh; 
     }
     
-    /* Abbassamento leggermente ridotto su mobile per non andare fuori schermo */
     #cartoncino3 .contenuto-cartoncino,
     #cartoncino4 .contenuto-cartoncino {
         margin-top: 15vh; 
@@ -207,11 +209,11 @@ strong {
     
     .contenuto-cartoncino {
         margin-top: 10px;
-        padding: 30px 20px;
+        padding: 30px 18px;
         outline-offset: -8px;
     }
-    h1 { font-size: 1.7em; }
-    h2 { font-size: 1.35em; }
-    p { font-size: 0.9em; }
+    h1 { font-size: 2.4em; }
+    h2 { font-size: 1.8em; }
+    p { font-size: 0.85em; }
     .btn-mappa { width: 100%; text-align: center; }
 }
