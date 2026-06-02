@@ -17,7 +17,7 @@ body {
     line-height: 1.6;
 }
 
-/* NAVBAR STRUTTURA BASE */
+/* NAVBAR DESKTOP */
 .navbar {
     position: fixed;
     top: 0;
@@ -35,9 +35,7 @@ body {
     transform: translateY(0);
 }
 
-.navbar-nascosta {
-    transform: translateY(-100%);
-}
+.navbar-nascosta { transform: translateY(-100%); }
 
 .navbar .logo {
     font-family: 'Cormorant Garamond', serif;
@@ -58,11 +56,9 @@ body {
     cursor: pointer;
 }
 
-.papiro-container {
-    margin-top: 60px;
-}
+.papiro-container { margin-top: 60px; }
 
-/* SEZIONI DEL PAPIRO (IMPOSTAZIONI DESKTOP PC) */
+/* SEZIONI SCHERMO INTERO DESKTOP */
 .cartoncino {
     min-height: 180vh; 
     display: flex;
@@ -73,7 +69,7 @@ body {
     text-align: center;
     background-size: cover; 
     background-repeat: no-repeat;
-    background-color: #fefbf7; /* Colore carta avorio di fondo */
+    background-color: #fefbf7; 
     position: relative;
     scroll-margin-top: 60px;
 }
@@ -83,7 +79,7 @@ body {
 #cartoncino3 { background-image: url('disegno3.png'); background-position: center bottom; min-height: 160vh; }
 #cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
 
-/* I BOX DEL TESTO (IMPOSTAZIONI DESKTOP PC) */
+/* I RIQUADRI BIANCHI DELLE INFO (VERSIONE DESKTOP: BELLI GRANDI) */
 .contenuto-cartoncino {
     background-color: #ffffff; 
     padding: 45px 35px;
@@ -98,111 +94,77 @@ body {
     text-align: center;
 }
 
-/* FORMATTAZIONE FONTS */
-h1, h2 {
-    font-family: 'Cormorant Garamond', serif;
-    color: #2c465e; 
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-}
-
+/* CARATTERI DESKTOP */
+h1, h2 { font-family: 'Cormorant Garamond', serif; color: #2c465e; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px; }
 h1 { font-size: 3.2em; line-height: 1.1; }
 h2 { font-size: 2.3em; line-height: 1.2; }
+.sottotitolo { font-family: 'Cormorant Garamond', serif; font-size: 1.4em; font-style: italic; color: #4a6353; margin-bottom: 25px; }
+p { font-size: 0.9em; color: #2b362e; margin-bottom: 14px; }
+.info-blocco { margin-bottom: 20px; }
+.nota-pernotto { font-size: 0.8em; font-style: italic; color: #556b5c; margin-top: 22px; padding-top: 15px; border-top: 1px dashed #eae5dd; }
 
-.sottotitolo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4em;
-    font-style: italic;
-    color: #4a6353; 
-    margin-bottom: 25px;
-    line-height: 1.3;
-}
-
-p { 
-    font-size: 0.9em; 
-    font-weight: 400; 
-    color: #2b362e; 
-    margin-bottom: 14px;
-}
-
-strong {
-    font-weight: 600;
-    color: #141c16;
-}
-
-.nota-pernotto {
-    font-size: 0.8em;
-    font-style: italic;
-    color: #556b5c;
-    margin-top: 22px;
-    padding-top: 15px;
-    border-top: 1px dashed #eae5dd;
-}
-
-/* BOTTONI MAPPA */
-.bottoni-gruppo {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 25px;
-    flex-wrap: wrap; 
-}
-
-.btn-mappa {
-    display: inline-block;
-    background-color: #3b5c7a; 
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 0.8em;
-    transition: background 0.2s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.btn-mappa:hover { 
-    background-color: #2a4359;
-}
+.bottoni-gruppo { display: flex; justify-content: center; gap: 12px; margin-top: 25px; flex-wrap: wrap; }
+.btn-mappa { display: inline-block; background-color: #3b5c7a; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: 500; font-size: 0.8em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
 
 /* ======================================================== */
-/* SUPER OTTIMIZZAZIONE PER SMARTPHONE E DISPOSITIVI MOBILE */
+/* AREA MOBILE - QUI ABBIAMO RIMPICCIOLITO I RIQUADRI INFO  */
 /* ======================================================== */
 @media (max-width: 768px) {
     .cartoncino {
-        min-height: 100vh; /* Riduce l'altezza per non disperdere il disegno */
-        padding: 30px 15px;
-        
-        /* MAGIC ZOOM OUT: Il disegno rimpicciolisce e si mostra INTERO senza tagli laterali */
+        min-height: 70vh; 
+        padding: 15px 10px; 
         background-size: contain; 
-        background-position: center bottom; /* Spinge il disegno sul fondo della sezione mobile */
-        background-color: #fefbf7; /* Lo sfondo riempie gli spazi vuoti con l'avorio della carta */
+        background-position: center bottom; 
     }
-    
-    /* Configurazione specifica posizioni disegni su mobile */
-    #cartoncino1 { background-position: center bottom; }
-    #cartoncino2 { background-position: center 85%; align-items: center; padding-left: 15px; }
-    #cartoncino3 { background-position: center bottom; min-height: 110vh; } /* Un pelo più alto per far stare i bottoni delle mappe */
-    #cartoncino4 { background-position: center bottom; }
+    #cartoncino2 { align-items: center; padding-left: 10px; }
+    #cartoncino3 { min-height: 85vh; }
 
-    /* RIDIMENSIONAMENTO AUTOMATICO DEI BOX DI TESTO SU MOBILE */
+    /* IL CUORE DELLA MODIFICA: IL RIQUADRO BIANCO DIVENTA PICCOLO E CORTO */
     .contenuto-cartoncino {
-        margin-top: 15px; /* Box vicinissimo alla cima dello schermo mobile */
-        padding: 25px 18px; /* Più compatto all'interno per risparmiare spazio */
-        width: 94%; /* Sfrutta quasi tutta la larghezza dello smartphone */
-        max-width: 360px; /* Evita che diventi troppo largo su schermi intermedi */
-        outline-offset: -8px; /* Cornice interna riproporzionata */
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); /* Ombra più leggera adatta al mobile */
+        margin-top: 10px; 
+        padding: 12px 15px !important; /* Ridotto il padding a pochissimi pixel per renderlo basso */
+        width: 85%; /* Più stretto ed elegante */
+        max-width: 270px; /* Larghezza massima ridotta drasticamente */
+        outline-offset: -5px; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04); 
     }
     
-    /* Ridimensionamento testi per smartphone */
-    h1 { font-size: 2.2em; }
-    h2 { font-size: 1.6em; }
-    .sottotitolo { font-size: 1.2em; margin-bottom: 15px; }
-    p { font-size: 0.85em; margin-bottom: 10px; }
-    .nota-pernotto { margin-top: 15px; padding-top: 10px; font-size: 0.75em; }
+    /* COMPATTAZIONE TESTI DEL RIQUADRO SU MOBILE */
+    h1 { font-size: 1.4em !important; margin-bottom: 2px !important; }
+    h2 { font-size: 1.2em !important; margin-bottom: 4px !important; }
     
-    .bottoni-gruppo { margin-top: 15px; gap: 8px; }
-    .btn-mappa { width: 100%; text-align: center; padding: 10px 15px; font-size: 0.8em; }
+    .sottotitolo { 
+        font-size: 0.9em !important; 
+        margin-bottom: 4px !important; 
+    }
+    
+    p { 
+        font-size: 0.75em !important; 
+        line-height: 1.25 !important; 
+        margin-bottom: 4px !important; 
+    }
+    
+    .info-blocco { 
+        margin-bottom: 6px !important; /* Ridotto lo spazio tra i blocchi della chiesa e della villa */
+    }
+    
+    .nota-pernotto { 
+        margin-top: 5px !important; 
+        padding-top: 4px !important; 
+        font-size: 0.65em !important; 
+    }
+    
+    /* BOTTONI MINI SULLA STESSA RIGA */
+    .bottoni-gruppo { 
+        margin-top: 8px !important; 
+        gap: 5px !important; 
+        flex-wrap: nowrap !important; 
+    }
+    
+    .btn-mappa { 
+        width: 50% !important; 
+        padding: 6px 2px !important; 
+        font-size: 0.65em !important; 
+    }
 }
