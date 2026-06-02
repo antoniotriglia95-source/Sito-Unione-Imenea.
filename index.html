@@ -22,7 +22,6 @@
 </head>
 <body>
 
-    <!-- SCHERMATA DI BLOCCO -->
     <div id="schermata-blocco" class="lock-box">
         <h1>Sito in Costruzione 🔒</h1>
         <p>Inserisci la password per accedere.</p>
@@ -31,27 +30,23 @@
         <p id="error-msg">Password errata. Riprova!</p>
     </div>
 
-    <!-- IL SITO VERO E PROPRIO -->
     <div id="sito-vero">
         
-        <!-- NAVBAR FISSA -->
         <nav class="navbar">
             <div class="logo">Antonio & Giulia</div>
             <div>
                 <select class="menu-tendina" onchange="navigaASezione(this.value)">
                     <option value="">Naviga nel sito...</option>
                     <option value="#cartoncino1">1. Copertina</option>
-                    <option value="#cartoncino2">2. Il Giorno</option>
-                    <option value="#cartoncino3">3. Sezione Speciale</option>
+                    <option value="#cartoncino2">2. Sezione Speciale</option>
+                    <option value="#cartoncino3">3. Il Giorno</option>
                     <option value="#cartoncino4">4. Iban & Regali</option>
                 </select>
             </div>
         </nav>
 
-        <!-- IL PAPIRO -->
         <div class="papiro-container">
             
-            <!-- CARTONCINO 1: COPERTINA -->
             <article id="cartoncino1" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h1>Antonio & Giulia</h1>
@@ -60,8 +55,14 @@
                 </div>
             </article>
 
-            <!-- CARTONCINO 2: IL GIORNO (SPOSTATO A SINISTRA) -->
             <article id="cartoncino2" class="cartoncino">
+                <div class="contenuto-cartoncino">
+                    <h2>Sezione Speciale</h2>
+                    <p>Questa servirà per inserire i link al quiz sugli sposi e altri giochi interattivi... in allestimento...</p>
+                </div>
+            </article>
+
+            <article id="cartoncino3" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il Grande Giorno</h2>
                     
@@ -84,15 +85,6 @@
                 </div>
             </article>
 
-            <!-- CARTONCINO 3: SEZIONE SPECIALE (PIÙ CORTO E CORRETTO SU INFO) -->
-            <article id="cartoncino3" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h2>Sezione Speciale</h2>
-                    <p>Questa servirà per inserire i link al quiz sugli sposi e altri giochi interattivi... in allestimento...</p>
-                </div>
-            </article>
-
-            <!-- CARTONCINO 4: IBAN E REGALI -->
             <article id="cartoncino4" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il nostro Sogno</h2>
@@ -103,7 +95,6 @@
         </div>
     </div>
 
-    <!-- SCRIPT LOGICHE -->
     <script>
         function controllaPassword() {
             const passwordInserita = document.getElementById('password-input').value;
