@@ -11,18 +11,17 @@
             max-width: 400px; margin: 150px auto; background: white; padding: 40px 30px;
             border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eae5dd;
         }
-        .lock-box h1 { color: #5b83a6; font-size: 1.8em; margin-bottom: 10px; }
+        .lock-box h1 { color: #3b5c7a; font-size: 1.8em; margin-bottom: 10px; }
         .lock-box input[type="password"] {
             width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center;
         }
-        .lock-btn { background: #5b83a6; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .lock-btn { background: #3b5c7a; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; }
         #error-msg { color: #c0392b; font-size: 0.9em; margin-top: 10px; display: none; }
         #sito-vero { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- SCHERMATA DI BLOCCO -->
     <div id="schermata-blocco" class="lock-box">
         <h1>Sito in Costruzione 🔒</h1>
         <p>Inserisci la password per accedere.</p>
@@ -31,10 +30,8 @@
         <p id="error-msg">Password errata. Riprova!</p>
     </div>
 
-    <!-- IL SITO VERO E PROPRIO -->
     <div id="sito-vero">
         
-        <!-- NAVBAR FISSA -->
         <nav class="navbar">
             <div class="logo">Antonio & Giulia</div>
             <div>
@@ -48,10 +45,8 @@
             </div>
         </nav>
 
-        <!-- IL PAPIRO -->
         <div class="papiro-container">
             
-            <!-- CARTONCINO 1: COPERTINA -->
             <article id="cartoncino1" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h1>Antonio & Giulia</h1>
@@ -60,7 +55,6 @@
                 </div>
             </article>
 
-            <!-- CARTONCINO 2: IL GIORNO (CHIESA + VILLA) -->
             <article id="cartoncino2" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il Grande Giorno</h2>
@@ -75,7 +69,7 @@
                     <strong>Villa Borghi</strong><br>
                     Piazza Bonomi, 2 - Varano Borghi (VA)</p>
                     
-                    <p class="nota-pernotto">* Per chi desiderasse pernottare direttamente in struttura, vi ricordiamo che è possibile farlo contattando direttamente la reception di Villa Borghi con dovuto anticipo.</p>
+                    <p class="nota-pernotto">* Per chi desiderasse pernottare direttamente in struttura, vi ricordiamo che è possibile farlo contattando la reception di Villa Borghi con dovuto anticipo.</p>
                     
                     <div class="bottoni-gruppo">
                         <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn-mappa" target="_blank">📍 Naviga verso la Chiesa</a>
@@ -84,7 +78,6 @@
                 </div>
             </article>
 
-            <!-- CARTONCINO 3: INFO E CONTATTI -->
             <article id="cartoncino3" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Informazioni Utili</h2>
@@ -92,7 +85,6 @@
                 </div>
             </article>
 
-            <!-- CARTONCINO 4: IBAN E REGALI -->
             <article id="cartoncino4" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il nostro Sogno</h2>
@@ -103,7 +95,6 @@
         </div>
     </div>
 
-    <!-- SCRIPT LOGICHE -->
     <script>
         function controllaPassword() {
             const passwordInserita = document.getElementById('password-input').value;
