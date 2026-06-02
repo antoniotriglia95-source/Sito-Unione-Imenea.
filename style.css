@@ -25,7 +25,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(254, 251, 247, 0.92);
+    background-color: rgba(254, 251, 247, 0.95);
     padding: 12px 20px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.02);
     z-index: 1000;
@@ -57,19 +57,22 @@ body {
     margin-top: 50px;
 }
 
-/* SEZIONE NOTEVOLMENTE ALLUNGATA PER OTTIMIZZARE LO SCORRIMENTO */
+/* SEZIONE ALLUNGATA CON SCORRIMENTO ATTIVO DEL DISEGNO */
 .cartoncino {
-    min-height: 180vh; /* Portato a 180vh per dare tantissimo spazio in più allo scorrimento dei disegni */
+    min-height: 180vh; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center;
-    padding: 100px 20px; /* Aumentato lo spazio interno per far respirare l'inizio della sezione */
+    padding: 120px 20px; 
     text-align: center;
     
     background-size: cover; 
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Mantiene lo sfondo fisso creando l'effetto scorrimento profondo */
+    
+    /* CAMBIATO IN SCROLL: Ora il disegno si muove attivamente insieme alla pagina e non resta congelato */
+    background-attachment: scroll; 
+    
     position: relative;
     scroll-margin-top: 50px;
 }
@@ -168,9 +171,8 @@ strong {
 /* ADATTAMENTO OTTIMIZZATO PER SMARTPHONE */
 @media (max-width: 768px) {
     .cartoncino {
-        min-height: 160vh; /* Molto lungo anche su mobile per valorizzare i disegni verticali della partecipazione */
+        min-height: 160vh; 
         padding: 80px 15px;
-        background-attachment: fixed; 
     }
     .contenuto-cartoncino {
         margin-top: 20px;
