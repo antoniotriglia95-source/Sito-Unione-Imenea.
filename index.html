@@ -22,6 +22,7 @@
 </head>
 <body>
 
+    <!-- SCHERMATA DI BLOCCO -->
     <div id="schermata-blocco" class="lock-box">
         <h1>Sito in Costruzione 🔒</h1>
         <p>Inserisci la password per accedere.</p>
@@ -30,8 +31,10 @@
         <p id="error-msg">Password errata. Riprova!</p>
     </div>
 
+    <!-- IL SITO VERO E PROPRIO -->
     <div id="sito-vero">
         
+        <!-- NAVBAR FISSA -->
         <nav class="navbar">
             <div class="logo">Antonio & Giulia</div>
             <div>
@@ -39,28 +42,31 @@
                     <option value="">Naviga nel sito...</option>
                     <option value="#cartoncino1">1. Copertina</option>
                     <option value="#cartoncino2">2. Il Giorno</option>
-                    <option value="#cartoncino3">3. Info & Contatti</option>
+                    <option value="#cartoncino3">3. Sezione Speciale</option>
                     <option value="#cartoncino4">4. Iban & Regali</option>
                 </select>
             </div>
         </nav>
 
+        <!-- IL PAPIRO -->
         <div class="papiro-container">
             
+            <!-- CARTONCINO 1: COPERTINA -->
             <article id="cartoncino1" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h1>Antonio & Giulia</h1>
-                    <p class="sottotitolo">Ci Sposiamo — 3 Luglio 2027</p>
-                    <p>Benvenuti nel nostro sito di matrimonio. Abbiamo racchiuso in queste pagine digitali tutti i dettagli del nostro giorno più bello, coordinati con i cartoncini della nostra partecipazione.</p>
+                    <p class="sottotitolo">Sono lieti di annunciare il loro matrimonio il 3 luglio 2027</p>
+                    <p>Benvenuti nel sito del nostro matrimonio. Scorrete per scoprire tutte le info più importanti.</p>
                 </div>
             </article>
 
+            <!-- CARTONCINO 2: IL GIORNO (SPOSTATO A SINISTRA) -->
             <article id="cartoncino2" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il Grande Giorno</h2>
                     
                     <p><strong>La Cerimonia</strong><br>
-                    Ore 14:30<br>
+                    Ore 14:00<br>
                     Santuario di Santa Maria del Monte<br>
                     Località Santa Maria del Monte, Varese (VA)</p>
                     
@@ -78,13 +84,15 @@
                 </div>
             </article>
 
+            <!-- CARTONCINO 3: SEZIONE SPECIALE (PIÙ CORTO E CORRETTO SU INFO) -->
             <article id="cartoncino3" class="cartoncino">
                 <div class="contenuto-cartoncino">
-                    <h2>Informazioni Utili</h2>
-                    <p>In questa sezione inseriremo i dettagli logistici mancanti, i contatti utili e i moduli di risposta per la conferma (RSVP).</p>
+                    <h2>Sezione Speciale</h2>
+                    <p>Questa servirà per inserire i link al quiz sugli sposi e altri giochi interattivi... in allestimento...</p>
                 </div>
             </article>
 
+            <!-- CARTONCINO 4: IBAN E REGALI -->
             <article id="cartoncino4" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il nostro Sogno</h2>
@@ -95,6 +103,7 @@
         </div>
     </div>
 
+    <!-- SCRIPT LOGICHE -->
     <script>
         function controllaPassword() {
             const passwordInserita = document.getElementById('password-input').value;
