@@ -3,29 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Nostro Matrimonio</title>
+    <title>Sito In Costruzione</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             text-align: center;
             background-color: #fcf9f5;
             color: #333;
-            padding: 50px 20px;
+            padding: 100px 20px;
+            margin: 0;
         }
-        h1 { color: #4a5d4e; font-size: 2.5em; }
-        .sottotitolo { font-style: italic; color: #777; font-size: 1.2em; }
-        .box { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .lock-box {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        h1 { color: #4a5d4e; font-size: 1.8em; margin-bottom: 10px; }
+        p { color: #777; font-size: 1em; margin-bottom: 25px; }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+            text-align: center;
+        }
+        button {
+            background-color: #4a5d4e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #3b4a3e; }
+        #error-msg { color: #c0392b; font-size: 0.9em; margin-top: 10px; display: none; }
+        
+        /* Questo nasconde il vero sito finché la password non è corretta */
+        #sito-vero { display: none; }
     </style>
 </head>
 <body>
 
-    <h1>Giulia & Antonio</h1>
-    <p class="sottotitolo">Ci Sposiamo!</p>
-
-    <div class="box">
-        <h2>Il Grande Giorno</h2>
-        <p>Stiamo lavorando al sito del nostro matrimonio. Presto troverai qui tutti i dettagli logistici, la mappa e il modulo per confermare la tua presenza!</p>
+    <!-- SCHERMATA DI BLOCCO -->
+    <div id="schermata-blocco" class="lock-box">
+        <h1>Sito in Costruzione 🔒</h1>
+        <p>Inserisci la password per accedere al sito del matrimonio.</p>
+        <input type="password" id="password-input" placeholder="Password">
+        <button onclick="controllaPassword()">Entra</button>
+        <p id="error-msg">Password errata. Riprova!</p>
     </div>
+
+    <!-- IL TUO SITO VERO E PROPRIO (Nascosto all'inizio) -->
+    <div id="sito-vero">
+        <div style="max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h1 style="color: #4a5d4e; font-size: 2.5em;">Marta & Stefano</h1>
+            <p style="font-style: italic; color: #777; font-size: 1.2em;">Ci Sposiamo!</p>
+            <h2>Il Grande Giorno</h2>
+            <p>Benvenuto! Se vedi questa pagina significa che hai inserito la password corretta. Qui metteremo tutti i dettagli!</p>
+        </div>
+    </div>
+
+    <script>
+        function controllaPassword() {
+            const passwordInserita = document.getElementById('password-input').value;
+            // LA TUA PASSWORD È QUELLA TRA LE VIRGOLETTE QUI SOTTO:
+            const passwordCorretta = "Ilmioamore2027"; 
+
+            if (passwordInserita === passwordCorretta) {
+                // Nascondi il blocco e mostra il sito
+                document.getElementById('schermata-blocco').style.display = 'none';
+                document.getElementById('sito-vero').style.display = 'block';
+                document.body.style.padding = '50px 20px'; // sistema lo spazio
+            } else {
+                // Mostra messaggio d'errore
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        // Permette di premere "Invio" sulla tastiera per entrare
+        document.getElementById('password-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                controllaPassword();
+            }
+        });
+    </script>
 
 </body>
 </html>
