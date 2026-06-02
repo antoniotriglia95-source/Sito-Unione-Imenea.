@@ -22,6 +22,7 @@
 </head>
 <body>
 
+    <!-- SCHERMATA DI BLOCCO -->
     <div id="schermata-blocco" class="lock-box">
         <h1>Sito in Costruzione 🔒</h1>
         <p>Inserisci la password per accedere.</p>
@@ -30,8 +31,10 @@
         <p id="error-msg">Password errata. Riprova!</p>
     </div>
 
+    <!-- IL SITO VERO E PROPRIO -->
     <div id="sito-vero">
         
+        <!-- NAVBAR -->
         <nav class="navbar" id="navbar-scorrimento">
             <div class="logo">Antonio & Giulia</div>
             <div>
@@ -45,56 +48,58 @@
             </div>
         </nav>
 
+        <!-- IL PAPIRO -->
         <div class="papiro-container">
             
+            <!-- CARTONCINO 1: COPERTINA -->
             <article id="cartoncino1" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h1>Antonio & Giulia</h1>
-                    <p class="sottotitolo">Sono lieti di annunciare il loro matrimonio il 3 luglio 2027</p>
-                    <p>Benvenuti nel sito del nostro matrimonio. Scorrete per scoprire tutte le info più importanti.</p>
+                    <p class="sottotitolo">3 Luglio 2027</p>
+                    <p class="testo-snello">Benvenuti nel sito del nostro matrimonio. Scorrete per scoprire i dettagli.</p>
                 </div>
             </article>
 
+            <!-- CARTONCINO 2: SEZIONE SPECIALE -->
             <article id="cartoncino2" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Sezione Speciale</h2>
-                    <p>Questa servirà per inserire i link al quiz sugli sposi e altri giochi interattivi... in allestimento...</p>
+                    <p class="testo-snello">Quiz sugli sposi e giochi interattivi... in arrivo!</p>
                 </div>
             </article>
 
+            <!-- CARTONCINO 3: IL GRANDE GIORNO -->
             <article id="cartoncino3" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il Grande Giorno</h2>
                     
-                    <p><strong>La Cerimonia</strong><br>
-                    Ore 14:00<br>
-                    Santuario di Santa Maria del Monte<br>
-                    Località Santa Maria del Monte, Varese (VA)</p>
+                    <p class="info-blocco"><strong>Cerimonia (Ore 14:00)</strong><br>
+                    Santuario di Santa Maria del Monte, Varese</p>
                     
-                    <p style="margin-top: 20px;"><strong>Il Ricevimento</strong><br>
-                    A seguire saremo felici di festeggiare con voi presso:<br>
-                    <strong>Villa Borghi</strong><br>
-                    Piazza Bonomi, 2 - Varano Borghi (VA)</p>
+                    <p class="info-blocco"><strong>Ricevimento</strong><br>
+                    Villa Borghi - Varano Borghi (VA)</p>
                     
-                    <p class="nota-pernotto">* Per chi desiderasse pernottare direttamente in struttura, vi ricordiamo che è possibile farlo contattando la reception di Villa Borghi con dovuto anticipo.</p>
+                    <p class="nota-pernotto">* Per pernottare, contatta la reception di Villa Borghi.</p>
                     
                     <div class="bottoni-gruppo">
-                        <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn-mappa" target="_blank">📍 Naviga verso la Chiesa</a>
-                        <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn-mappa" target="_blank">🍇 Naviga verso Villa Borghi</a>
+                        <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn-mappa" target="_blank">📍 Chiesa</a>
+                        <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn-mappa" target="_blank">🍇 Villa</a>
                     </div>
                 </div>
             </article>
 
+            <!-- CARTONCINO 4: IBAN E REGALI -->
             <article id="cartoncino4" class="cartoncino">
                 <div class="contenuto-cartoncino">
                     <h2>Il nostro Sogno</h2>
-                    <p>In questa sezione inseriremo i dettagli per la lista nozze, il viaggio di nozze o le coordinate bancarie.</p>
+                    <p class="testo-snello">Qui inseriremo i dettagli per la lista nozze e le coordinate bancarie.</p>
                 </div>
             </article>
 
         </div>
     </div>
 
+    <!-- SCRIPT LOGICHE -->
     <script>
         function controllaPassword() {
             const passwordInserita = document.getElementById('password-input').value;
@@ -118,19 +123,12 @@
             }
         }
 
-        // LOGICA EFFETTO SCOMPARSA NAVBAR (COMPARE SOLO SE SEI FERMO)
         function inizializzaNavbarScomparsa() {
             const navbar = document.getElementById('navbar-scorrimento');
             let isScrolling;
-
             window.addEventListener('scroll', function() {
-                // Appena l'utente si muove, aggiunge la classe che la nasconde verso l'alto
                 navbar.classList.add('navbar-nascosta');
-
-                // Cancella il timer precedente mentre l'utente continua a scorrere
                 window.clearTimeout(isScrolling);
-
-                // Imposta un timer: dopo 150 millisecondi che sei fermo, la barra riappare
                 isScrolling = setTimeout(function() {
                     navbar.classList.remove('navbar-nascosta');
                 }, 150);
