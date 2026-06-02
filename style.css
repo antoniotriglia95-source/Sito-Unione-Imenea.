@@ -31,13 +31,10 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #f2ece4;
-    
-    /* Animazione fluida per la comparsa/scomparsa */
     transition: transform 0.3s ease-in-out;
     transform: translateY(0);
 }
 
-/* LA CLASSE MAGICA: Nasconde la barra spostandola sopra il limite dello schermo */
 .navbar-nascosta {
     transform: translateY(-100%);
 }
@@ -65,46 +62,28 @@ body {
     margin-top: 60px;
 }
 
-/* SEZIONI DEL PAPIRO */
+/* SEZIONI DEL PAPIRO (IMPOSTAZIONI DESKTOP PC) */
 .cartoncino {
     min-height: 180vh; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center; 
-    padding: 120px 20px; 
+    padding: 60px 20px; 
     text-align: center;
     background-size: cover; 
     background-repeat: no-repeat;
-    background-attachment: scroll; 
+    background-color: #fefbf7; /* Colore carta avorio di fondo */
     position: relative;
     scroll-margin-top: 60px;
 }
 
-#cartoncino1 { 
-    background-image: url('disegno1.png'); 
-    background-position: center bottom; 
-}
+#cartoncino1 { background-image: url('disegno1.png'); background-position: center bottom; }
+#cartoncino2 { background-image: url('disegno2.png'); background-position: center center; align-items: flex-start; padding-left: 8%; }
+#cartoncino3 { background-image: url('disegno3.png'); background-position: center bottom; min-height: 160vh; }
+#cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
 
-#cartoncino2 { 
-    background-image: url('disegno2.png'); 
-    background-position: center center;
-    align-items: flex-start; 
-    padding-left: 8%; 
-}
-
-#cartoncino3 { 
-    background-image: url('disegno3.png'); 
-    background-position: center bottom; 
-    min-height: 160vh; 
-}
-
-#cartoncino4 { 
-    background-image: url('disegno4.png'); 
-    background-position: center 70%; 
-}
-
-/* I BOX DEL TESTO */
+/* I BOX DEL TESTO (IMPOSTAZIONI DESKTOP PC) */
 .contenuto-cartoncino {
     background-color: #ffffff; 
     padding: 45px 35px;
@@ -117,12 +96,6 @@ body {
     outline-offset: -12px; 
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
-
-/* ABBASSAMENTO PER LE SEZIONI 3 E 4 */
-#cartoncino3 .contenuto-cartoncino,
-#cartoncino4 .contenuto-cartoncino {
-    margin-top: 25vh; 
 }
 
 /* FORMATTAZIONE FONTS */
@@ -192,34 +165,44 @@ strong {
     background-color: #2a4359;
 }
 
-/* MOBILE SMARTPHONE */
+
+/* ======================================================== */
+/* SUPER OTTIMIZZAZIONE PER SMARTPHONE E DISPOSITIVI MOBILE */
+/* ======================================================== */
 @media (max-width: 768px) {
     .cartoncino {
-        min-height: 140vh; 
-        padding: 80px 15px;
+        min-height: 100vh; /* Riduce l'altezza per non disperdere il disegno */
+        padding: 30px 15px;
+        
+        /* MAGIC ZOOM OUT: Il disegno rimpicciolisce e si mostra INTERO senza tagli laterali */
+        background-size: contain; 
+        background-position: center bottom; /* Spinge il disegno sul fondo della sezione mobile */
+        background-color: #fefbf7; /* Lo sfondo riempie gli spazi vuoti con l'avorio della carta */
     }
     
-    #cartoncino2 { 
-        align-items: center; 
-        padding-left: 15px;
-    }
-    
-    #cartoncino3 { 
-        min-height: 125vh; 
-    }
-    
-    #cartoncino3 .contenuto-cartoncino,
-    #cartoncino4 .contenuto-cartoncino {
-        margin-top: 15vh; 
-    }
-    
+    /* Configurazione specifica posizioni disegni su mobile */
+    #cartoncino1 { background-position: center bottom; }
+    #cartoncino2 { background-position: center 85%; align-items: center; padding-left: 15px; }
+    #cartoncino3 { background-position: center bottom; min-height: 110vh; } /* Un pelo più alto per far stare i bottoni delle mappe */
+    #cartoncino4 { background-position: center bottom; }
+
+    /* RIDIMENSIONAMENTO AUTOMATICO DEI BOX DI TESTO SU MOBILE */
     .contenuto-cartoncino {
-        margin-top: 10px;
-        padding: 30px 18px;
-        outline-offset: -8px;
+        margin-top: 15px; /* Box vicinissimo alla cima dello schermo mobile */
+        padding: 25px 18px; /* Più compatto all'interno per risparmiare spazio */
+        width: 94%; /* Sfrutta quasi tutta la larghezza dello smartphone */
+        max-width: 360px; /* Evita che diventi troppo largo su schermi intermedi */
+        outline-offset: -8px; /* Cornice interna riproporzionata */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06); /* Ombra più leggera adatta al mobile */
     }
-    h1 { font-size: 2.4em; }
-    h2 { font-size: 1.8em; }
-    p { font-size: 0.85em; }
-    .btn-mappa { width: 100%; text-align: center; }
+    
+    /* Ridimensionamento testi per smartphone */
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.6em; }
+    .sottotitolo { font-size: 1.2em; margin-bottom: 15px; }
+    p { font-size: 0.85em; margin-bottom: 10px; }
+    .nota-pernotto { margin-top: 15px; padding-top: 10px; font-size: 0.75em; }
+    
+    .bottoni-gruppo { margin-top: 15px; gap: 8px; }
+    .btn-mappa { width: 100%; text-align: center; padding: 10px 15px; font-size: 0.8em; }
 }
