@@ -17,7 +17,7 @@ body {
     line-height: 1.6;
 }
 
-/* NAVBAR */
+/* NAVBAR STRUTTURA BASE */
 .navbar {
     position: fixed;
     top: 0;
@@ -31,6 +31,15 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #f2ece4;
+    
+    /* Animazione fluida per la comparsa/scomparsa */
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
+}
+
+/* LA CLASSE MAGICA: Nasconde la barra spostandola sopra il limite dello schermo */
+.navbar-nascosta {
+    transform: translateY(-100%);
 }
 
 .navbar .logo {
@@ -80,14 +89,14 @@ body {
 #cartoncino2 { 
     background-image: url('disegno2.png'); 
     background-position: center center;
-    align-items: flex-start; /* Il testo corto dei giochi sta elegante a sinistra su PC */
+    align-items: flex-start; 
     padding-left: 8%; 
 }
 
 #cartoncino3 { 
     background-image: url('disegno3.png'); 
     background-position: center bottom; 
-    min-height: 160vh; /* Più corto, perfetto per ospitare il Grande Giorno senza coprire il fondo */
+    min-height: 160vh; 
 }
 
 #cartoncino4 { 
@@ -110,7 +119,7 @@ body {
     text-align: center;
 }
 
-/* SPINTA VERSO IL BASSO CONTROLLATA PER LE SEZIONI 3 E 4 */
+/* ABBASSAMENTO PER LE SEZIONI 3 E 4 */
 #cartoncino3 .contenuto-cartoncino,
 #cartoncino4 .contenuto-cartoncino {
     margin-top: 25vh; 
