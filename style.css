@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Proza+Libre:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 /* RESET GENERALE */
 * {
@@ -783,6 +783,384 @@ p,
     .info-blocco,
     .nota-pernotto {
         font-size: 0.68rem !important;
+    }
+
+    #cartoncino1,
+    #cartoncino2,
+    #cartoncino3,
+    #cartoncino4 {
+        --dimensione-disegno: 132vw auto;
+    }
+}
+/* ======================================================== */
+/* STILE PARTECIPAZIONE - TESTO STAMPATO SUL DISEGNO        */
+/* ======================================================== */
+
+/* Colore principale simile alla stampa blu/grigia della partecipazione */
+:root {
+    --blu-partecipazione: #5f7492;
+    --blu-scuro-partecipazione: #405775;
+    --verde-morbido: #5c6f60;
+    --carta-trasparente: rgba(254, 251, 247, 0.74);
+}
+
+/* Le sezioni diventano tavole illustrate */
+.cartoncino {
+    display: block;
+    min-height: 110svh;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #fefbf7;
+}
+
+/* Disegno protagonista */
+.cartoncino::before {
+    opacity: 1;
+    filter: saturate(0.96) contrast(1.04) brightness(1.02);
+}
+
+/* Velatura molto leggera, non effetto box */
+.cartoncino::after {
+    background: radial-gradient(
+        circle at var(--luce-x, 50%) var(--luce-y, 20%),
+        rgba(254, 251, 247, 0.54),
+        rgba(254, 251, 247, 0.18) 34%,
+        rgba(254, 251, 247, 0.00) 70%
+    );
+}
+
+/* Contenitore testo senza cartoncino bianco */
+.contenuto-cartoncino {
+    position: absolute;
+    z-index: 2;
+
+    top: var(--testo-top, 8%);
+    left: var(--testo-left, 50%);
+    transform: translateX(-50%) rotate(var(--testo-rotazione, 0deg));
+
+    width: var(--testo-width, min(84vw, 500px));
+    max-width: var(--testo-max-width, 500px);
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+
+    text-align: center;
+}
+
+/* Piccola aura carta dietro al testo per leggibilità */
+.contenuto-cartoncino::before {
+    content: "";
+    position: absolute;
+    inset: -22px -26px;
+    z-index: -1;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(254, 251, 247, 0.72),
+        rgba(254, 251, 247, 0.38) 48%,
+        rgba(254, 251, 247, 0.00) 78%
+    );
+
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+/* Nomi / titoli grandi: effetto scrittura a mano */
+h1,
+h2 {
+    font-family: 'WindSong', cursive;
+    color: var(--blu-partecipazione);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 0.95;
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.50),
+        0 2px 8px rgba(254, 251, 247, 0.80);
+
+    mix-blend-mode: multiply;
+}
+
+h1 {
+    font-size: clamp(3.2rem, 9vw, 6.6rem);
+}
+
+h2 {
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+}
+
+/* Data sotto al titolo */
+.sottotitolo {
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+    font-style: normal;
+    font-weight: 300;
+    color: var(--blu-partecipazione);
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.60),
+        0 2px 8px rgba(254, 251, 247, 0.85);
+
+    mix-blend-mode: multiply;
+}
+
+/* Testi piccoli stile partecipazione: maiuscolo, sottile, spaziato */
+p,
+.testo-snello,
+.info-blocco,
+.nota-pernotto {
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 300;
+    color: var(--blu-scuro-partecipazione);
+    font-size: clamp(0.76rem, 1.25vw, 0.95rem);
+    line-height: 1.65;
+    margin-bottom: 13px;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.65),
+        0 2px 8px rgba(254, 251, 247, 0.85);
+
+    mix-blend-mode: multiply;
+}
+
+.testo-snello {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-blocco strong {
+    color: var(--blu-scuro-partecipazione);
+    font-weight: 400;
+}
+
+/* La nota pernotto resta più delicata */
+.nota-pernotto {
+    font-size: clamp(0.65rem, 1vw, 0.78rem);
+    letter-spacing: 0.10em;
+    text-transform: none;
+    font-style: normal;
+    border-top: 1px solid rgba(95, 116, 146, 0.22);
+}
+
+/* Bottoni meno moderni, più coerenti con la carta */
+.bottoni-gruppo {
+    margin-top: 22px;
+}
+
+.btn-mappa {
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 400;
+
+    background-color: rgba(95, 116, 146, 0.92);
+    color: #ffffff;
+
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+
+    padding: 9px 18px;
+    font-size: 0.72rem;
+
+    box-shadow: 0 8px 20px rgba(64, 87, 117, 0.16);
+}
+
+.btn-mappa:hover {
+    background-color: var(--blu-scuro-partecipazione);
+}
+
+/* ======================================================== */
+/* POSIZIONE TESTI SUI DISEGNI                              */
+/* ======================================================== */
+
+/* Copertina */
+#cartoncino1 {
+    --testo-top: 8%;
+    --testo-left: 50%;
+    --testo-width: min(86vw, 560px);
+    --testo-rotazione: -0.3deg;
+
+    --dimensione-disegno: min(96vw, 1180px) auto;
+    --posizione-disegno: center bottom;
+
+    --luce-x: 50%;
+    --luce-y: 18%;
+}
+
+/* Sezione speciale */
+#cartoncino2 {
+    --testo-top: 9%;
+    --testo-left: 35%;
+    --testo-width: min(76vw, 430px);
+    --testo-rotazione: 0.4deg;
+
+    --dimensione-disegno: min(92vw, 1080px) auto;
+    --posizione-disegno: center 72%;
+
+    --luce-x: 35%;
+    --luce-y: 18%;
+}
+
+/* Il grande giorno */
+#cartoncino3 {
+    --testo-top: 7%;
+    --testo-left: 50%;
+    --testo-width: min(84vw, 500px);
+    --testo-rotazione: 0deg;
+
+    --dimensione-disegno: min(98vw, 1220px) auto;
+    --posizione-disegno: center bottom;
+
+    --luce-x: 50%;
+    --luce-y: 17%;
+}
+
+/* Regali */
+#cartoncino4 {
+    --testo-top: 9%;
+    --testo-left: 50%;
+    --testo-width: min(80vw, 460px);
+    --testo-rotazione: -0.25deg;
+
+    --dimensione-disegno: min(92vw, 1080px) auto;
+    --posizione-disegno: center 76%;
+
+    --luce-x: 50%;
+    --luce-y: 19%;
+}
+
+/* ======================================================== */
+/* MOBILE                                                   */
+/* ======================================================== */
+
+@media (max-width: 768px) {
+    .cartoncino {
+        min-height: 100svh;
+    }
+
+    .contenuto-cartoncino {
+        width: var(--testo-mobile-width, 84vw);
+        max-width: 330px;
+    }
+
+    .contenuto-cartoncino::before {
+        inset: -16px -18px;
+        background: radial-gradient(
+            ellipse at center,
+            rgba(254, 251, 247, 0.76),
+            rgba(254, 251, 247, 0.42) 48%,
+            rgba(254, 251, 247, 0.00) 78%
+        );
+    }
+
+    h1 {
+        font-size: clamp(3rem, 14vw, 4.4rem) !important;
+        line-height: 0.9 !important;
+        margin-bottom: 8px !important;
+    }
+
+    h2 {
+        font-size: clamp(2.4rem, 12vw, 3.7rem) !important;
+        line-height: 0.95 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .sottotitolo {
+        font-size: 0.92rem !important;
+        letter-spacing: 0.16em !important;
+        margin-bottom: 11px !important;
+    }
+
+    p,
+    .testo-snello,
+    .info-blocco,
+    .nota-pernotto {
+        font-size: 0.66rem !important;
+        line-height: 1.45 !important;
+        letter-spacing: 0.10em !important;
+        margin-bottom: 7px !important;
+    }
+
+    .nota-pernotto {
+        font-size: 0.58rem !important;
+        letter-spacing: 0.06em !important;
+    }
+
+    .bottoni-gruppo {
+        gap: 7px !important;
+        margin-top: 12px !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .btn-mappa {
+        width: auto !important;
+        min-width: 102px;
+        padding: 7px 10px !important;
+        font-size: 0.58rem !important;
+        letter-spacing: 0.08em !important;
+    }
+
+    #cartoncino1 {
+        --testo-top: 7%;
+        --testo-left: 50%;
+        --testo-mobile-width: 86vw;
+
+        --dimensione-disegno: 122vw auto;
+        --posizione-disegno: center bottom;
+    }
+
+    #cartoncino2 {
+        --testo-top: 8%;
+        --testo-left: 50%;
+        --testo-mobile-width: 80vw;
+
+        --dimensione-disegno: 118vw auto;
+        --posizione-disegno: center 76%;
+    }
+
+    #cartoncino3 {
+        --testo-top: 6%;
+        --testo-left: 50%;
+        --testo-mobile-width: 86vw;
+
+        --dimensione-disegno: 128vw auto;
+        --posizione-disegno: center bottom;
+        min-height: 108svh;
+    }
+
+    #cartoncino4 {
+        --testo-top: 8%;
+        --testo-left: 50%;
+        --testo-mobile-width: 82vw;
+
+        --dimensione-disegno: 118vw auto;
+        --posizione-disegno: center 78%;
+    }
+}
+
+@media (max-width: 390px) {
+    .contenuto-cartoncino {
+        max-width: 292px;
+    }
+
+    p,
+    .testo-snello,
+    .info-blocco,
+    .nota-pernotto {
+        font-size: 0.61rem !important;
     }
 
     #cartoncino1,
