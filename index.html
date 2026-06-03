@@ -3,111 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sito In Costruzione</title>
+    <title>Antonio & Giulia</title>
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        .lock-box {
-            max-width: 400px; margin: 150px auto; background: white; padding: 40px 30px;
-            border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eae5dd;
-        }
-        .lock-box h1 { color: #3b5c7a; font-size: 1.8em; margin-bottom: 10px; }
-        .lock-box input[type="password"] {
-            width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center;
-        }
-        .lock-btn { background: #3b5c7a; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        #error-msg { color: #c0392b; font-size: 0.9em; margin-top: 10px; display: none; }
-        #sito-vero { display: none; }
-    </style>
 </head>
+
 <body>
 
-    <!-- SCHERMATA DI BLOCCO -->
-    <div id="schermata-blocco" class="lock-box">
-        <h1>Sito in Costruzione 🔒</h1>
-        <p>Inserisci la password per accedere.</p>
-        <input type="password" id="password-input" placeholder="Password">
-        <button class="lock-btn" onclick="controllaPassword()">Entra</button>
-        <p id="error-msg">Password errata. Riprova!</p>
-    </div>
+    <!-- SFONDO DECORATIVO -->
+    <div class="sfondo-decorativo"></div>
 
-    <!-- IL SITO VERO E PROPRIO -->
+    <!-- SCHERMATA DI BLOCCO -->
+    <main id="schermata-blocco" class="lock-page">
+        <section class="lock-box">
+            <p class="eyebrow">Sito riservato</p>
+            <h1>Antonio & Giulia</h1>
+            <p class="lock-subtitle">Il nostro sito è ancora in costruzione.</p>
+
+            <div class="password-area">
+                <input 
+                    type="password" 
+                    id="password-input" 
+                    placeholder="Inserisci la password"
+                    autocomplete="current-password"
+                >
+
+                <button class="lock-btn" onclick="controllaPassword()">
+                    Entra nel sito
+                </button>
+
+                <p id="error-msg">Password errata. Riprova!</p>
+            </div>
+
+            <p class="lock-note">3 Luglio 2027</p>
+        </section>
+    </main>
+
+    <!-- SITO VERO -->
     <div id="sito-vero">
-        
+
         <!-- NAVBAR -->
         <nav class="navbar" id="navbar-scorrimento">
-            <div class="logo">Antonio & Giulia</div>
-            <div>
-                <select class="menu-tendina" onchange="navigaASezione(this.value)">
-                    <option value="">Naviga...</option>
-                    <option value="#cartoncino1">1. Copertina</option>
-                    <option value="#cartoncino2">2. Sezione Speciale</option>
-                    <option value="#cartoncino3">3. Il Giorno</option>
-                    <option value="#cartoncino4">4. Iban & Regali</option>
-                </select>
+            <a href="#cartoncino1" class="nav-logo">A & G</a>
+
+            <div class="nav-links">
+                <a href="#cartoncino1">Home</a>
+                <a href="#cartoncino2">Speciale</a>
+                <a href="#cartoncino3">Il Giorno</a>
+                <a href="#cartoncino4">Regali</a>
             </div>
+
+            <select class="menu-tendina" onchange="navigaASezione(this.value)">
+                <option value="">Naviga...</option>
+                <option value="#cartoncino1">Copertina</option>
+                <option value="#cartoncino2">Sezione Speciale</option>
+                <option value="#cartoncino3">Il Giorno</option>
+                <option value="#cartoncino4">Iban & Regali</option>
+            </select>
         </nav>
 
-        <!-- IL PAPIRO -->
-        <div class="papiro-container">
-            
-            <!-- CARTONCINO 1: COPERTINA -->
-            <article id="cartoncino1" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h1>Antonio & Giulia</h1>
-                    <p class="sottotitolo">3 Luglio 2027</p>
-                    <p class="testo-snello">Benvenuti nel sito del nostro matrimonio. Scorrete per scoprire i dettagli.</p>
-                </div>
-            </article>
+        <!-- HERO -->
+        <header id="cartoncino1" class="hero-section">
+            <div class="hero-card">
+                <p class="eyebrow">Ci sposiamo</p>
+                <h1>Antonio <span>&</span> Giulia</h1>
+                <p class="hero-date">3 Luglio 2027</p>
+                <p class="hero-text">
+                    Benvenuti nel sito del nostro matrimonio.  
+                    Qui troverete tutte le informazioni sul grande giorno.
+                </p>
 
-            <!-- CARTONCINO 2: SEZIONE SPECIALE -->
+                <a href="#cartoncino3" class="primary-btn">
+                    Scopri i dettagli
+                </a>
+            </div>
+        </header>
+
+        <!-- CONTENUTO -->
+        <main class="papiro-container">
+
+            <!-- SEZIONE SPECIALE -->
             <article id="cartoncino2" class="cartoncino">
                 <div class="contenuto-cartoncino">
+                    <p class="section-number">01</p>
                     <h2>Sezione Speciale</h2>
-                    <p class="testo-snello">Quiz sugli sposi e giochi interattivi... in arrivo!</p>
-                </div>
-            </article>
+                    <p class="testo-snello">
+                        Quiz sugli sposi, giochi interattivi e piccole sorprese per gli invitati.
+                    </p>
 
-            <!-- CARTONCINO 3: IL GRANDE GIORNO -->
-            <article id="cartoncino3" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h2>Il Grande Giorno</h2>
-                    
-                    <p class="info-blocco"><strong>Cerimonia (Ore 14:00)</strong><br>
-                    Santuario di Santa Maria del Monte, Varese</p>
-                    
-                    <p class="info-blocco"><strong>Ricevimento</strong><br>
-                    Villa Borghi - Varano Borghi (VA)</p>
-                    
-                    <p class="nota-pernotto">* Per pernottare, contatta la reception di Villa Borghi.</p>
-                    
-                    <div class="bottoni-gruppo">
-                        <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn-mappa" target="_blank">📍 Chiesa</a>
-                        <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn-mappa" target="_blank">🍇 Villa</a>
+                    <div class="coming-soon-box">
+                        <span>In arrivo</span>
+                        <p>Stiamo preparando qualcosa di speciale per voi.</p>
                     </div>
                 </div>
             </article>
 
-            <!-- CARTONCINO 4: IBAN E REGALI -->
-            <article id="cartoncino4" class="cartoncino">
+            <!-- IL GRANDE GIORNO -->
+            <article id="cartoncino3" class="cartoncino">
                 <div class="contenuto-cartoncino">
-                    <h2>Il nostro Sogno</h2>
-                    <p class="testo-snello">Qui inseriremo i dettagli per la lista nozze e le coordinate bancarie.</p>
+                    <p class="section-number">02</p>
+                    <h2>Il Grande Giorno</h2>
+                    <p class="testo-snello">
+                        Ecco i primi dettagli della giornata. Altre informazioni arriveranno presto.
+                    </p>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">14:00</div>
+                            <div class="timeline-content">
+                                <h3>Cerimonia</h3>
+                                <p>Santuario di Santa Maria del Monte, Varese</p>
+                                <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" target="_blank" class="mini-link">
+                                    Apri su Maps
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">Dopo</div>
+                            <div class="timeline-content">
+                                <h3>Ricevimento</h3>
+                                <p>Villa Borghi - Varano Borghi (VA)</p>
+                                <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" target="_blank" class="mini-link">
+                                    Apri su Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="nota-pernotto">
+                        Per pernottare, contatta la reception di Villa Borghi.
+                    </p>
+
+                    <div class="bottoni-gruppo">
+                        <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn-mappa" target="_blank">
+                            📍 Chiesa
+                        </a>
+                        <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn-mappa" target="_blank">
+                            🍇 Villa
+                        </a>
+                    </div>
                 </div>
             </article>
 
-        </div>
+            <!-- IBAN E REGALI -->
+            <article id="cartoncino4" class="cartoncino">
+                <div class="contenuto-cartoncino">
+                    <p class="section-number">03</p>
+                    <h2>Il nostro Sogno</h2>
+                    <p class="testo-snello">
+                        Qui inseriremo i dettagli per la lista nozze e le coordinate bancarie.
+                    </p>
+
+                    <div class="gift-card">
+                        <div class="gift-icon">✦</div>
+                        <p>
+                            Il regalo più grande sarà festeggiare insieme a voi.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>Antonio & Giulia</p>
+            <span>3 Luglio 2027</span>
+        </footer>
+
     </div>
 
-    <!-- SCRIPT LOGICHE -->
+    <!-- SCRIPT -->
     <script>
         function controllaPassword() {
-            const passwordInserita = document.getElementById('password-input').value;
-            const passwordCorretta = "Ilmioamore2027"; 
+            const passwordInserita = document.getElementById('password-input').value.trim();
+
+            /*
+                IMPORTANTE:
+                Cambia questa password prima di pubblicare.
+                Per ora questa NON è sicurezza vera, è solo una barriera grafica.
+            */
+            const passwordCorretta = "Ilmioamore2027";
 
             if (passwordInserita === passwordCorretta) {
                 document.getElementById('schermata-blocco').style.display = 'none';
                 document.getElementById('sito-vero').style.display = 'block';
+                document.body.classList.add('sito-sbloccato');
                 inizializzaNavbarScomparsa();
             } else {
                 document.getElementById('error-msg').style.display = 'block';
@@ -125,18 +206,25 @@
 
         function inizializzaNavbarScomparsa() {
             const navbar = document.getElementById('navbar-scorrimento');
-            let isScrolling;
+            let ultimoScroll = 0;
+
             window.addEventListener('scroll', function() {
-                navbar.classList.add('navbar-nascosta');
-                window.clearTimeout(isScrolling);
-                isScrolling = setTimeout(function() {
+                const scrollAttuale = window.scrollY;
+
+                if (scrollAttuale > ultimoScroll && scrollAttuale > 120) {
+                    navbar.classList.add('navbar-nascosta');
+                } else {
                     navbar.classList.remove('navbar-nascosta');
-                }, 150);
-            }, false);
+                }
+
+                ultimoScroll = scrollAttuale;
+            });
         }
 
-        document.getElementById('password-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { controllaPassword(); }
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                controllaPassword();
+            }
         });
     </script>
 
