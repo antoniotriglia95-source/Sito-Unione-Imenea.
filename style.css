@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Proza+Libre:wght@400;500;600&display=swap');
 
+/* RESET GENERALE */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -12,12 +13,81 @@ html {
 
 body {
     font-family: 'Proza Libre', sans-serif;
-    background-color: #faf6f0; 
-    color: #1a241d; 
+    background-color: #faf6f0;
+    color: #1a241d;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* NAVBAR DESKTOP */
+/* ======================================================== */
+/* SCHERMATA PASSWORD                                       */
+/* ======================================================== */
+
+.lock-box {
+    max-width: 400px;
+    margin: 150px auto;
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    border: 1px solid #eae5dd;
+}
+
+.lock-box h1 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #3b5c7a;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.lock-box p {
+    color: #2b362e;
+    margin-bottom: 15px;
+}
+
+.lock-box input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Proza Libre', sans-serif;
+}
+
+.lock-btn {
+    background: #3b5c7a;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Proza Libre', sans-serif;
+}
+
+.lock-btn:hover {
+    background: #2c465e;
+}
+
+#error-msg {
+    color: #c0392b;
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: none;
+}
+
+/* Il sito parte nascosto */
+#sito-vero {
+    display: none;
+}
+
+/* ======================================================== */
+/* NAVBAR                                                   */
+/* ======================================================== */
+
 .navbar {
     position: fixed;
     top: 0;
@@ -35,14 +105,16 @@ body {
     transform: translateY(0);
 }
 
-.navbar-nascosta { transform: translateY(-100%); }
+.navbar-nascosta {
+    transform: translateY(-100%);
+}
 
 .navbar .logo {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
     font-style: italic;
     font-size: 1.4em;
-    color: #3b5c7a; 
+    color: #3b5c7a;
 }
 
 .menu-tendina {
@@ -56,115 +128,328 @@ body {
     cursor: pointer;
 }
 
-.papiro-container { margin-top: 60px; }
+/* ======================================================== */
+/* STRUTTURA GENERALE CARTONCINI                            */
+/* ======================================================== */
 
-/* SEZIONI SCHERMO INTERO DESKTOP */
+.papiro-container {
+    margin-top: 60px;
+}
+
+/*
+    Qui sta la parte importante:
+    i disegni NON sono più background tagliati con cover.
+    Ogni sezione ha un ::before con il disegno posizionato bene.
+*/
+
 .cartoncino {
-    min-height: 180vh; 
+    min-height: 105svh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center; 
-    padding: 60px 20px; 
+    justify-content: flex-start;
+    align-items: center;
     text-align: center;
-    background-size: cover; 
-    background-repeat: no-repeat;
-    background-color: #fefbf7; 
+    padding: 80px 20px 60px;
+    background-color: #fefbf7;
     position: relative;
+    overflow: hidden;
     scroll-margin-top: 60px;
 }
 
-#cartoncino1 { background-image: url('disegno1.png'); background-position: center bottom; }
-#cartoncino2 { background-image: url('disegno2.png'); background-position: center center; align-items: flex-start; padding-left: 8%; }
-#cartoncino3 { background-image: url('disegno3.png'); background-position: center bottom; min-height: 160vh; }
-#cartoncino4 { background-image: url('disegno4.png'); background-position: center 70%; }
+/* Disegno sotto il contenuto */
+.cartoncino::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--disegno);
+    background-repeat: no-repeat;
+    background-size: var(--dimensione-disegno);
+    background-position: var(--posizione-disegno);
+    pointer-events: none;
+}
 
-/* I RIQUADRI BIANCHI DELLE INFO (VERSIONE DESKTOP: BELLI GRANDI) */
+/* Velatura leggera per far leggere meglio il testo */
+.cartoncino::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to bottom,
+        rgba(254, 251, 247, 0.35),
+        rgba(254, 251, 247, 0.04),
+        rgba(254, 251, 247, 0.18)
+    );
+    pointer-events: none;
+}
+
+/* Riquadro bianco sopra al disegno */
 .contenuto-cartoncino {
-    background-color: #ffffff; 
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.94);
     padding: 45px 35px;
-    max-width: 480px; 
+    max-width: 480px;
     width: 92%;
-    margin-top: 40px; 
-    border-radius: 4px; 
+    margin-top: 25px;
+    border-radius: 4px;
     border: 1px solid #eae5dd;
-    outline: 4px solid rgba(143, 168, 155, 0.18); 
-    outline-offset: -12px; 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    outline: 4px solid rgba(143, 168, 155, 0.18);
+    outline-offset: -12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
     text-align: center;
 }
 
-/* CARATTERI DESKTOP */
-h1, h2 { font-family: 'Cormorant Garamond', serif; color: #2c465e; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px; }
-h1 { font-size: 3.2em; line-height: 1.1; }
-h2 { font-size: 2.3em; line-height: 1.2; }
-.sottotitolo { font-family: 'Cormorant Garamond', serif; font-size: 1.4em; font-style: italic; color: #4a6353; margin-bottom: 25px; }
-p { font-size: 0.9em; color: #2b362e; margin-bottom: 14px; }
-.info-blocco { margin-bottom: 20px; }
-.nota-pernotto { font-size: 0.8em; font-style: italic; color: #556b5c; margin-top: 22px; padding-top: 15px; border-top: 1px dashed #eae5dd; }
+/* ======================================================== */
+/* POSIZIONE DEI DISEGNI                                    */
+/* ======================================================== */
 
-.bottoni-gruppo { display: flex; justify-content: center; gap: 12px; margin-top: 25px; flex-wrap: wrap; }
-.btn-mappa { display: inline-block; background-color: #3b5c7a; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: 500; font-size: 0.8em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+/* Cartoncino 1 - Copertina */
+#cartoncino1 {
+    --disegno: url('disegno1.png');
+    --dimensione-disegno: min(92vw, 1150px) auto;
+    --posizione-disegno: center bottom;
+    min-height: 110svh;
+}
 
+/* Cartoncino 2 - Sezione speciale */
+#cartoncino2 {
+    --disegno: url('disegno2.png');
+    --dimensione-disegno: min(88vw, 1000px) auto;
+    --posizione-disegno: center 72%;
+    min-height: 105svh;
+}
+
+/* Cartoncino 3 - Il giorno */
+#cartoncino3 {
+    --disegno: url('disegno3.png');
+    --dimensione-disegno: min(94vw, 1180px) auto;
+    --posizione-disegno: center bottom;
+    min-height: 120svh;
+}
+
+/* Cartoncino 4 - Regali */
+#cartoncino4 {
+    --disegno: url('disegno4.png');
+    --dimensione-disegno: min(88vw, 1000px) auto;
+    --posizione-disegno: center 78%;
+    min-height: 105svh;
+}
 
 /* ======================================================== */
-/* AREA MOBILE - QUI ABBIAMO RIMPICCIOLITO I RIQUADRI INFO  */
+/* TESTI                                                    */
 /* ======================================================== */
+
+h1,
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #2c465e;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 2.3em;
+    line-height: 1.2;
+}
+
+.sottotitolo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4em;
+    font-style: italic;
+    color: #4a6353;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 0.9em;
+    color: #2b362e;
+    margin-bottom: 14px;
+}
+
+.testo-snello {
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-blocco {
+    margin-bottom: 20px;
+}
+
+.nota-pernotto {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #556b5c;
+    margin-top: 22px;
+    padding-top: 15px;
+    border-top: 1px dashed #eae5dd;
+}
+
+/* ======================================================== */
+/* BOTTONI MAPPA                                            */
+/* ======================================================== */
+
+.bottoni-gruppo {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-mappa {
+    display: inline-block;
+    background-color: #3b5c7a;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.8em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-mappa:hover {
+    background-color: #2c465e;
+}
+
+/* ======================================================== */
+/* MOBILE                                                   */
+/* ======================================================== */
+
 @media (max-width: 768px) {
-    .cartoncino {
-        min-height: 70vh; 
-        padding: 15px 10px; 
-        background-size: contain; 
-        background-position: center bottom; 
+    .lock-box {
+        margin: 100px auto;
+        width: calc(100% - 36px);
+        padding: 34px 24px;
     }
-    #cartoncino2 { align-items: center; padding-left: 10px; }
-    #cartoncino3 { min-height: 85vh; }
 
-    /* IL CUORE DELLA MODIFICA: IL RIQUADRO BIANCO DIVENTA PICCOLO E CORTO */
+    .navbar {
+        padding: 12px 14px;
+    }
+
+    .navbar .logo {
+        font-size: 1.25em;
+    }
+
+    .menu-tendina {
+        font-size: 0.75em;
+        max-width: 135px;
+    }
+
+    .papiro-container {
+        margin-top: 55px;
+    }
+
+    .cartoncino {
+        min-height: 100svh;
+        padding: 24px 10px 40px;
+        justify-content: flex-start;
+    }
+
     .contenuto-cartoncino {
-        margin-top: 10px; 
-        padding: 12px 15px !important; /* Ridotto il padding a pochissimi pixel per renderlo basso */
-        width: 85%; /* Più stretto ed elegante */
-        max-width: 270px; /* Larghezza massima ridotta drasticamente */
-        outline-offset: -5px; 
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04); 
+        margin-top: 10px;
+        padding: 16px 15px !important;
+        width: 86%;
+        max-width: 285px;
+        outline-offset: -6px;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+        background-color: rgba(255, 255, 255, 0.95);
     }
-    
-    /* COMPATTAZIONE TESTI DEL RIQUADRO SU MOBILE */
-    h1 { font-size: 1.4em !important; margin-bottom: 2px !important; }
-    h2 { font-size: 1.2em !important; margin-bottom: 4px !important; }
-    
-    .sottotitolo { 
-        font-size: 0.9em !important; 
-        margin-bottom: 4px !important; 
+
+    /*
+        Disegni più grandi su mobile.
+        Così non sembrano sparire sotto il riquadro.
+    */
+
+    #cartoncino1 {
+        --dimensione-disegno: 118vw auto;
+        --posizione-disegno: center bottom;
+        min-height: 100svh;
     }
-    
-    p { 
-        font-size: 0.75em !important; 
-        line-height: 1.25 !important; 
-        margin-bottom: 4px !important; 
+
+    #cartoncino2 {
+        --dimensione-disegno: 112vw auto;
+        --posizione-disegno: center 76%;
+        min-height: 100svh;
     }
-    
-    .info-blocco { 
-        margin-bottom: 6px !important; /* Ridotto lo spazio tra i blocchi della chiesa e della villa */
+
+    #cartoncino3 {
+        --dimensione-disegno: 122vw auto;
+        --posizione-disegno: center bottom;
+        min-height: 112svh;
     }
-    
-    .nota-pernotto { 
-        margin-top: 5px !important; 
-        padding-top: 4px !important; 
-        font-size: 0.65em !important; 
+
+    #cartoncino4 {
+        --dimensione-disegno: 112vw auto;
+        --posizione-disegno: center 78%;
+        min-height: 100svh;
     }
-    
-    /* BOTTONI MINI SULLA STESSA RIGA */
-    .bottoni-gruppo { 
-        margin-top: 8px !important; 
-        gap: 5px !important; 
-        flex-wrap: nowrap !important; 
+
+    h1 {
+        font-size: 1.55em !important;
+        margin-bottom: 3px !important;
     }
-    
-    .btn-mappa { 
-        width: 50% !important; 
-        padding: 6px 2px !important; 
-        font-size: 0.65em !important; 
+
+    h2 {
+        font-size: 1.35em !important;
+        margin-bottom: 5px !important;
+    }
+
+    .sottotitolo {
+        font-size: 0.95em !important;
+        margin-bottom: 5px !important;
+    }
+
+    p {
+        font-size: 0.75em !important;
+        line-height: 1.35 !important;
+        margin-bottom: 5px !important;
+    }
+
+    .info-blocco {
+        margin-bottom: 7px !important;
+    }
+
+    .nota-pernotto {
+        margin-top: 7px !important;
+        padding-top: 5px !important;
+        font-size: 0.65em !important;
+    }
+
+    .bottoni-gruppo {
+        margin-top: 9px !important;
+        gap: 6px !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .btn-mappa {
+        width: 50% !important;
+        padding: 6px 2px !important;
+        font-size: 0.65em !important;
+    }
+}
+
+/* TELEFONI MOLTO PICCOLI */
+@media (max-width: 390px) {
+    .contenuto-cartoncino {
+        width: 88%;
+        max-width: 265px;
+        padding: 14px 12px !important;
+    }
+
+    #cartoncino1,
+    #cartoncino2,
+    #cartoncino3,
+    #cartoncino4 {
+        --dimensione-disegno: 126vw auto;
     }
 }
