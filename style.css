@@ -453,3 +453,342 @@ p {
         --dimensione-disegno: 126vw auto;
     }
 }
+/* ======================================================== */
+/* EFFETTO "TESTO STAMPATO SUL CARTONCINO"                  */
+/* Incolla questo blocco in fondo al file style.css          */
+/* ======================================================== */
+
+/* Le sezioni diventano vere "tavole" con testo posizionato */
+.cartoncino {
+    display: block;
+    min-height: 110svh;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Disegno più protagonista */
+.cartoncino::before {
+    opacity: 1;
+    filter: saturate(0.96) contrast(1.03);
+}
+
+/* Velatura quasi invisibile, solo per ammorbidire la scansione */
+.cartoncino::after {
+    background: radial-gradient(
+        circle at var(--luce-x, 50%) var(--luce-y, 22%),
+        rgba(254, 251, 247, 0.42),
+        rgba(254, 251, 247, 0.12) 34%,
+        rgba(254, 251, 247, 0.02) 68%
+    );
+}
+
+/* Il box bianco sparisce: resta solo il testo "stampato" */
+.contenuto-cartoncino {
+    position: absolute;
+    z-index: 2;
+
+    top: var(--testo-top, 10%);
+    left: var(--testo-left, 50%);
+    transform: translateX(-50%) rotate(var(--testo-rotazione, 0deg));
+
+    width: var(--testo-width, min(82vw, 460px));
+    max-width: var(--testo-max-width, 460px);
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+
+    text-align: center;
+}
+
+/* Piccola "macchia carta" dietro: non è un box, è una velatura */
+.contenuto-cartoncino::before {
+    content: "";
+    position: absolute;
+    inset: -22px -26px;
+    z-index: -1;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(254, 251, 247, 0.78),
+        rgba(254, 251, 247, 0.46) 48%,
+        rgba(254, 251, 247, 0.00) 76%
+    );
+
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+/* Titoli: effetto partecipazione stampata */
+h1,
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #223f57;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.55),
+        0 2px 10px rgba(254, 251, 247, 0.75);
+
+    mix-blend-mode: multiply;
+}
+
+h1 {
+    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    line-height: 0.95;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 3.7rem);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+/* Data/sottotitolo più da invito */
+.sottotitolo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+    font-style: italic;
+    color: #405d4a;
+    margin-bottom: 18px;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.55),
+        0 2px 8px rgba(254, 251, 247, 0.75);
+
+    mix-blend-mode: multiply;
+}
+
+/* Testi leggibili ma non troppo "web" */
+p,
+.testo-snello,
+.info-blocco,
+.nota-pernotto {
+    color: #253229;
+    font-size: clamp(0.82rem, 1.35vw, 0.98rem);
+    line-height: 1.55;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.65),
+        0 2px 8px rgba(254, 251, 247, 0.8);
+
+    mix-blend-mode: multiply;
+}
+
+.testo-snello {
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-blocco strong {
+    color: #223f57;
+}
+
+/* Bottoni più integrati, meno "web app" */
+.bottoni-gruppo {
+    margin-top: 22px;
+}
+
+.btn-mappa {
+    background-color: rgba(59, 92, 122, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 9px 18px;
+    box-shadow: 0 8px 20px rgba(34, 63, 87, 0.18);
+}
+
+.btn-mappa:hover {
+    background-color: #223f57;
+}
+
+/* ======================================================== */
+/* POSIZIONI TESTI SUI 4 CARTONCINI                         */
+/* Modifica questi valori per centrare meglio sulle immagini */
+/* ======================================================== */
+
+/* Copertina */
+#cartoncino1 {
+    --testo-top: 8%;
+    --testo-left: 50%;
+    --testo-width: min(86vw, 520px);
+    --testo-rotazione: -0.3deg;
+
+    --dimensione-disegno: min(96vw, 1180px) auto;
+    --posizione-disegno: center bottom;
+
+    --luce-x: 50%;
+    --luce-y: 18%;
+}
+
+/* Sezione speciale */
+#cartoncino2 {
+    --testo-top: 10%;
+    --testo-left: 32%;
+    --testo-width: min(76vw, 390px);
+    --testo-rotazione: 0.4deg;
+
+    --dimensione-disegno: min(92vw, 1080px) auto;
+    --posizione-disegno: center 72%;
+
+    --luce-x: 32%;
+    --luce-y: 18%;
+}
+
+/* Il grande giorno */
+#cartoncino3 {
+    --testo-top: 7%;
+    --testo-left: 50%;
+    --testo-width: min(84vw, 460px);
+    --testo-rotazione: 0deg;
+
+    --dimensione-disegno: min(98vw, 1220px) auto;
+    --posizione-disegno: center bottom;
+
+    --luce-x: 50%;
+    --luce-y: 18%;
+}
+
+/* Regali */
+#cartoncino4 {
+    --testo-top: 10%;
+    --testo-left: 50%;
+    --testo-width: min(80vw, 430px);
+    --testo-rotazione: -0.25deg;
+
+    --dimensione-disegno: min(92vw, 1080px) auto;
+    --posizione-disegno: center 76%;
+
+    --luce-x: 50%;
+    --luce-y: 20%;
+}
+
+/* ======================================================== */
+/* MOBILE                                                   */
+/* ======================================================== */
+
+@media (max-width: 768px) {
+    .cartoncino {
+        min-height: 100svh;
+    }
+
+    .contenuto-cartoncino {
+        width: var(--testo-mobile-width, 82vw);
+        max-width: 310px;
+    }
+
+    .contenuto-cartoncino::before {
+        inset: -16px -18px;
+        background: radial-gradient(
+            ellipse at center,
+            rgba(254, 251, 247, 0.82),
+            rgba(254, 251, 247, 0.50) 46%,
+            rgba(254, 251, 247, 0.00) 76%
+        );
+    }
+
+    h1 {
+        font-size: clamp(2rem, 11vw, 3.2rem) !important;
+        line-height: 0.95 !important;
+        margin-bottom: 8px !important;
+    }
+
+    h2 {
+        font-size: clamp(1.65rem, 9vw, 2.4rem) !important;
+        line-height: 1 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .sottotitolo {
+        font-size: 1.05rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    p,
+    .testo-snello,
+    .info-blocco,
+    .nota-pernotto {
+        font-size: 0.74rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 7px !important;
+    }
+
+    .bottoni-gruppo {
+        gap: 7px !important;
+        margin-top: 12px !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .btn-mappa {
+        width: auto !important;
+        min-width: 105px;
+        padding: 7px 10px !important;
+        font-size: 0.65rem !important;
+    }
+
+    #cartoncino1 {
+        --testo-top: 7%;
+        --testo-left: 50%;
+        --testo-mobile-width: 84vw;
+
+        --dimensione-disegno: 122vw auto;
+        --posizione-disegno: center bottom;
+    }
+
+    #cartoncino2 {
+        --testo-top: 8%;
+        --testo-left: 50%;
+        --testo-mobile-width: 78vw;
+
+        --dimensione-disegno: 118vw auto;
+        --posizione-disegno: center 76%;
+    }
+
+    #cartoncino3 {
+        --testo-top: 6%;
+        --testo-left: 50%;
+        --testo-mobile-width: 84vw;
+
+        --dimensione-disegno: 128vw auto;
+        --posizione-disegno: center bottom;
+        min-height: 108svh;
+    }
+
+    #cartoncino4 {
+        --testo-top: 8%;
+        --testo-left: 50%;
+        --testo-mobile-width: 80vw;
+
+        --dimensione-disegno: 118vw auto;
+        --posizione-disegno: center 78%;
+    }
+}
+
+/* Telefoni piccoli */
+@media (max-width: 390px) {
+    .contenuto-cartoncino {
+        max-width: 285px;
+    }
+
+    p,
+    .testo-snello,
+    .info-blocco,
+    .nota-pernotto {
+        font-size: 0.68rem !important;
+    }
+
+    #cartoncino1,
+    #cartoncino2,
+    #cartoncino3,
+    #cartoncino4 {
+        --dimensione-disegno: 132vw auto;
+    }
+}
