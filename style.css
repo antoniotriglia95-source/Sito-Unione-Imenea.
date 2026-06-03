@@ -1626,3 +1626,289 @@ p,
         --dimensione-disegno: 124vw auto;
     }
 }
+/* ======================================================== */
+/* RESET ORDINE IMMAGINI - VERSIONE PULITA E DRITTA         */
+/* ======================================================== */
+
+/* Stop agli incastri strani tra le immagini */
+.papiro-container {
+    margin-top: 60px !important;
+    padding: 0 !important;
+    background: #fefbf7 !important;
+}
+
+/* Ogni cartoncino diventa una tavola ordinata */
+.cartoncino {
+    position: relative !important;
+    display: block !important;
+
+    min-height: calc(100svh - 60px) !important;
+    height: calc(100svh - 60px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+    background-color: #fefbf7 !important;
+
+    scroll-margin-top: 60px !important;
+}
+
+/* Immagini dritte, proporzionate e non deformate */
+.cartoncino::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+
+    background-image: var(--disegno) !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center center !important;
+
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+
+    pointer-events: none !important;
+}
+
+/* Via velature troppo forti o strane */
+.cartoncino::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+
+    background: radial-gradient(
+        circle at var(--luce-x, 50%) var(--luce-y, 22%),
+        rgba(254, 251, 247, 0.36),
+        rgba(254, 251, 247, 0.10) 38%,
+        rgba(254, 251, 247, 0.00) 72%
+    ) !important;
+
+    pointer-events: none !important;
+}
+
+/* Testi sopra, ordinati */
+.contenuto-cartoncino {
+    position: absolute !important;
+    z-index: 2 !important;
+
+    top: var(--testo-top, 10%) !important;
+    left: var(--testo-left, 50%) !important;
+
+    width: var(--testo-width, min(84vw, 520px)) !important;
+    max-width: var(--testo-max-width, 520px) !important;
+
+    transform: translateX(-50%) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    text-align: center !important;
+}
+
+/* Alone carta leggero dietro alle scritte */
+.contenuto-cartoncino::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: -22px -28px !important;
+    z-index: -1 !important;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(254, 251, 247, 0.72),
+        rgba(254, 251, 247, 0.36) 48%,
+        rgba(254, 251, 247, 0.00) 78%
+    ) !important;
+
+    filter: blur(2px) !important;
+    pointer-events: none !important;
+}
+
+/* ======================================================== */
+/* POSIZIONI PULITE DELLE 4 TAVOLE                          */
+/* ======================================================== */
+
+#cartoncino1 {
+    --disegno: url('disegno1.png');
+    --testo-top: 7%;
+    --testo-left: 50%;
+    --testo-width: min(86vw, 560px);
+    --luce-x: 50%;
+    --luce-y: 18%;
+}
+
+#cartoncino2 {
+    --disegno: url('disegno2.png');
+    --testo-top: 13%;
+    --testo-left: 50%;
+    --testo-width: min(88vw, 660px);
+    --luce-x: 50%;
+    --luce-y: 24%;
+}
+
+#cartoncino3 {
+    --disegno: url('disegno3.png');
+    --testo-top: 12%;
+    --testo-left: 50%;
+    --testo-width: min(84vw, 520px);
+    --luce-x: 50%;
+    --luce-y: 23%;
+}
+
+#cartoncino4 {
+    --disegno: url('disegno4.png');
+    --testo-top: 13%;
+    --testo-left: 47%;
+    --testo-width: min(82vw, 500px);
+    --luce-x: 47%;
+    --luce-y: 24%;
+}
+
+/* ======================================================== */
+/* DATA COPERTINA PIÙ FORTE                                 */
+/* ======================================================== */
+
+#cartoncino1 h1 {
+    margin-bottom: 32px !important;
+}
+
+#cartoncino1 .sottotitolo {
+    display: inline-block !important;
+
+    font-family: 'Josefin Sans', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.24em !important;
+    font-weight: 400 !important;
+
+    font-size: clamp(1.25rem, 3vw, 2rem) !important;
+    color: #405775 !important;
+
+    margin-top: 4px !important;
+    margin-bottom: 28px !important;
+
+    padding: 10px 18px 8px !important;
+    border-top: 1px solid rgba(95, 116, 146, 0.35) !important;
+    border-bottom: 1px solid rgba(95, 116, 146, 0.35) !important;
+}
+
+/* Più spazio tra titolo e testo nelle altre sezioni */
+#cartoncino2 h2,
+#cartoncino3 h2,
+#cartoncino4 h2 {
+    margin-bottom: 32px !important;
+}
+
+/* ======================================================== */
+/* COLONNE ORDINATE                                         */
+/* ======================================================== */
+
+.contenuto-colonne {
+    width: min(88vw, 660px) !important;
+    max-width: 660px !important;
+}
+
+.colonne-partecipazione {
+    display: grid !important;
+    grid-template-columns: 1fr 1px 1fr !important;
+    gap: 30px !important;
+    align-items: start !important;
+    margin-top: 28px !important;
+}
+
+.colonne-partecipazione::before {
+    content: "" !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+
+    width: 1px !important;
+    height: 100% !important;
+    min-height: 190px !important;
+
+    background: rgba(95, 116, 146, 0.48) !important;
+}
+
+.colonne-partecipazione p:first-child {
+    grid-column: 1 !important;
+}
+
+.colonne-partecipazione p:last-child {
+    grid-column: 3 !important;
+}
+
+/* ======================================================== */
+/* MOBILE                                                   */
+/* ======================================================== */
+
+@media (max-width: 768px) {
+    .cartoncino {
+        min-height: calc(100svh - 55px) !important;
+        height: calc(100svh - 55px) !important;
+    }
+
+    .cartoncino::before {
+        background-size: contain !important;
+        background-position: center center !important;
+    }
+
+    .contenuto-cartoncino {
+        max-width: 330px !important;
+    }
+
+    #cartoncino1 {
+        --testo-top: 7%;
+        --testo-left: 50%;
+        --testo-width: 86vw;
+    }
+
+    #cartoncino2 {
+        --testo-top: 12%;
+        --testo-left: 50%;
+        --testo-width: 86vw;
+    }
+
+    #cartoncino3 {
+        --testo-top: 11%;
+        --testo-left: 50%;
+        --testo-width: 86vw;
+    }
+
+    #cartoncino4 {
+        --testo-top: 12%;
+        --testo-left: 48%;
+        --testo-width: 84vw;
+    }
+
+    #cartoncino1 h1 {
+        margin-bottom: 22px !important;
+    }
+
+    #cartoncino1 .sottotitolo {
+        font-size: 1.05rem !important;
+        letter-spacing: 0.18em !important;
+        padding: 8px 12px 6px !important;
+        margin-bottom: 18px !important;
+    }
+
+    #cartoncino2 h2,
+    #cartoncino3 h2,
+    #cartoncino4 h2 {
+        margin-bottom: 20px !important;
+    }
+
+    .colonne-partecipazione {
+        gap: 14px !important;
+        margin-top: 18px !important;
+    }
+
+    .colonne-partecipazione::before {
+        min-height: 150px !important;
+    }
+}
