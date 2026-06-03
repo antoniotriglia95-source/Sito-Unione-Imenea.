@@ -27,19 +27,23 @@
     <div id="sito-vero">
 
         <!-- NAVBAR -->
-        <nav class="navbar" id="navbar-scorrimento">
-            <div class="logo">Antonio & Giulia</div>
+       <nav class="navbar" id="navbar-scorrimento">
+    <a href="#cartoncino1" class="logo">Antonio & Giulia</a>
 
-            <div>
-                <select class="menu-tendina" onchange="navigaASezione(this.value)">
-                    <option value="">Naviga...</option>
-                    <option value="#cartoncino1">1. Copertina</option>
-                    <option value="#cartoncino2">2. Sezione Speciale</option>
-                    <option value="#cartoncino3">3. Il Giorno</option>
-                    <option value="#cartoncino4">4. Iban & Regali</option>
-                </select>
-            </div>
-        </nav>
+    <div class="nav-elegante">
+        <a href="#cartoncino1">Copertina</a>
+        <a href="#cartoncino2">Promessa</a>
+        <a href="#cartoncino3">Il Giorno</a>
+        <a href="#cartoncino4">Regali</a>
+    </div>
+</nav>
+
+<div class="nav-puntini" aria-label="Navigazione sezioni">
+    <a href="#cartoncino1" aria-label="Vai alla copertina"></a>
+    <a href="#cartoncino2" aria-label="Vai alla promessa"></a>
+    <a href="#cartoncino3" aria-label="Vai al giorno"></a>
+    <a href="#cartoncino4" aria-label="Vai ai regali"></a>
+</div>
 
         <!-- IL PAPIRO -->
         <div class="papiro-container">
@@ -57,13 +61,23 @@
 
             <!-- CARTONCINO 2: SEZIONE SPECIALE -->
             <article id="cartoncino2" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h2>Sezione Speciale</h2>
-                    <p class="testo-snello">
-                        Quiz sugli sposi e giochi interattivi... in arrivo!
-                    </p>
-                </div>
-            </article>
+    <div class="contenuto-cartoncino contenuto-colonne">
+        <h2>La Promessa</h2>
+
+        <div class="colonne-partecipazione">
+            <p>
+                Una parola data da ragazzi.  
+                Il 30 settembre 2025, nel calore di casa nostra,
+                Antonio l’ha resa realtà.
+            </p>
+
+            <p>
+                Per tutti i dettagli e per curiosare nella nostra storia,
+                abbiamo preparato una sezione speciale.
+            </p>
+        </div>
+    </div>
+</article>
 
             <!-- CARTONCINO 3: IL GRANDE GIORNO -->
             <article id="cartoncino3" class="cartoncino">
