@@ -1,7 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+/* ================================================================
+   ANTONIO & GIULIA · SITO MATRIMONIO
+   style.css — versione pulita
+   ================================================================ */
 
-/* RESET GENERALE */
-* {
+@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap');
+
+
+/* ================================================================
+   VARIABILI GLOBALI
+   ================================================================ */
+
+:root {
+    --blu:        #5f7492;
+    --blu-scuro:  #405775;
+    --carta:      #fefbf7;
+    --navbar-h:   58px;
+}
+
+
+/* ================================================================
+   RESET BASE
+   ================================================================ */
+
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -12,97 +33,132 @@ html {
 }
 
 body {
-    font-family: 'Proza Libre', sans-serif;
-    background-color: #faf6f0;
-    color: #1a241d;
-    line-height: 1.6;
+    background: var(--carta);
+    color: var(--blu-scuro);
     overflow-x: hidden;
 }
 
-/* ======================================================== */
-/* SCHERMATA PASSWORD                                       */
-/* ======================================================== */
 
-.lock-box {
-    max-width: 400px;
-    margin: 150px auto;
-    background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    text-align: center;
-    border: 1px solid #eae5dd;
+/* ================================================================
+   SCHERMATA PASSWORD
+   ================================================================ */
+
+#schermata-blocco {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--carta);
 }
 
-.lock-box h1 {
-    font-family: 'Cormorant Garamond', serif;
-    color: #3b5c7a;
-    font-size: 1.8em;
+.lock-box {
+    width: min(90vw, 360px);
+    text-align: center;
+    padding: 50px 36px 40px;
+    background: white;
+    border: 1px solid rgba(95, 116, 146, 0.18);
+    border-radius: 6px;
+    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.06);
+}
+
+.lock-iniziali {
+    font-family: 'WindSong', cursive;
+    font-size: 3.2rem;
+    font-weight: 500;
+    color: var(--blu-scuro);
+    line-height: 1;
     margin-bottom: 10px;
 }
 
-.lock-box p {
-    color: #2b362e;
-    margin-bottom: 15px;
+.lock-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: var(--blu);
+    margin-bottom: 26px;
 }
 
-.lock-box input[type="password"] {
+#password-input {
+    display: block;
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: var(--carta);
+    border: 1px solid rgba(95, 116, 146, 0.28);
     border-radius: 4px;
     text-align: center;
-    font-family: 'Proza Libre', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    color: var(--blu-scuro);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#password-input:focus {
+    border-color: var(--blu);
 }
 
 .lock-btn {
-    background: #3b5c7a;
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--blu);
     color: white;
     border: none;
-    padding: 12px;
-    width: 100%;
     border-radius: 4px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
     cursor: pointer;
-    font-weight: bold;
-    font-family: 'Proza Libre', sans-serif;
+    transition: background 0.2s;
 }
 
 .lock-btn:hover {
-    background: #2c465e;
+    background: var(--blu-scuro);
 }
 
 #error-msg {
-    color: #c0392b;
-    font-size: 0.9em;
-    margin-top: 10px;
     display: none;
+    margin-top: 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a03030;
 }
 
-/* Il sito parte nascosto */
+/* Il sito parte nascosto finché non entra la password */
 #sito-vero {
     display: none;
 }
 
-/* ======================================================== */
-/* NAVBAR                                                   */
-/* ======================================================== */
+
+/* ================================================================
+   NAVBAR
+   ================================================================ */
 
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fefbf7;
-    padding: 14px 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    z-index: 1000;
+    height: var(--navbar-h);
+    background: rgba(254, 251, 247, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(95, 116, 146, 0.10);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #f2ece4;
-    transition: transform 0.3s ease-in-out;
-    transform: translateY(0);
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 100;
+    transition: transform 0.3s ease;
 }
 
 .navbar-nascosta {
@@ -110,53 +166,101 @@ body {
 }
 
 .navbar .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 1.4em;
-    color: #3b5c7a;
+    font-family: 'WindSong', cursive;
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: var(--blu-scuro);
+    text-decoration: none;
 }
 
-.menu-tendina {
-    padding: 6px 12px;
-    font-family: 'Proza Libre', sans-serif;
-    border: 1px solid #d4c3b3;
-    background-color: white;
-    color: #2f3e33;
-    border-radius: 4px;
-    font-size: 0.8em;
-    cursor: pointer;
+.nav-elegante {
+    display: flex;
+    align-items: center;
+    gap: 28px;
 }
 
-/* ======================================================== */
-/* STRUTTURA GENERALE CARTONCINI                            */
-/* ======================================================== */
-
-.papiro-container {
-    margin-top: 60px;
+.nav-elegante a {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.64rem;
+    font-weight: 300;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--blu);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.2s;
 }
 
-/*
-    Qui sta la parte importante:
-    i disegni NON sono più background tagliati con cover.
-    Ogni sezione ha un ::before con il disegno posizionato bene.
-*/
+/* Sottolineatura animata al hover */
+.nav-elegante a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--blu);
+    transform: translateX(-50%);
+    transition: width 0.25s ease;
+}
 
-.cartoncino {
-    min-height: 105svh;
+.nav-elegante a:hover::after,
+.nav-elegante a.active::after {
+    width: 100%;
+}
+
+
+/* ================================================================
+   PUNTINI DI NAVIGAZIONE LATERALI
+   ================================================================ */
+
+.nav-puntini {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    padding: 80px 20px 60px;
-    background-color: #fefbf7;
-    position: relative;
-    overflow: hidden;
-    scroll-margin-top: 60px;
+    gap: 13px;
 }
 
-/* Disegno sotto il contenuto */
+.nav-puntini a {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--blu);
+    background: rgba(254, 251, 247, 0.7);
+    transition: background 0.22s, transform 0.22s;
+}
+
+.nav-puntini a:hover,
+.nav-puntini a.active {
+    background: var(--blu);
+    transform: scale(1.45);
+}
+
+
+/* ================================================================
+   STRUTTURA SEZIONI
+   ================================================================ */
+
+.papiro-container {
+    margin-top: var(--navbar-h);
+}
+
+.cartoncino {
+    position: relative;
+    width: 100%;
+    height: calc(100svh - var(--navbar-h));
+    overflow: hidden;
+    background: var(--carta);
+    scroll-margin-top: var(--navbar-h);
+}
+
+/* Disegno come sfondo — non deformato, non tagliato */
 .cartoncino::before {
     content: "";
     position: absolute;
@@ -164,1751 +268,395 @@ body {
     z-index: 0;
     background-image: var(--disegno);
     background-repeat: no-repeat;
-    background-size: var(--dimensione-disegno);
-    background-position: var(--posizione-disegno);
+    background-size: var(--img-size, contain);
+    background-position: var(--img-pos, center center);
+    filter: saturate(0.97) contrast(1.03);
     pointer-events: none;
 }
 
-/* Velatura leggera per far leggere meglio il testo */
+/* Velatura radiale per rendere leggibile il testo sopra */
 .cartoncino::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(
-        to bottom,
-        rgba(254, 251, 247, 0.35),
-        rgba(254, 251, 247, 0.04),
-        rgba(254, 251, 247, 0.18)
-    );
-    pointer-events: none;
-}
-
-/* Riquadro bianco sopra al disegno */
-.contenuto-cartoncino {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.94);
-    padding: 45px 35px;
-    max-width: 480px;
-    width: 92%;
-    margin-top: 25px;
-    border-radius: 4px;
-    border: 1px solid #eae5dd;
-    outline: 4px solid rgba(143, 168, 155, 0.18);
-    outline-offset: -12px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
-    text-align: center;
-}
-
-/* ======================================================== */
-/* POSIZIONE DEI DISEGNI                                    */
-/* ======================================================== */
-
-/* Cartoncino 1 - Copertina */
-#cartoncino1 {
-    --disegno: url('disegno1.png');
-    --dimensione-disegno: min(92vw, 1150px) auto;
-    --posizione-disegno: center bottom;
-    min-height: 110svh;
-}
-
-/* Cartoncino 2 - Sezione speciale */
-#cartoncino2 {
-    --disegno: url('disegno2.png');
-    --dimensione-disegno: min(88vw, 1000px) auto;
-    --posizione-disegno: center 72%;
-    min-height: 105svh;
-}
-
-/* Cartoncino 3 - Il giorno */
-#cartoncino3 {
-    --disegno: url('disegno3.png');
-    --dimensione-disegno: min(94vw, 1180px) auto;
-    --posizione-disegno: center bottom;
-    min-height: 120svh;
-}
-
-/* Cartoncino 4 - Regali */
-#cartoncino4 {
-    --disegno: url('disegno4.png');
-    --dimensione-disegno: min(88vw, 1000px) auto;
-    --posizione-disegno: center 78%;
-    min-height: 105svh;
-}
-
-/* ======================================================== */
-/* TESTI                                                    */
-/* ======================================================== */
-
-h1,
-h2 {
-    font-family: 'Cormorant Garamond', serif;
-    color: #2c465e;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-}
-
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-}
-
-h2 {
-    font-size: 2.3em;
-    line-height: 1.2;
-}
-
-.sottotitolo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4em;
-    font-style: italic;
-    color: #4a6353;
-    margin-bottom: 25px;
-}
-
-p {
-    font-size: 0.9em;
-    color: #2b362e;
-    margin-bottom: 14px;
-}
-
-.testo-snello {
-    max-width: 360px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.info-blocco {
-    margin-bottom: 20px;
-}
-
-.nota-pernotto {
-    font-size: 0.8em;
-    font-style: italic;
-    color: #556b5c;
-    margin-top: 22px;
-    padding-top: 15px;
-    border-top: 1px dashed #eae5dd;
-}
-
-/* ======================================================== */
-/* BOTTONI MAPPA                                            */
-/* ======================================================== */
-
-.bottoni-gruppo {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 25px;
-    flex-wrap: wrap;
-}
-
-.btn-mappa {
-    display: inline-block;
-    background-color: #3b5c7a;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 0.8em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.btn-mappa:hover {
-    background-color: #2c465e;
-}
-
-/* ======================================================== */
-/* MOBILE                                                   */
-/* ======================================================== */
-
-@media (max-width: 768px) {
-    .lock-box {
-        margin: 100px auto;
-        width: calc(100% - 36px);
-        padding: 34px 24px;
-    }
-
-    .navbar {
-        padding: 12px 14px;
-    }
-
-    .navbar .logo {
-        font-size: 1.25em;
-    }
-
-    .menu-tendina {
-        font-size: 0.75em;
-        max-width: 135px;
-    }
-
-    .papiro-container {
-        margin-top: 55px;
-    }
-
-    .cartoncino {
-        min-height: 100svh;
-        padding: 24px 10px 40px;
-        justify-content: flex-start;
-    }
-
-    .contenuto-cartoncino {
-        margin-top: 10px;
-        padding: 16px 15px !important;
-        width: 86%;
-        max-width: 285px;
-        outline-offset: -6px;
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-        background-color: rgba(255, 255, 255, 0.95);
-    }
-
-    /*
-        Disegni più grandi su mobile.
-        Così non sembrano sparire sotto il riquadro.
-    */
-
-    #cartoncino1 {
-        --dimensione-disegno: 118vw auto;
-        --posizione-disegno: center bottom;
-        min-height: 100svh;
-    }
-
-    #cartoncino2 {
-        --dimensione-disegno: 112vw auto;
-        --posizione-disegno: center 76%;
-        min-height: 100svh;
-    }
-
-    #cartoncino3 {
-        --dimensione-disegno: 122vw auto;
-        --posizione-disegno: center bottom;
-        min-height: 112svh;
-    }
-
-    #cartoncino4 {
-        --dimensione-disegno: 112vw auto;
-        --posizione-disegno: center 78%;
-        min-height: 100svh;
-    }
-
-    h1 {
-        font-size: 1.55em !important;
-        margin-bottom: 3px !important;
-    }
-
-    h2 {
-        font-size: 1.35em !important;
-        margin-bottom: 5px !important;
-    }
-
-    .sottotitolo {
-        font-size: 0.95em !important;
-        margin-bottom: 5px !important;
-    }
-
-    p {
-        font-size: 0.75em !important;
-        line-height: 1.35 !important;
-        margin-bottom: 5px !important;
-    }
-
-    .info-blocco {
-        margin-bottom: 7px !important;
-    }
-
-    .nota-pernotto {
-        margin-top: 7px !important;
-        padding-top: 5px !important;
-        font-size: 0.65em !important;
-    }
-
-    .bottoni-gruppo {
-        margin-top: 9px !important;
-        gap: 6px !important;
-        flex-wrap: nowrap !important;
-    }
-
-    .btn-mappa {
-        width: 50% !important;
-        padding: 6px 2px !important;
-        font-size: 0.65em !important;
-    }
-}
-
-/* TELEFONI MOLTO PICCOLI */
-@media (max-width: 390px) {
-    .contenuto-cartoncino {
-        width: 88%;
-        max-width: 265px;
-        padding: 14px 12px !important;
-    }
-
-    #cartoncino1,
-    #cartoncino2,
-    #cartoncino3,
-    #cartoncino4 {
-        --dimensione-disegno: 126vw auto;
-    }
-}
-/* ======================================================== */
-/* EFFETTO "TESTO STAMPATO SUL CARTONCINO"                  */
-/* Incolla questo blocco in fondo al file style.css          */
-/* ======================================================== */
-
-/* Le sezioni diventano vere "tavole" con testo posizionato */
-.cartoncino {
-    display: block;
-    min-height: 110svh;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Disegno più protagonista */
-.cartoncino::before {
-    opacity: 1;
-    filter: saturate(0.96) contrast(1.03);
-}
-
-/* Velatura quasi invisibile, solo per ammorbidire la scansione */
-.cartoncino::after {
-    background: radial-gradient(
-        circle at var(--luce-x, 50%) var(--luce-y, 22%),
-        rgba(254, 251, 247, 0.42),
-        rgba(254, 251, 247, 0.12) 34%,
-        rgba(254, 251, 247, 0.02) 68%
-    );
-}
-
-/* Il box bianco sparisce: resta solo il testo "stampato" */
-.contenuto-cartoncino {
-    position: absolute;
-    z-index: 2;
-
-    top: var(--testo-top, 10%);
-    left: var(--testo-left, 50%);
-    transform: translateX(-50%) rotate(var(--testo-rotazione, 0deg));
-
-    width: var(--testo-width, min(82vw, 460px));
-    max-width: var(--testo-max-width, 460px);
-
-    margin: 0;
-    padding: 0;
-
-    background: transparent;
-    border: none;
-    outline: none;
-    box-shadow: none;
-
-    text-align: center;
-}
-
-/* Piccola "macchia carta" dietro: non è un box, è una velatura */
-.contenuto-cartoncino::before {
-    content: "";
-    position: absolute;
-    inset: -22px -26px;
-    z-index: -1;
-
-    background: radial-gradient(
-        ellipse at center,
-        rgba(254, 251, 247, 0.78),
-        rgba(254, 251, 247, 0.46) 48%,
-        rgba(254, 251, 247, 0.00) 76%
-    );
-
-    filter: blur(2px);
-    pointer-events: none;
-}
-
-/* Titoli: effetto partecipazione stampata */
-h1,
-h2 {
-    font-family: 'Cormorant Garamond', serif;
-    color: #223f57;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.55),
-        0 2px 10px rgba(254, 251, 247, 0.75);
-
-    mix-blend-mode: multiply;
-}
-
-h1 {
-    font-size: clamp(2.6rem, 7vw, 5.4rem);
-    line-height: 0.95;
-    margin-bottom: 12px;
-}
-
-h2 {
-    font-size: clamp(2rem, 5vw, 3.7rem);
-    line-height: 1;
-    margin-bottom: 12px;
-}
-
-/* Data/sottotitolo più da invito */
-.sottotitolo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
-    font-style: italic;
-    color: #405d4a;
-    margin-bottom: 18px;
-
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.55),
-        0 2px 8px rgba(254, 251, 247, 0.75);
-
-    mix-blend-mode: multiply;
-}
-
-/* Testi leggibili ma non troppo "web" */
-p,
-.testo-snello,
-.info-blocco,
-.nota-pernotto {
-    color: #253229;
-    font-size: clamp(0.82rem, 1.35vw, 0.98rem);
-    line-height: 1.55;
-
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.65),
-        0 2px 8px rgba(254, 251, 247, 0.8);
-
-    mix-blend-mode: multiply;
-}
-
-.testo-snello {
-    max-width: 360px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.info-blocco strong {
-    color: #223f57;
-}
-
-/* Bottoni più integrati, meno "web app" */
-.bottoni-gruppo {
-    margin-top: 22px;
-}
-
-.btn-mappa {
-    background-color: rgba(59, 92, 122, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    color: #ffffff;
-    border-radius: 999px;
-    padding: 9px 18px;
-    box-shadow: 0 8px 20px rgba(34, 63, 87, 0.18);
-}
-
-.btn-mappa:hover {
-    background-color: #223f57;
-}
-
-/* ======================================================== */
-/* POSIZIONI TESTI SUI 4 CARTONCINI                         */
-/* Modifica questi valori per centrare meglio sulle immagini */
-/* ======================================================== */
-
-/* Copertina */
-#cartoncino1 {
-    --testo-top: 8%;
-    --testo-left: 50%;
-    --testo-width: min(86vw, 520px);
-    --testo-rotazione: -0.3deg;
-
-    --dimensione-disegno: min(96vw, 1180px) auto;
-    --posizione-disegno: center bottom;
-
-    --luce-x: 50%;
-    --luce-y: 18%;
-}
-
-/* Sezione speciale */
-#cartoncino2 {
-    --testo-top: 10%;
-    --testo-left: 32%;
-    --testo-width: min(76vw, 390px);
-    --testo-rotazione: 0.4deg;
-
-    --dimensione-disegno: min(92vw, 1080px) auto;
-    --posizione-disegno: center 72%;
-
-    --luce-x: 32%;
-    --luce-y: 18%;
-}
-
-/* Il grande giorno */
-#cartoncino3 {
-    --testo-top: 7%;
-    --testo-left: 50%;
-    --testo-width: min(84vw, 460px);
-    --testo-rotazione: 0deg;
-
-    --dimensione-disegno: min(98vw, 1220px) auto;
-    --posizione-disegno: center bottom;
-
-    --luce-x: 50%;
-    --luce-y: 18%;
-}
-
-/* Regali */
-#cartoncino4 {
-    --testo-top: 10%;
-    --testo-left: 50%;
-    --testo-width: min(80vw, 430px);
-    --testo-rotazione: -0.25deg;
-
-    --dimensione-disegno: min(92vw, 1080px) auto;
-    --posizione-disegno: center 76%;
-
-    --luce-x: 50%;
-    --luce-y: 20%;
-}
-
-/* ======================================================== */
-/* MOBILE                                                   */
-/* ======================================================== */
-
-@media (max-width: 768px) {
-    .cartoncino {
-        min-height: 100svh;
-    }
-
-    .contenuto-cartoncino {
-        width: var(--testo-mobile-width, 82vw);
-        max-width: 310px;
-    }
-
-    .contenuto-cartoncino::before {
-        inset: -16px -18px;
-        background: radial-gradient(
-            ellipse at center,
-            rgba(254, 251, 247, 0.82),
-            rgba(254, 251, 247, 0.50) 46%,
-            rgba(254, 251, 247, 0.00) 76%
-        );
-    }
-
-    h1 {
-        font-size: clamp(2rem, 11vw, 3.2rem) !important;
-        line-height: 0.95 !important;
-        margin-bottom: 8px !important;
-    }
-
-    h2 {
-        font-size: clamp(1.65rem, 9vw, 2.4rem) !important;
-        line-height: 1 !important;
-        margin-bottom: 8px !important;
-    }
-
-    .sottotitolo {
-        font-size: 1.05rem !important;
-        margin-bottom: 10px !important;
-    }
-
-    p,
-    .testo-snello,
-    .info-blocco,
-    .nota-pernotto {
-        font-size: 0.74rem !important;
-        line-height: 1.35 !important;
-        margin-bottom: 7px !important;
-    }
-
-    .bottoni-gruppo {
-        gap: 7px !important;
-        margin-top: 12px !important;
-        flex-wrap: nowrap !important;
-    }
-
-    .btn-mappa {
-        width: auto !important;
-        min-width: 105px;
-        padding: 7px 10px !important;
-        font-size: 0.65rem !important;
-    }
-
-    #cartoncino1 {
-        --testo-top: 7%;
-        --testo-left: 50%;
-        --testo-mobile-width: 84vw;
-
-        --dimensione-disegno: 122vw auto;
-        --posizione-disegno: center bottom;
-    }
-
-    #cartoncino2 {
-        --testo-top: 8%;
-        --testo-left: 50%;
-        --testo-mobile-width: 78vw;
-
-        --dimensione-disegno: 118vw auto;
-        --posizione-disegno: center 76%;
-    }
-
-    #cartoncino3 {
-        --testo-top: 6%;
-        --testo-left: 50%;
-        --testo-mobile-width: 84vw;
-
-        --dimensione-disegno: 128vw auto;
-        --posizione-disegno: center bottom;
-        min-height: 108svh;
-    }
-
-    #cartoncino4 {
-        --testo-top: 8%;
-        --testo-left: 50%;
-        --testo-mobile-width: 80vw;
-
-        --dimensione-disegno: 118vw auto;
-        --posizione-disegno: center 78%;
-    }
-}
-
-/* Telefoni piccoli */
-@media (max-width: 390px) {
-    .contenuto-cartoncino {
-        max-width: 285px;
-    }
-
-    p,
-    .testo-snello,
-    .info-blocco,
-    .nota-pernotto {
-        font-size: 0.68rem !important;
-    }
-
-    #cartoncino1,
-    #cartoncino2,
-    #cartoncino3,
-    #cartoncino4 {
-        --dimensione-disegno: 132vw auto;
-    }
-}
-/* ======================================================== */
-/* STILE PARTECIPAZIONE - TESTO STAMPATO SUL DISEGNO        */
-/* ======================================================== */
-
-/* Colore principale simile alla stampa blu/grigia della partecipazione */
-:root {
-    --blu-partecipazione: #5f7492;
-    --blu-scuro-partecipazione: #405775;
-    --verde-morbido: #5c6f60;
-    --carta-trasparente: rgba(254, 251, 247, 0.74);
-}
-
-/* Le sezioni diventano tavole illustrate */
-.cartoncino {
-    display: block;
-    min-height: 110svh;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-    background-color: #fefbf7;
-}
-
-/* Disegno protagonista */
-.cartoncino::before {
-    opacity: 1;
-    filter: saturate(0.96) contrast(1.04) brightness(1.02);
-}
-
-/* Velatura molto leggera, non effetto box */
-.cartoncino::after {
     background: radial-gradient(
         circle at var(--luce-x, 50%) var(--luce-y, 20%),
-        rgba(254, 251, 247, 0.54),
-        rgba(254, 251, 247, 0.18) 34%,
-        rgba(254, 251, 247, 0.00) 70%
+        rgba(254, 251, 247, 0.52),
+        rgba(254, 251, 247, 0.14) 36%,
+        transparent 68%
     );
-}
-
-/* Contenitore testo senza cartoncino bianco */
-.contenuto-cartoncino {
-    position: absolute;
-    z-index: 2;
-
-    top: var(--testo-top, 8%);
-    left: var(--testo-left, 50%);
-    transform: translateX(-50%) rotate(var(--testo-rotazione, 0deg));
-
-    width: var(--testo-width, min(84vw, 500px));
-    max-width: var(--testo-max-width, 500px);
-
-    margin: 0;
-    padding: 0;
-
-    background: transparent;
-    border: none;
-    outline: none;
-    box-shadow: none;
-
-    text-align: center;
-}
-
-/* Piccola aura carta dietro al testo per leggibilità */
-.contenuto-cartoncino::before {
-    content: "";
-    position: absolute;
-    inset: -22px -26px;
-    z-index: -1;
-
-    background: radial-gradient(
-        ellipse at center,
-        rgba(254, 251, 247, 0.72),
-        rgba(254, 251, 247, 0.38) 48%,
-        rgba(254, 251, 247, 0.00) 78%
-    );
-
-    filter: blur(2px);
     pointer-events: none;
 }
 
-/* Nomi / titoli grandi: effetto scrittura a mano */
-h1,
-h2 {
-    font-family: 'WindSong', cursive;
-    color: var(--blu-partecipazione);
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 0.95;
-    margin-bottom: 12px;
 
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.50),
-        0 2px 8px rgba(254, 251, 247, 0.80);
+/* ================================================================
+   CONTENUTO TESTO (posizionato sul disegno)
+   ================================================================ */
 
-    mix-blend-mode: multiply;
+.contenuto-cartoncino {
+    position: absolute;
+    z-index: 2;
+    top:  var(--testo-top,  8%);
+    left: var(--testo-left, 50%);
+    transform: translateX(-50%) rotate(var(--testo-rot, 0deg));
+    width: var(--testo-w, min(84vw, 500px));
+    text-align: center;
 }
+
+/* Alone morbido dietro il testo per leggibilità */
+.contenuto-cartoncino::before {
+    content: "";
+    position: absolute;
+    inset: -30px -40px;
+    z-index: -1;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(254, 251, 247, 0.76),
+        rgba(254, 251, 247, 0.36) 50%,
+        transparent 78%
+    );
+    filter: blur(3px);
+    pointer-events: none;
+}
+
+
+/* ================================================================
+   TIPOGRAFIA
+   ================================================================ */
 
 h1 {
-    font-size: clamp(3.2rem, 9vw, 6.6rem);
-}
-
-h2 {
-    font-size: clamp(2.6rem, 7vw, 5.2rem);
-}
-
-/* Data sotto al titolo */
-.sottotitolo {
-    font-family: 'Josefin Sans', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: clamp(0.95rem, 2.2vw, 1.35rem);
-    font-style: normal;
-    font-weight: 300;
-    color: var(--blu-partecipazione);
-    margin-bottom: 20px;
-
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.60),
-        0 2px 8px rgba(254, 251, 247, 0.85);
-
+    font-family: 'WindSong', cursive;
+    font-size: clamp(3.4rem, 9vw, 6.8rem);
+    font-weight: 500;
+    color: var(--blu-scuro);
+    line-height: 0.95;
+    margin-bottom: 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5), 0 2px 14px rgba(254,251,247,0.8);
     mix-blend-mode: multiply;
 }
 
-/* Testi piccoli stile partecipazione: maiuscolo, sottile, spaziato */
+h2 {
+    font-family: 'WindSong', cursive;
+    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    font-weight: 500;
+    color: var(--blu-scuro);
+    line-height: 0.95;
+    margin-bottom: 22px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5), 0 2px 14px rgba(254,251,247,0.8);
+    mix-blend-mode: multiply;
+}
+
+.sottotitolo {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: clamp(0.9rem, 2.2vw, 1.25rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--blu);
+    margin-bottom: 16px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 2px 10px rgba(254,251,247,0.85);
+    mix-blend-mode: multiply;
+}
+
 p,
 .testo-snello,
-.info-blocco,
-.nota-pernotto {
+.info-blocco {
     font-family: 'Josefin Sans', sans-serif;
+    font-size: clamp(0.70rem, 1.25vw, 0.88rem);
+    font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    font-weight: 300;
-    color: var(--blu-scuro-partecipazione);
-    font-size: clamp(0.76rem, 1.25vw, 0.95rem);
-    line-height: 1.65;
-    margin-bottom: 13px;
-
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.65),
-        0 2px 8px rgba(254, 251, 247, 0.85);
-
+    color: var(--blu-scuro);
+    line-height: 1.75;
+    margin-bottom: 12px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.65), 0 2px 8px rgba(254,251,247,0.85);
     mix-blend-mode: multiply;
 }
 
 .testo-snello {
-    max-width: 420px;
+    max-width: 380px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .info-blocco strong {
-    color: var(--blu-scuro-partecipazione);
     font-weight: 400;
+    color: var(--blu-scuro);
 }
 
-/* La nota pernotto resta più delicata */
 .nota-pernotto {
-    font-size: clamp(0.65rem, 1vw, 0.78rem);
-    letter-spacing: 0.10em;
-    text-transform: none;
-    font-style: normal;
-    border-top: 1px solid rgba(95, 116, 146, 0.22);
-}
-
-/* Bottoni meno moderni, più coerenti con la carta */
-.bottoni-gruppo {
-    margin-top: 22px;
-}
-
-.btn-mappa {
     font-family: 'Josefin Sans', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-weight: 400;
-
-    background-color: rgba(95, 116, 146, 0.92);
-    color: #ffffff;
-
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-
-    padding: 9px 18px;
-    font-size: 0.72rem;
-
-    box-shadow: 0 8px 20px rgba(64, 87, 117, 0.16);
-}
-
-.btn-mappa:hover {
-    background-color: var(--blu-scuro-partecipazione);
-}
-
-/* ======================================================== */
-/* POSIZIONE TESTI SUI DISEGNI                              */
-/* ======================================================== */
-
-/* Copertina */
-#cartoncino1 {
-    --testo-top: 8%;
-    --testo-left: 50%;
-    --testo-width: min(86vw, 560px);
-    --testo-rotazione: -0.3deg;
-
-    --dimensione-disegno: min(96vw, 1180px) auto;
-    --posizione-disegno: center bottom;
-
-    --luce-x: 50%;
-    --luce-y: 18%;
-}
-
-/* Sezione speciale */
-#cartoncino2 {
-    --testo-top: 9%;
-    --testo-left: 35%;
-    --testo-width: min(76vw, 430px);
-    --testo-rotazione: 0.4deg;
-
-    --dimensione-disegno: min(92vw, 1080px) auto;
-    --posizione-disegno: center 72%;
-
-    --luce-x: 35%;
-    --luce-y: 18%;
-}
-
-/* Il grande giorno */
-#cartoncino3 {
-    --testo-top: 7%;
-    --testo-left: 50%;
-    --testo-width: min(84vw, 500px);
-    --testo-rotazione: 0deg;
-
-    --dimensione-disegno: min(98vw, 1220px) auto;
-    --posizione-disegno: center bottom;
-
-    --luce-x: 50%;
-    --luce-y: 17%;
-}
-
-/* Regali */
-#cartoncino4 {
-    --testo-top: 9%;
-    --testo-left: 50%;
-    --testo-width: min(80vw, 460px);
-    --testo-rotazione: -0.25deg;
-
-    --dimensione-disegno: min(92vw, 1080px) auto;
-    --posizione-disegno: center 76%;
-
-    --luce-x: 50%;
-    --luce-y: 19%;
-}
-
-/* ======================================================== */
-/* MOBILE                                                   */
-/* ======================================================== */
-
-@media (max-width: 768px) {
-    .cartoncino {
-        min-height: 100svh;
-    }
-
-    .contenuto-cartoncino {
-        width: var(--testo-mobile-width, 84vw);
-        max-width: 330px;
-    }
-
-    .contenuto-cartoncino::before {
-        inset: -16px -18px;
-        background: radial-gradient(
-            ellipse at center,
-            rgba(254, 251, 247, 0.76),
-            rgba(254, 251, 247, 0.42) 48%,
-            rgba(254, 251, 247, 0.00) 78%
-        );
-    }
-
-    h1 {
-        font-size: clamp(3rem, 14vw, 4.4rem) !important;
-        line-height: 0.9 !important;
-        margin-bottom: 8px !important;
-    }
-
-    h2 {
-        font-size: clamp(2.4rem, 12vw, 3.7rem) !important;
-        line-height: 0.95 !important;
-        margin-bottom: 8px !important;
-    }
-
-    .sottotitolo {
-        font-size: 0.92rem !important;
-        letter-spacing: 0.16em !important;
-        margin-bottom: 11px !important;
-    }
-
-    p,
-    .testo-snello,
-    .info-blocco,
-    .nota-pernotto {
-        font-size: 0.66rem !important;
-        line-height: 1.45 !important;
-        letter-spacing: 0.10em !important;
-        margin-bottom: 7px !important;
-    }
-
-    .nota-pernotto {
-        font-size: 0.58rem !important;
-        letter-spacing: 0.06em !important;
-    }
-
-    .bottoni-gruppo {
-        gap: 7px !important;
-        margin-top: 12px !important;
-        flex-wrap: nowrap !important;
-    }
-
-    .btn-mappa {
-        width: auto !important;
-        min-width: 102px;
-        padding: 7px 10px !important;
-        font-size: 0.58rem !important;
-        letter-spacing: 0.08em !important;
-    }
-
-    #cartoncino1 {
-        --testo-top: 7%;
-        --testo-left: 50%;
-        --testo-mobile-width: 86vw;
-
-        --dimensione-disegno: 122vw auto;
-        --posizione-disegno: center bottom;
-    }
-
-    #cartoncino2 {
-        --testo-top: 8%;
-        --testo-left: 50%;
-        --testo-mobile-width: 80vw;
-
-        --dimensione-disegno: 118vw auto;
-        --posizione-disegno: center 76%;
-    }
-
-    #cartoncino3 {
-        --testo-top: 6%;
-        --testo-left: 50%;
-        --testo-mobile-width: 86vw;
-
-        --dimensione-disegno: 128vw auto;
-        --posizione-disegno: center bottom;
-        min-height: 108svh;
-    }
-
-    #cartoncino4 {
-        --testo-top: 8%;
-        --testo-left: 50%;
-        --testo-mobile-width: 82vw;
-
-        --dimensione-disegno: 118vw auto;
-        --posizione-disegno: center 78%;
-    }
-}
-
-@media (max-width: 390px) {
-    .contenuto-cartoncino {
-        max-width: 292px;
-    }
-
-    p,
-    .testo-snello,
-    .info-blocco,
-    .nota-pernotto {
-        font-size: 0.61rem !important;
-    }
-
-    #cartoncino1,
-    #cartoncino2,
-    #cartoncino3,
-    #cartoncino4 {
-        --dimensione-disegno: 132vw auto;
-    }
-}
-/* ======================================================== */
-/* NAV ELEGANTE AL POSTO DEL MENU A TENDINA                 */
-/* ======================================================== */
-
-.navbar {
-    background: rgba(254, 251, 247, 0.78);
-    backdrop-filter: blur(10px);
-}
-
-.navbar .logo {
-    text-decoration: none;
-}
-
-.menu-tendina {
-    display: none !important;
-}
-
-.nav-elegante {
-    display: flex;
-    align-items: center;
-    gap: 26px;
-}
-
-.nav-elegante a {
-    font-family: 'Josefin Sans', sans-serif;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.68rem;
+    font-size: clamp(0.60rem, 1vw, 0.72rem);
     font-weight: 300;
-    color: #5f7492;
-    position: relative;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.08em;
+    color: var(--blu);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(95, 116, 146, 0.22);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.65), 0 2px 8px rgba(254,251,247,0.85);
+    mix-blend-mode: multiply;
 }
 
-.nav-elegante a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -7px;
-    width: 0;
-    height: 1px;
-    background: #5f7492;
-    transform: translateX(-50%);
-    transition: width 0.25s ease;
+
+/* ================================================================
+   CONTO ALLA ROVESCIA
+   ================================================================ */
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 20px;
 }
 
-.nav-elegante a:hover::after {
-    width: 100%;
-}
-
-/* Puntini laterali eleganti */
-.nav-puntini {
-    position: fixed;
-    right: 22px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1001;
+.countdown-block {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    align-items: center;
+    gap: 3px;
 }
 
-.nav-puntini a {
-    width: 9px;
-    height: 9px;
-    border-radius: 999px;
-    border: 1px solid #5f7492;
-    background: rgba(254, 251, 247, 0.72);
-    box-shadow: 0 2px 8px rgba(64, 87, 117, 0.14);
-    transition: 0.25s ease;
+.countdown-block span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--blu-scuro);
+    line-height: 1;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5), 0 2px 10px rgba(254,251,247,0.8);
+    mix-blend-mode: multiply;
 }
 
-.nav-puntini a:hover {
-    background: #5f7492;
-    transform: scale(1.35);
+.countdown-block small {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.50rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: var(--blu);
+    mix-blend-mode: multiply;
 }
 
-/* ======================================================== */
-/* COLONNE STILE PARTECIPAZIONE                             */
-/* ======================================================== */
+.countdown-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-style: italic;
+    color: var(--blu);
+    line-height: 1;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    align-self: flex-start;
+}
+
+
+/* ================================================================
+   LAYOUT DUE COLONNE (sezione 2: La Promessa)
+   ================================================================ */
 
 .contenuto-colonne {
-    width: min(88vw, 640px);
-    max-width: 640px;
+    width: min(90vw, 620px);
 }
 
 .colonne-partecipazione {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
-    gap: 24px;
+    gap: 22px;
     align-items: start;
-    margin-top: 24px;
+    margin-top: 22px;
 }
 
+/* Linea divisoria centrale */
 .colonne-partecipazione::before {
     content: "";
     grid-column: 2;
     grid-row: 1;
     width: 1px;
     height: 100%;
-    min-height: 190px;
-    background: rgba(95, 116, 146, 0.58);
-}
-
-.colonne-partecipazione p {
-    max-width: none;
-    margin: 0;
+    min-height: 160px;
+    background: rgba(95, 116, 146, 0.40);
 }
 
 .colonne-partecipazione p:first-child {
     grid-column: 1;
+    margin: 0;
+    text-align: right;
 }
 
 .colonne-partecipazione p:last-child {
     grid-column: 3;
+    margin: 0;
+    text-align: left;
 }
 
-/* ======================================================== */
-/* CORREZIONI IMMAGINI / POSIZIONI                          */
-/* ======================================================== */
 
-/* Immagine 3: meno cielo, immagine meno alta, crop più a destra */
-#cartoncino3 {
-    --dimensione-disegno: min(86vw, 1040px) auto;
-    --posizione-disegno: 62% bottom;
-    min-height: 100svh;
+/* ================================================================
+   BOTTONI MAPPA
+   ================================================================ */
 
-    --testo-top: 6%;
-    --testo-left: 50%;
+.bottoni-gruppo {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
-/* Immagine 4: testo un filo più a sinistra */
-#cartoncino4 {
-    --testo-left: 46%;
+.btn-mappa {
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.63rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    padding: 9px 22px;
+    background: rgba(95, 116, 146, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(64, 87, 117, 0.18);
+    transition: background 0.2s;
+}
+
+.btn-mappa:hover {
+    background: var(--blu-scuro);
+}
+
+
+/* ================================================================
+   POSIZIONI DEI DISEGNI E DEL TESTO PER OGNI SEZIONE
+   Modifica questi valori se vuoi spostare il testo o il disegno.
+   ================================================================ */
+
+/* — Sezione 1: Copertina — */
+#cartoncino1 {
+    --disegno:   url('disegno1.png');
+    --img-size:  min(96vw, 1180px) auto;
+    --img-pos:   center bottom;
     --testo-top: 8%;
-
-    --dimensione-disegno: min(90vw, 1040px) auto;
-    --posizione-disegno: center 76%;
-}
-
-/* Cartoncino 2 più simile alla partecipazione fronte */
-#cartoncino2 {
-    --testo-top: 6%;
     --testo-left: 50%;
-    --testo-width: min(90vw, 660px);
-    --testo-rotazione: 0deg;
+    --testo-w:   min(86vw, 560px);
+    --testo-rot: -0.3deg;
+    --luce-x: 50%; --luce-y: 18%;
 }
 
-/* ======================================================== */
-/* MOBILE                                                   */
-/* ======================================================== */
+/* — Sezione 2: La Promessa — */
+#cartoncino2 {
+    --disegno:   url('disegno2.png');
+    --img-size:  min(92vw, 1080px) auto;
+    --img-pos:   center 72%;
+    --testo-top: 9%;
+    --testo-left: 35%;
+    --testo-w:   min(76vw, 430px);
+    --testo-rot: 0.4deg;
+    --luce-x: 35%; --luce-y: 18%;
+}
+
+/* — Sezione 3: Il Grande Giorno — */
+#cartoncino3 {
+    --disegno:   url('disegno3.png');
+    --img-size:  min(98vw, 1220px) auto;
+    --img-pos:   center bottom;
+    --testo-top: 7%;
+    --testo-left: 50%;
+    --testo-w:   min(84vw, 500px);
+    --testo-rot: 0deg;
+    --luce-x: 50%; --luce-y: 17%;
+}
+
+/* — Sezione 4: Regali — */
+#cartoncino4 {
+    --disegno:   url('disegno4.png');
+    --img-size:  min(92vw, 1080px) auto;
+    --img-pos:   center 76%;
+    --testo-top: 9%;
+    --testo-left: 50%;
+    --testo-w:   min(80vw, 460px);
+    --testo-rot: -0.25deg;
+    --luce-x: 50%; --luce-y: 19%;
+}
+
+
+/* ================================================================
+   RESPONSIVE — TABLET / MOBILE  (≤ 768px)
+   ================================================================ */
 
 @media (max-width: 768px) {
-    .navbar {
-        justify-content: center;
-        padding: 12px 14px;
+
+    :root {
+        --navbar-h: 52px;
     }
 
-    .navbar .logo {
-        font-size: 1.2em;
-    }
-
+    /* Nascondi i link testuali: rimangono solo i puntini */
     .nav-elegante {
         display: none;
     }
 
-    .nav-puntini {
-        right: auto;
-        top: auto;
-        left: 50%;
-        bottom: 14px;
-        transform: translateX(-50%);
-        flex-direction: row;
-        gap: 16px;
-        padding: 9px 14px;
-        border-radius: 999px;
-        background: rgba(254, 251, 247, 0.72);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 24px rgba(64, 87, 117, 0.14);
+    .navbar {
+        padding: 0 16px;
     }
 
-    .nav-puntini a {
-        width: 8px;
-        height: 8px;
-    }
-
-    .contenuto-colonne {
-        width: 86vw;
-        max-width: 330px;
-    }
-
+    /* Su mobile le due colonne diventano una sola */
     .colonne-partecipazione {
-        grid-template-columns: 1fr 1px 1fr;
-        gap: 12px;
-        margin-top: 15px;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .colonne-partecipazione::before {
-        min-height: 150px;
+        display: none;
     }
 
-    .colonne-partecipazione p {
-        font-size: 0.58rem !important;
-        line-height: 1.45 !important;
-        letter-spacing: 0.08em !important;
+    .colonne-partecipazione p:first-child,
+    .colonne-partecipazione p:last-child {
+        grid-column: 1;
+        text-align: center;
     }
 
-    /* Mobile immagine 3: più compatta e spostata a destra */
-    #cartoncino3 {
-        --dimensione-disegno: 108vw auto;
-        --posizione-disegno: 64% bottom;
-        min-height: 100svh;
-    }
-
-    /* Mobile immagine 4: testo leggermente a sinistra */
-    #cartoncino4 {
-        --testo-left: 47%;
-        --dimensione-disegno: 112vw auto;
-        --posizione-disegno: center 78%;
-    }
-}
-
-@media (max-width: 430px) {
-    .colonne-partecipazione {
-        gap: 9px;
-    }
-
-    .colonne-partecipazione p {
-        font-size: 0.54rem !important;
-        line-height: 1.38 !important;
-        letter-spacing: 0.065em !important;
-    }
-
-    #cartoncino3 {
-        --dimensione-disegno: 112vw auto;
-        --posizione-disegno: 66% bottom;
-    }
-}
-/* ======================================================== */
-/* RIFINITURE POSIZIONE TESTI E SPAZIATURE                  */
-/* ======================================================== */
-
-/* Più aria tra titolo e testo in generale */
-.contenuto-cartoncino h2 {
-    margin-bottom: 28px !important;
-}
-
-/* Più aria anche nei blocchi testuali */
-.testo-snello,
-.info-blocco,
-.colonne-partecipazione {
-    margin-top: 10px;
-}
-
-/* ======================================================== */
-/* CARTONCINO 1 - COPERTINA                                 */
-/* La posizione resta uguale, cambia solo la data            */
-/* ======================================================== */
-
-#cartoncino1 h1 {
-    margin-bottom: 34px !important;
-}
-
-/* Data molto più evidente, stile partecipazione */
-#cartoncino1 .sottotitolo {
-    display: inline-block;
-
-    font-family: 'Josefin Sans', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.24em;
-    font-weight: 400;
-
-    font-size: clamp(1.25rem, 3vw, 2rem) !important;
-    color: #405775;
-
-    margin-top: 4px !important;
-    margin-bottom: 28px !important;
-
-    padding: 10px 18px 8px;
-    border-top: 1px solid rgba(95, 116, 146, 0.35);
-    border-bottom: 1px solid rgba(95, 116, 146, 0.35);
-
-    text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.72),
-        0 2px 8px rgba(254, 251, 247, 0.90);
-
-    mix-blend-mode: multiply;
-}
-
-/* Testo sotto la data leggermente più staccato */
-#cartoncino1 .testo-snello {
-    margin-top: 8px;
-}
-
-/* ======================================================== */
-/* CARTONCINI 2, 3, 4 - ABBASSAMENTO TESTI                  */
-/* ======================================================== */
-
-/* Cartoncino 2: da più respiro, stile partecipazione */
-#cartoncino2 {
-    --testo-top: 14%;
-}
-
-/* Cartoncino 3: testo più dentro al disegno, meno appiccicato in alto */
-#cartoncino3 {
-    --testo-top: 13%;
-}
-
-/* Cartoncino 4: testo più basso e leggermente a sinistra */
-#cartoncino4 {
-    --testo-top: 14%;
-    --testo-left: 46%;
-}
-
-/* Titoli delle sezioni non copertina: più separazione dal testo */
-#cartoncino2 h2,
-#cartoncino3 h2,
-#cartoncino4 h2 {
-    margin-bottom: 34px !important;
-}
-
-/* Colonne: un filo più ariose */
-.colonne-partecipazione {
-    margin-top: 28px;
-    gap: 30px;
-}
-
-/* Riga centrale un filo più elegante */
-.colonne-partecipazione::before {
-    background: rgba(95, 116, 146, 0.48);
-}
-
-/* ======================================================== */
-/* MOBILE                                                   */
-/* ======================================================== */
-
-@media (max-width: 768px) {
-    /* Prima immagine: posizione invariata, data più visibile */
-    #cartoncino1 h1 {
-        margin-bottom: 22px !important;
-    }
-
-    #cartoncino1 .sottotitolo {
-        font-size: 1.05rem !important;
-        letter-spacing: 0.18em !important;
-
-        padding: 8px 12px 6px;
-        margin-bottom: 18px !important;
-    }
-
-    /* Abbassiamo anche su telefono, ma meno che desktop */
-    #cartoncino2 {
-        --testo-top: 13%;
-    }
-
-    #cartoncino3 {
-        --testo-top: 11%;
-    }
-
-    #cartoncino4 {
-        --testo-top: 13%;
-        --testo-left: 47%;
-    }
-
-    #cartoncino2 h2,
-    #cartoncino3 h2,
-    #cartoncino4 h2 {
-        margin-bottom: 20px !important;
-    }
-
-    .colonne-partecipazione {
-        margin-top: 18px;
-        gap: 14px;
-    }
-}
-
-@media (max-width: 430px) {
-    #cartoncino2 {
-        --testo-top: 12%;
-    }
-
-    #cartoncino3 {
-        --testo-top: 10%;
-    }
-
-    #cartoncino4 {
-        --testo-top: 12%;
-    }
-}
-/* ======================================================== */
-/* UNIONE TRA LE IMMAGINI - NIENTE SPAZI BIANCHI            */
-/* ======================================================== */
-
-/* Togliamo ogni possibile spazio tra una tavola e l'altra */
-.papiro-container {
-    margin-top: 60px;
-    padding: 0 !important;
-    background-color: #fefbf7;
-}
-
-.cartoncino {
-    margin: 0 !important;
-    border: 0 !important;
-}
-
-/* Le sezioni 3 e 4 risalgono leggermente per eliminare il vuoto */
-#cartoncino3 {
-    margin-top: -9svh !important;
-}
-
-#cartoncino4 {
-    margin-top: -8svh !important;
-}
-
-/* Le immagini 2, 3 e 4 diventano un filo più grandi,
-   così riempiono meglio lo spazio verticale */
-#cartoncino2 {
-    --dimensione-disegno: min(96vw, 1120px) auto;
-}
-
-#cartoncino3 {
-    --dimensione-disegno: min(94vw, 1120px) auto;
-    --posizione-disegno: 64% bottom;
-}
-
-#cartoncino4 {
-    --dimensione-disegno: min(96vw, 1120px) auto;
-    --posizione-disegno: center 76%;
-}
-
-/* Mobile: stessa cosa, ma più delicata */
-@media (max-width: 768px) {
-    #cartoncino3 {
-        margin-top: -7svh !important;
-        --dimensione-disegno: 118vw auto;
-        --posizione-disegno: 66% bottom;
-    }
-
-    #cartoncino4 {
-        margin-top: -7svh !important;
-        --dimensione-disegno: 120vw auto;
-        --posizione-disegno: center 78%;
-    }
-}
-
-@media (max-width: 430px) {
-    #cartoncino3 {
-        margin-top: -6svh !important;
-        --dimensione-disegno: 122vw auto;
-    }
-
-    #cartoncino4 {
-        margin-top: -6svh !important;
-        --dimensione-disegno: 124vw auto;
-    }
-}
-/* ======================================================== */
-/* RESET ORDINE IMMAGINI - VERSIONE PULITA E DRITTA         */
-/* ======================================================== */
-
-/* Stop agli incastri strani tra le immagini */
-.papiro-container {
-    margin-top: 60px !important;
-    padding: 0 !important;
-    background: #fefbf7 !important;
-}
-
-/* Ogni cartoncino diventa una tavola ordinata */
-.cartoncino {
-    position: relative !important;
-    display: block !important;
-
-    min-height: calc(100svh - 60px) !important;
-    height: calc(100svh - 60px) !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    overflow: hidden !important;
-    background-color: #fefbf7 !important;
-
-    scroll-margin-top: 60px !important;
-}
-
-/* Immagini dritte, proporzionate e non deformate */
-.cartoncino::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    z-index: 0 !important;
-
-    background-image: var(--disegno) !important;
-    background-repeat: no-repeat !important;
-    background-size: contain !important;
-    background-position: center center !important;
-
-    opacity: 1 !important;
-    filter: none !important;
-    transform: none !important;
-
-    pointer-events: none !important;
-}
-
-/* Via velature troppo forti o strane */
-.cartoncino::after {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    z-index: 1 !important;
-
-    background: radial-gradient(
-        circle at var(--luce-x, 50%) var(--luce-y, 22%),
-        rgba(254, 251, 247, 0.36),
-        rgba(254, 251, 247, 0.10) 38%,
-        rgba(254, 251, 247, 0.00) 72%
-    ) !important;
-
-    pointer-events: none !important;
-}
-
-/* Testi sopra, ordinati */
-.contenuto-cartoncino {
-    position: absolute !important;
-    z-index: 2 !important;
-
-    top: var(--testo-top, 10%) !important;
-    left: var(--testo-left, 50%) !important;
-
-    width: var(--testo-width, min(84vw, 520px)) !important;
-    max-width: var(--testo-max-width, 520px) !important;
-
-    transform: translateX(-50%) !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    background: transparent !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-
-    text-align: center !important;
-}
-
-/* Alone carta leggero dietro alle scritte */
-.contenuto-cartoncino::before {
-    content: "" !important;
-    position: absolute !important;
-    inset: -22px -28px !important;
-    z-index: -1 !important;
-
-    background: radial-gradient(
-        ellipse at center,
-        rgba(254, 251, 247, 0.72),
-        rgba(254, 251, 247, 0.36) 48%,
-        rgba(254, 251, 247, 0.00) 78%
-    ) !important;
-
-    filter: blur(2px) !important;
-    pointer-events: none !important;
-}
-
-/* ======================================================== */
-/* POSIZIONI PULITE DELLE 4 TAVOLE                          */
-/* ======================================================== */
-
-#cartoncino1 {
-    --disegno: url('disegno1.png');
-    --testo-top: 7%;
-    --testo-left: 50%;
-    --testo-width: min(86vw, 560px);
-    --luce-x: 50%;
-    --luce-y: 18%;
-}
-
-#cartoncino2 {
-    --disegno: url('disegno2.png');
-    --testo-top: 13%;
-    --testo-left: 50%;
-    --testo-width: min(88vw, 660px);
-    --luce-x: 50%;
-    --luce-y: 24%;
-}
-
-#cartoncino3 {
-    --disegno: url('disegno3.png');
-    --testo-top: 12%;
-    --testo-left: 50%;
-    --testo-width: min(84vw, 520px);
-    --luce-x: 50%;
-    --luce-y: 23%;
-}
-
-#cartoncino4 {
-    --disegno: url('disegno4.png');
-    --testo-top: 13%;
-    --testo-left: 47%;
-    --testo-width: min(82vw, 500px);
-    --luce-x: 47%;
-    --luce-y: 24%;
-}
-
-/* ======================================================== */
-/* DATA COPERTINA PIÙ FORTE                                 */
-/* ======================================================== */
-
-#cartoncino1 h1 {
-    margin-bottom: 32px !important;
-}
-
-#cartoncino1 .sottotitolo {
-    display: inline-block !important;
-
-    font-family: 'Josefin Sans', sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.24em !important;
-    font-weight: 400 !important;
-
-    font-size: clamp(1.25rem, 3vw, 2rem) !important;
-    color: #405775 !important;
-
-    margin-top: 4px !important;
-    margin-bottom: 28px !important;
-
-    padding: 10px 18px 8px !important;
-    border-top: 1px solid rgba(95, 116, 146, 0.35) !important;
-    border-bottom: 1px solid rgba(95, 116, 146, 0.35) !important;
-}
-
-/* Più spazio tra titolo e testo nelle altre sezioni */
-#cartoncino2 h2,
-#cartoncino3 h2,
-#cartoncino4 h2 {
-    margin-bottom: 32px !important;
-}
-
-/* ======================================================== */
-/* COLONNE ORDINATE                                         */
-/* ======================================================== */
-
-.contenuto-colonne {
-    width: min(88vw, 660px) !important;
-    max-width: 660px !important;
-}
-
-.colonne-partecipazione {
-    display: grid !important;
-    grid-template-columns: 1fr 1px 1fr !important;
-    gap: 30px !important;
-    align-items: start !important;
-    margin-top: 28px !important;
-}
-
-.colonne-partecipazione::before {
-    content: "" !important;
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-
-    width: 1px !important;
-    height: 100% !important;
-    min-height: 190px !important;
-
-    background: rgba(95, 116, 146, 0.48) !important;
-}
-
-.colonne-partecipazione p:first-child {
-    grid-column: 1 !important;
-}
-
-.colonne-partecipazione p:last-child {
-    grid-column: 3 !important;
-}
-
-/* ======================================================== */
-/* MOBILE                                                   */
-/* ======================================================== */
-
-@media (max-width: 768px) {
-    .cartoncino {
-        min-height: calc(100svh - 55px) !important;
-        height: calc(100svh - 55px) !important;
-    }
-
-    .cartoncino::before {
-        background-size: contain !important;
-        background-position: center center !important;
-    }
-
-    .contenuto-cartoncino {
-        max-width: 330px !important;
-    }
-
+    /* Disegni un po' più grandi su mobile */
     #cartoncino1 {
-        --testo-top: 7%;
-        --testo-left: 50%;
-        --testo-width: 86vw;
+        --img-size: 122vw auto;
+        --img-pos:  center bottom;
+        --testo-top: 7%; --testo-left: 50%; --testo-w: 86vw;
     }
 
     #cartoncino2 {
-        --testo-top: 12%;
-        --testo-left: 50%;
-        --testo-width: 86vw;
+        --img-size: 118vw auto;
+        --img-pos:  center 76%;
+        --testo-top: 8%; --testo-left: 50%; --testo-w: 82vw;
     }
 
     #cartoncino3 {
-        --testo-top: 11%;
-        --testo-left: 50%;
-        --testo-width: 86vw;
+        --img-size: 128vw auto;
+        --img-pos:  center bottom;
+        --testo-top: 6%; --testo-left: 50%; --testo-w: 84vw;
     }
 
     #cartoncino4 {
-        --testo-top: 12%;
-        --testo-left: 48%;
-        --testo-width: 84vw;
+        --img-size: 118vw auto;
+        --img-pos:  center 78%;
+        --testo-top: 8%; --testo-left: 50%; --testo-w: 82vw;
     }
 
-    #cartoncino1 h1 {
-        margin-bottom: 22px !important;
+    .bottoni-gruppo {
+        flex-wrap: nowrap;
     }
+}
 
-    #cartoncino1 .sottotitolo {
-        font-size: 1.05rem !important;
-        letter-spacing: 0.18em !important;
-        padding: 8px 12px 6px !important;
-        margin-bottom: 18px !important;
-    }
 
-    #cartoncino2 h2,
-    #cartoncino3 h2,
-    #cartoncino4 h2 {
-        margin-bottom: 20px !important;
-    }
+/* ================================================================
+   RESPONSIVE — TELEFONI PICCOLI  (≤ 390px)
+   ================================================================ */
 
-    .colonne-partecipazione {
-        gap: 14px !important;
-        margin-top: 18px !important;
-    }
+@media (max-width: 390px) {
 
-    .colonne-partecipazione::before {
-        min-height: 150px !important;
+    #cartoncino1,
+    #cartoncino2,
+    #cartoncino3,
+    #cartoncino4 {
+        --img-size: 132vw auto;
     }
 }
