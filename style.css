@@ -1,662 +1,405 @@
 /* ================================================================
-   ANTONIO & GIULIA · SITO MATRIMONIO
-   style.css — versione pulita
+   ANTONIO & GIULIA · style.css
+   Mobile-first · Parallasse · Testo integrato nel disegno
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:wght@200;300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
-
-/* ================================================================
-   VARIABILI GLOBALI
-   ================================================================ */
-
+/* ── VARIABILI ────────────────────────── */
 :root {
-    --blu:        #5f7492;
-    --blu-scuro:  #405775;
-    --carta:      #fefbf7;
-    --navbar-h:   58px;
+    --ink:      #3b4f61;   /* colore principale testi */
+    --ink2:     #697f94;   /* colore secondario */
+    --paper:    #fefbf7;   /* fondo color carta */
+    --nav-h:    54px;
 }
 
+/* ── RESET ────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-/* ================================================================
-   RESET BASE
-   ================================================================ */
-
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: var(--carta);
-    color: var(--blu-scuro);
-    overflow-x: hidden;
-}
-
-
-/* ================================================================
+/* ═══════════════════════════════════════
    SCHERMATA PASSWORD
-   ================================================================ */
-
-#schermata-blocco {
+═══════════════════════════════════════ */
+#lock {
     min-height: 100svh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--carta);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--paper);
 }
 
 .lock-box {
-    width: min(90vw, 360px);
+    width: min(88vw, 320px);
     text-align: center;
-    padding: 50px 36px 40px;
+    padding: 48px 28px 38px;
     background: white;
-    border: 1px solid rgba(95, 116, 146, 0.18);
-    border-radius: 6px;
-    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(59,79,97,.13);
+    border-radius: 5px;
+    box-shadow: 0 12px 48px rgba(0,0,0,.06);
 }
 
-.lock-iniziali {
+.lock-title {
     font-family: 'WindSong', cursive;
-    font-size: 3.2rem;
-    font-weight: 500;
-    color: var(--blu-scuro);
-    line-height: 1;
-    margin-bottom: 10px;
+    font-size: 3rem; font-weight: 500;
+    color: var(--ink); line-height: 1;
+    margin-bottom: 8px;
 }
 
-.lock-sub {
+.lock-hint {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-weight: 300;
-    color: var(--blu);
-    margin-bottom: 26px;
+    font-size: .58rem; font-weight: 300;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink2); margin-bottom: 24px;
 }
 
-#password-input {
-    display: block;
-    width: 100%;
-    padding: 12px 16px;
-    margin-bottom: 12px;
-    background: var(--carta);
-    border: 1px solid rgba(95, 116, 146, 0.28);
-    border-radius: 4px;
+#pwd {
+    display: block; width: 100%;
+    padding: 11px 14px; margin-bottom: 11px;
+    background: var(--paper);
+    border: 1px solid rgba(59,79,97,.22); border-radius: 3px;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-    color: var(--blu-scuro);
-    outline: none;
-    transition: border-color 0.2s;
+    font-size: .95rem; letter-spacing: .06em;
+    color: var(--ink); outline: none;
+    transition: border-color .2s;
+    /* touch: area adeguata */
+    min-height: 44px;
 }
+#pwd:focus { border-color: var(--ink2); }
 
-#password-input:focus {
-    border-color: var(--blu);
-}
-
-.lock-btn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background: var(--blu);
-    color: white;
-    border: none;
-    border-radius: 4px;
+.lock-box button {
+    display: block; width: 100%;
+    padding: 12px; min-height: 44px;
+    background: var(--ink); color: white;
+    border: none; border-radius: 3px;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 400;
-    cursor: pointer;
-    transition: background 0.2s;
+    font-size: .60rem; font-weight: 300;
+    letter-spacing: .22em; text-transform: uppercase;
+    cursor: pointer; transition: background .2s;
 }
+.lock-box button:active,
+.lock-box button:hover { background: #2a3b4a; }
 
-.lock-btn:hover {
-    background: var(--blu-scuro);
-}
-
-#error-msg {
-    display: none;
-    margin-top: 14px;
+#lock-err {
+    display: none; margin-top: 12px;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #a03030;
+    font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+    color: #8f2a2a;
 }
 
-/* Il sito parte nascosto finché non entra la password */
-#sito-vero {
-    display: none;
-}
+#site { display: none; }
 
-
-/* ================================================================
+/* ═══════════════════════════════════════
    NAVBAR
-   ================================================================ */
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--navbar-h);
-    background: rgba(254, 251, 247, 0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(95, 116, 146, 0.10);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
+═══════════════════════════════════════ */
+#navbar {
+    position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 22px;
+    background: rgba(254,251,247,.80);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(59,79,97,.09);
     z-index: 100;
-    transition: transform 0.3s ease;
+    transition: transform .32s ease;
 }
+#navbar.hidden { transform: translateY(-100%); }
 
-.navbar-nascosta {
-    transform: translateY(-100%);
-}
-
-.navbar .logo {
+.nav-logo {
     font-family: 'WindSong', cursive;
-    font-size: 1.55rem;
-    font-weight: 500;
-    color: var(--blu-scuro);
-    text-decoration: none;
+    font-size: 1.45rem; font-weight: 500;
+    color: var(--ink); text-decoration: none;
+    /* Garantisce tappabilità su mobile */
+    padding: 8px 0;
 }
 
-.nav-elegante {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
-
-.nav-elegante a {
+.nav-links { display: flex; gap: 22px; }
+.nav-links a {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.64rem;
-    font-weight: 300;
-    letter-spacing: 0.17em;
-    text-transform: uppercase;
-    color: var(--blu);
-    text-decoration: none;
+    font-size: .58rem; font-weight: 300;
+    letter-spacing: .17em; text-transform: uppercase;
+    color: var(--ink2); text-decoration: none;
+    position: relative; padding: 6px 0;
+}
+.nav-links a::after {
+    content: ''; position: absolute;
+    bottom: 2px; left: 50%; width: 0; height: 1px;
+    background: var(--ink2); transform: translateX(-50%);
+    transition: width .24s;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* ═══════════════════════════════════════
+   PUNTINI LATERALI
+═══════════════════════════════════════ */
+#dots {
+    position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+    z-index: 101; display: flex; flex-direction: column; gap: 11px;
+}
+#dots a {
+    display: block; width: 7px; height: 7px; border-radius: 50%;
+    border: 1px solid var(--ink2);
+    background: rgba(254,251,247,.6);
+    transition: background .22s, transform .22s;
+    /* Area di tap più grande */
     position: relative;
-    padding-bottom: 2px;
-    transition: color 0.2s;
+}
+#dots a::before {
+    content: ''; position: absolute;
+    inset: -8px;
+}
+#dots a:hover,
+#dots a.on {
+    background: var(--ink2); transform: scale(1.5);
 }
 
-/* Sottolineatura animata al hover */
-.nav-elegante a::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: var(--blu);
-    transform: translateX(-50%);
-    transition: width 0.25s ease;
-}
+/* ═══════════════════════════════════════
+   SLIDE (sezioni)
+═══════════════════════════════════════ */
+#site > nav + nav + section,
+.slide { scroll-margin-top: var(--nav-h); }
 
-.nav-elegante a:hover::after,
-.nav-elegante a.active::after {
-    width: 100%;
-}
-
-
-/* ================================================================
-   PUNTINI DI NAVIGAZIONE LATERALI
-   ================================================================ */
-
-.nav-puntini {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 101;
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
-
-.nav-puntini a {
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid var(--blu);
-    background: rgba(254, 251, 247, 0.7);
-    transition: background 0.22s, transform 0.22s;
-}
-
-.nav-puntini a:hover,
-.nav-puntini a.active {
-    background: var(--blu);
-    transform: scale(1.45);
-}
-
-
-/* ================================================================
-   STRUTTURA SEZIONI
-   ================================================================ */
-
-.papiro-container {
-    margin-top: var(--navbar-h);
-}
-
-.cartoncino {
+.slide {
     position: relative;
     width: 100%;
-    height: calc(100svh - var(--navbar-h));
+    height: calc(100svh - var(--nav-h));
     overflow: hidden;
-    background: var(--carta);
-    scroll-margin-top: var(--navbar-h);
+    background: var(--paper);
 }
 
-/* Disegno come sfondo — non deformato, non tagliato */
-.cartoncino::before {
-    content: "";
+/* Prima slide parte subito dopo la navbar */
+#site section:first-of-type {
+    margin-top: var(--nav-h);
+}
+
+/* ── BACKGROUND CON PARALLASSE ─────────── */
+.bg {
     position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-image: var(--disegno);
+    top: -14%; left: 0;
+    width: 100%; height: 128%;
     background-repeat: no-repeat;
-    background-size: var(--img-size, contain);
-    background-position: var(--img-pos, center center);
-    filter: saturate(0.97) contrast(1.03);
+    background-size: cover;      /* riempie tutto */
+    will-change: transform;
     pointer-events: none;
+    /* La posizione specifica (data-pos) è impostata via JS */
 }
 
-/* Velatura radiale per rendere leggibile il testo sopra */
-.cartoncino::after {
-    content: "";
+/* ── CONTENUTO TESTO ───────────────────── */
+/*
+   mix-blend-mode: multiply = testo "stampato" sul foglio.
+   Su carta bianca: l'inchiostro si vede al 100%.
+   Sui colori dell'acquerello: si fonde elegantemente.
+   Nessun box, nessuna nuvola bianca dietro.
+*/
+.txt {
     position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: radial-gradient(
-        circle at var(--luce-x, 50%) var(--luce-y, 20%),
-        rgba(254, 251, 247, 0.52),
-        rgba(254, 251, 247, 0.14) 36%,
-        transparent 68%
-    );
-    pointer-events: none;
-}
-
-
-/* ================================================================
-   CONTENUTO TESTO (posizionato sul disegno)
-   ================================================================ */
-
-.contenuto-cartoncino {
-    position: absolute;
-    z-index: 2;
-    top:  var(--testo-top,  8%);
-    left: var(--testo-left, 50%);
-    transform: translateX(-50%) rotate(var(--testo-rot, 0deg));
-    width: var(--testo-w, min(84vw, 500px));
+    top:  var(--t, 8%);
+    left: var(--l, 50%);
+    transform: translateX(-50%);
+    width: var(--w, min(80vw, 480px));
     text-align: center;
+    z-index: 2;
+    pointer-events: none;  /* i link e bottoni al loro interno sono re-enabled */
 }
+.txt a, .txt button { pointer-events: auto; }
 
-/* Alone morbido dietro il testo per leggibilità */
-.contenuto-cartoncino::before {
-    content: "";
-    position: absolute;
-    inset: -30px -40px;
-    z-index: -1;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(254, 251, 247, 0.76),
-        rgba(254, 251, 247, 0.36) 50%,
-        transparent 78%
-    );
-    filter: blur(3px);
-    pointer-events: none;
-}
-
-
-/* ================================================================
-   TIPOGRAFIA
-   ================================================================ */
+/* ═══════════════════════════════════════
+   TIPOGRAFIA — STILE PARTECIPAZIONE
+═══════════════════════════════════════ */
 
 h1 {
     font-family: 'WindSong', cursive;
-    font-size: clamp(3.4rem, 9vw, 6.8rem);
+    font-size: clamp(3rem, 12vw, 7rem);
     font-weight: 500;
-    color: var(--blu-scuro);
-    line-height: 0.95;
-    margin-bottom: 14px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5), 0 2px 14px rgba(254,251,247,0.8);
+    color: var(--ink);
+    line-height: .93;
+    margin-bottom: 10px;
     mix-blend-mode: multiply;
+    /* ombra leggerissima per staccarsi dai colori scuri del disegno */
+    text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 3px 18px rgba(254,251,247,.85);
 }
 
 h2 {
     font-family: 'WindSong', cursive;
-    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    font-size: clamp(2.6rem, 10vw, 6rem);
     font-weight: 500;
-    color: var(--blu-scuro);
-    line-height: 0.95;
-    margin-bottom: 22px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5), 0 2px 14px rgba(254,251,247,0.8);
-    mix-blend-mode: multiply;
-}
-
-.sottotitolo {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(0.9rem, 2.2vw, 1.25rem);
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    color: var(--blu);
+    color: var(--ink);
+    line-height: .93;
     margin-bottom: 16px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 2px 10px rgba(254,251,247,0.85);
     mix-blend-mode: multiply;
+    text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 3px 18px rgba(254,251,247,.85);
 }
 
-p,
-.testo-snello,
-.info-blocco {
+/* Data (3 · VII · 2027) */
+.date {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(0.70rem, 1.25vw, 0.88rem);
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--blu-scuro);
-    line-height: 1.75;
+    font-size: clamp(.75rem, 2.4vw, 1rem);
+    font-weight: 200; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--ink2);
     margin-bottom: 12px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.65), 0 2px 8px rgba(254,251,247,0.85);
     mix-blend-mode: multiply;
 }
 
-.testo-snello {
-    max-width: 380px;
-    margin-left: auto;
-    margin-right: auto;
+/* Testo corsivo principale (stile invito) */
+.body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(.9rem, 2.4vw, 1.1rem);
+    font-style: italic; font-weight: 300;
+    color: var(--ink);
+    line-height: 1.65; margin-bottom: 0;
+    mix-blend-mode: multiply;
+    text-shadow: 0 1px 6px rgba(254,251,247,.7);
 }
 
-.info-blocco strong {
-    font-weight: 400;
-    color: var(--blu-scuro);
-}
-
-.nota-pernotto {
+/* Etichette (CERIMONIA, RICEVIMENTO…) */
+.label {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(0.60rem, 1vw, 0.72rem);
-    font-weight: 300;
-    font-style: italic;
-    text-transform: none;
-    letter-spacing: 0.08em;
-    color: var(--blu);
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(95, 116, 146, 0.22);
-    text-shadow: 0 1px 0 rgba(255,255,255,0.65), 0 2px 8px rgba(254,251,247,0.85);
+    font-size: clamp(.58rem, 1.6vw, .68rem);
+    font-weight: 300; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink2); margin-bottom: 3px;
     mix-blend-mode: multiply;
 }
 
+/* Nota pernotto */
+.note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(.72rem, 1.6vw, .82rem);
+    font-style: italic; font-weight: 300;
+    color: var(--ink2); margin-top: 12px;
+    padding-top: 10px; border-top: 1px solid rgba(105,127,148,.22);
+    mix-blend-mode: multiply;
+}
 
-/* ================================================================
+/* ═══════════════════════════════════════
    CONTO ALLA ROVESCIA
-   ================================================================ */
-
-.countdown {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 14px;
-    margin-top: 20px;
+═══════════════════════════════════════ */
+#countdown {
+    display: flex; align-items: flex-start;
+    justify-content: center; gap: 10px;
+    margin-top: 18px;
 }
 
-.countdown-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
+.cunit {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
 }
 
-.countdown-block span {
+.cunit b {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--blu-scuro);
-    line-height: 1;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5), 0 2px 10px rgba(254,251,247,0.8);
+    font-size: clamp(1.7rem, 6vw, 3rem);
+    font-style: italic; font-weight: 400;
+    color: var(--ink); line-height: 1;
     mix-blend-mode: multiply;
+    text-shadow: 0 1px 8px rgba(254,251,247,.75);
 }
 
-.countdown-block small {
+.cunit small {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.50rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 300;
-    color: var(--blu);
-    mix-blend-mode: multiply;
+    font-size: clamp(.42rem, 1.1vw, .50rem);
+    letter-spacing: .2em; text-transform: uppercase; font-weight: 300;
+    color: var(--ink2); mix-blend-mode: multiply;
 }
 
-.countdown-sep {
+.cdot {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    font-style: italic;
-    color: var(--blu);
-    line-height: 1;
-    opacity: 0.5;
+    font-size: clamp(1.7rem, 6vw, 3rem);
+    font-style: italic; color: var(--ink2);
+    opacity: .35; line-height: 1;
     mix-blend-mode: multiply;
-    align-self: flex-start;
 }
 
-
-/* ================================================================
-   LAYOUT DUE COLONNE (sezione 2: La Promessa)
-   ================================================================ */
-
-.contenuto-colonne {
-    width: min(90vw, 620px);
-}
-
-.colonne-partecipazione {
+/* ═══════════════════════════════════════
+   LAYOUT DUE COLONNE (sezione 2)
+═══════════════════════════════════════ */
+.split {
     display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    gap: 22px;
-    align-items: start;
-    margin-top: 22px;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px; align-items: start;
+    margin-top: 16px;
 }
 
-/* Linea divisoria centrale */
-.colonne-partecipazione::before {
-    content: "";
-    grid-column: 2;
-    grid-row: 1;
-    width: 1px;
-    height: 100%;
-    min-height: 160px;
-    background: rgba(95, 116, 146, 0.40);
+.split-divider {
+    width: 1px; align-self: stretch;
+    min-height: 100px;
+    background: rgba(105,127,148,.3);
 }
 
-.colonne-partecipazione p:first-child {
-    grid-column: 1;
-    margin: 0;
-    text-align: right;
-}
+.split p:first-child { text-align: right; }
+.split p:last-child  { text-align: left; }
 
-.colonne-partecipazione p:last-child {
-    grid-column: 3;
-    margin: 0;
-    text-align: left;
-}
-
-
-/* ================================================================
+/* ═══════════════════════════════════════
    BOTTONI MAPPA
-   ================================================================ */
-
-.bottoni-gruppo {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+═══════════════════════════════════════ */
+.btns {
+    display: flex; justify-content: center;
+    gap: 10px; margin-top: 16px;
 }
 
-.btn-mappa {
-    display: inline-block;
+.btn {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.63rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 400;
-    color: white;
-    text-decoration: none;
-    padding: 9px 22px;
-    background: rgba(95, 116, 146, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    font-size: .58rem; font-weight: 300;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: white; text-decoration: none;
+    display: inline-flex; align-items: center;
+    padding: 0 18px; min-height: 38px; /* tap-friendly */
+    background: rgba(59,79,97,.85);
+    border: 1px solid rgba(255,255,255,.38);
     border-radius: 999px;
-    box-shadow: 0 6px 18px rgba(64, 87, 117, 0.18);
-    transition: background 0.2s;
+    box-shadow: 0 4px 14px rgba(59,79,97,.2);
+    transition: background .2s;
+    pointer-events: auto;
 }
+.btn:active,
+.btn:hover { background: #2a3b4a; }
 
-.btn-mappa:hover {
-    background: var(--blu-scuro);
-}
+/* ═══════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 600px)
+   Priorità assoluta: è il device principale
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+    :root { --nav-h: 50px; }
 
+    /* Su telefono mostriamo solo il logo nella navbar,
+       i link sono sostituiti dai puntini laterali */
+    .nav-links { display: none; }
 
-/* ================================================================
-   POSIZIONI DEI DISEGNI E DEL TESTO PER OGNI SEZIONE
-   Modifica questi valori se vuoi spostare il testo o il disegno.
-   ================================================================ */
+    /* Puntini un po' più a destra del bordo */
+    #dots { right: 14px; }
 
-/* — Sezione 1: Copertina — */
-#cartoncino1 {
-    --disegno:   url('disegno1.png');
-    --img-size:  min(96vw, 1180px) auto;
-    --img-pos:   center bottom;
-    --testo-top: 8%;
-    --testo-left: 50%;
-    --testo-w:   min(86vw, 560px);
-    --testo-rot: -0.3deg;
-    --luce-x: 50%; --luce-y: 18%;
-}
-
-/* — Sezione 2: La Promessa — */
-#cartoncino2 {
-    --disegno:   url('disegno2.png');
-    --img-size:  min(92vw, 1080px) auto;
-    --img-pos:   center 72%;
-    --testo-top: 9%;
-    --testo-left: 35%;
-    --testo-w:   min(76vw, 430px);
-    --testo-rot: 0.4deg;
-    --luce-x: 35%; --luce-y: 18%;
-}
-
-/* — Sezione 3: Il Grande Giorno — */
-#cartoncino3 {
-    --disegno:   url('disegno3.png');
-    --img-size:  min(98vw, 1220px) auto;
-    --img-pos:   center bottom;
-    --testo-top: 7%;
-    --testo-left: 50%;
-    --testo-w:   min(84vw, 500px);
-    --testo-rot: 0deg;
-    --luce-x: 50%; --luce-y: 17%;
-}
-
-/* — Sezione 4: Regali — */
-#cartoncino4 {
-    --disegno:   url('disegno4.png');
-    --img-size:  min(92vw, 1080px) auto;
-    --img-pos:   center 76%;
-    --testo-top: 9%;
-    --testo-left: 50%;
-    --testo-w:   min(80vw, 460px);
-    --testo-rot: -0.25deg;
-    --luce-x: 50%; --luce-y: 19%;
-}
-
-
-/* ================================================================
-   RESPONSIVE — TABLET / MOBILE  (≤ 768px)
-   ================================================================ */
-
-@media (max-width: 768px) {
-
-    :root {
-        --navbar-h: 52px;
-    }
-
-    /* Nascondi i link testuali: rimangono solo i puntini */
-    .nav-elegante {
-        display: none;
-    }
-
-    .navbar {
-        padding: 0 16px;
-    }
-
-    /* Su mobile le due colonne diventano una sola */
-    .colonne-partecipazione {
+    /* Le due colonne diventano una colonna su mobile */
+    .split {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
     }
+    .split-divider { display: none; }
+    .split p:first-child,
+    .split p:last-child { text-align: center; }
 
-    .colonne-partecipazione::before {
-        display: none;
-    }
+    /* Posizioni testo ottimizzate per portrait phone */
+    #s1 .txt { --t: 7%;  --l: 50%; --w: 84vw; }
+    #s2 .txt { --t: 8%;  --l: 50%; --w: 84vw; }
+    #s3 .txt { --t: 5%;  --l: 50%; --w: 84vw; }
+    #s4 .txt { --t: 8%;  --l: 50%; --w: 78vw; }
 
-    .colonne-partecipazione p:first-child,
-    .colonne-partecipazione p:last-child {
-        grid-column: 1;
-        text-align: center;
-    }
-
-    /* Disegni un po' più grandi su mobile */
-    #cartoncino1 {
-        --img-size: 122vw auto;
-        --img-pos:  center bottom;
-        --testo-top: 7%; --testo-left: 50%; --testo-w: 86vw;
-    }
-
-    #cartoncino2 {
-        --img-size: 118vw auto;
-        --img-pos:  center 76%;
-        --testo-top: 8%; --testo-left: 50%; --testo-w: 82vw;
-    }
-
-    #cartoncino3 {
-        --img-size: 128vw auto;
-        --img-pos:  center bottom;
-        --testo-top: 6%; --testo-left: 50%; --testo-w: 84vw;
-    }
-
-    #cartoncino4 {
-        --img-size: 118vw auto;
-        --img-pos:  center 78%;
-        --testo-top: 8%; --testo-left: 50%; --testo-w: 82vw;
-    }
-
-    .bottoni-gruppo {
-        flex-wrap: nowrap;
-    }
+    /* Su mobile il disegno si posiziona diversamente */
+    #s2 .bg { background-position: 65% 55% !important; }
 }
 
+/* ═══════════════════════════════════════
+   RESPONSIVE — TELEFONI MOLTO PICCOLI (≤ 380px)
+═══════════════════════════════════════ */
+@media (max-width: 380px) {
+    .lock-box { padding: 36px 22px 30px; }
+    #s1 .txt { --w: 88vw; }
+    #s2 .txt { --w: 88vw; }
+    #s3 .txt { --w: 88vw; }
+    #s4 .txt { --w: 84vw; }
+}
 
-/* ================================================================
-   RESPONSIVE — TELEFONI PICCOLI  (≤ 390px)
-   ================================================================ */
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET e DESKTOP (> 600px)
+═══════════════════════════════════════ */
+@media (min-width: 601px) {
+    #navbar { padding: 0 32px; }
 
-@media (max-width: 390px) {
-
-    #cartoncino1,
-    #cartoncino2,
-    #cartoncino3,
-    #cartoncino4 {
-        --img-size: 132vw auto;
-    }
+    /* Su desktop il disegno 2 si posiziona a sinistra
+       perché il soggetto è a destra */
+    #s2 .txt { --l: 33%; }
 }
