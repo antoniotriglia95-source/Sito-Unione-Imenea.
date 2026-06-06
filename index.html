@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      SCHERMATA PASSWORD
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <div id="lock">
     <div class="lock-box">
         <p class="lock-title">A & G</p>
@@ -21,12 +21,11 @@
     </div>
 </div>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      SITO
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <div id="site">
 
-    <!-- NAVBAR -->
     <nav id="navbar">
         <a href="#s1" class="nav-logo">Antonio & Giulia</a>
         <div class="nav-links">
@@ -37,7 +36,6 @@
         </div>
     </nav>
 
-    <!-- PUNTINI LATERALI -->
     <nav id="dots">
         <a href="#s1" aria-label="Copertina"></a>
         <a href="#s2" aria-label="Promessa"></a>
@@ -47,8 +45,8 @@
 
     <!-- ── SEZIONE 1: COPERTINA ── -->
     <section id="s1" class="slide">
-        <div class="bg" data-img="disegno1.png" data-pos="center bottom"></div>
-        <div class="txt" style="--t:8%;--l:50%;--w:min(78vw,500px)">
+        <div class="bg" data-img="disegno1.png"></div>
+        <div class="txt" style="--t:8%;--l:50%;--w:min(78vw,480px)">
             <h1>Antonio & Giulia</h1>
             <p class="date">3 · VII · 2027</p>
             <p class="body">Benvenuti nel sito del nostro matrimonio.<br>Scorri per scoprire tutti i dettagli.</p>
@@ -64,12 +62,12 @@
 
     <!-- ── SEZIONE 2: LA PROMESSA ── -->
     <section id="s2" class="slide">
-        <div class="bg" data-img="disegno2.png" data-pos="center 60%"></div>
-        <div class="txt" style="--t:9%;--l:50%;--w:min(82vw,540px)">
+        <div class="bg" data-img="disegno2.png"></div>
+        <div class="txt" style="--t:8%;--l:50%;--w:min(82vw,520px)">
             <h2>La Promessa</h2>
             <div class="split">
                 <p class="body">Una parola data da ragazzi.<br>Il 30 settembre 2025,<br>nel calore di casa nostra,<br>Antonio l'ha resa realtà.</p>
-                <div class="split-divider"></div>
+                <div class="split-line"></div>
                 <p class="body">Per tutti i dettagli e per curiosare nella nostra storia, abbiamo preparato una sezione speciale.</p>
             </div>
         </div>
@@ -77,12 +75,12 @@
 
     <!-- ── SEZIONE 3: IL GRANDE GIORNO ── -->
     <section id="s3" class="slide">
-        <div class="bg" data-img="disegno3.png" data-pos="center bottom"></div>
-        <div class="txt" style="--t:7%;--l:50%;--w:min(78vw,460px)">
+        <div class="bg" data-img="disegno3.png"></div>
+        <div class="txt" style="--t:6%;--l:50%;--w:min(78vw,450px)">
             <h2>Il Grande Giorno</h2>
             <p class="label">Cerimonia · ore 14:00</p>
             <p class="body">Santuario di Santa Maria del Monte<br>Varese</p>
-            <p class="label" style="margin-top:.9em">Ricevimento</p>
+            <p class="label" style="margin-top:.8em">Ricevimento</p>
             <p class="body">Villa Borghi · Varano Borghi, VA</p>
             <p class="note">Per pernottare contatta la reception di Villa Borghi.</p>
             <div class="btns">
@@ -94,18 +92,18 @@
 
     <!-- ── SEZIONE 4: REGALI ── -->
     <section id="s4" class="slide">
-        <div class="bg" data-img="disegno4.png" data-pos="center 68%"></div>
-        <div class="txt" style="--t:9%;--l:50%;--w:min(72vw,420px)">
+        <div class="bg" data-img="disegno4.png"></div>
+        <div class="txt" style="--t:8%;--l:50%;--w:min(72vw,400px)">
             <h2>Il nostro Sogno</h2>
             <p class="body">Qui inseriremo i dettagli per la lista nozze e le coordinate bancarie.</p>
         </div>
     </section>
 
-</div><!-- /site -->
+</div>
 
 <script>
-/* ── PASSWORD ─────────────────────────────── */
-const PWD = "Ilmioamore2027"; // ← cambia qui
+/* ── PASSWORD ─────────────────────────── */
+const PWD = "Ilmioamore2027"; // ← cambia qui la password
 
 function checkPwd() {
     if (document.getElementById('pwd').value.trim() === PWD) {
@@ -121,11 +119,16 @@ document.getElementById('pwd').addEventListener('keypress', e => {
     if (e.key === 'Enter') checkPwd();
 });
 
-/* ── INIT ─────────────────────────────────── */
+/* ── INIT ─────────────────────────────── */
 function init() {
-    applyBackgrounds();
+    // Imposta le immagini di sfondo
+    document.querySelectorAll('.bg').forEach(bg => {
+        bg.style.backgroundImage = `url('${bg.dataset.img}')`;
+    });
+
     initNavbar();
     initDots();
+    initTextFade();
     updateCountdown();
     setInterval(updateCountdown, 30000);
 
@@ -135,15 +138,7 @@ function init() {
     }
 }
 
-/* ── APPLICA LE IMMAGINI COME BACKGROUND ──── */
-function applyBackgrounds() {
-    document.querySelectorAll('.bg').forEach(bg => {
-        bg.style.backgroundImage  = `url('${bg.dataset.img}')`;
-        bg.style.backgroundPosition = bg.dataset.pos;
-    });
-}
-
-/* ── NAVBAR HIDE ON SCROLL ──────────────────── */
+/* ── NAVBAR: scompare scorrendo giù ──── */
 function initNavbar() {
     const nav = document.getElementById('navbar');
     let last = 0;
@@ -154,7 +149,7 @@ function initNavbar() {
     }, { passive: true });
 }
 
-/* ── PUNTINI ATTIVI ────────────────────────── */
+/* ── PUNTINI: evidenzia sezione attiva ── */
 function initDots() {
     const slides = document.querySelectorAll('.slide');
     const dots   = document.querySelectorAll('#dots a');
@@ -169,26 +164,42 @@ function initDots() {
     slides.forEach(s => obs.observe(s));
 }
 
-/* ── PARALLASSE ────────────────────────────── */
+/* ── TESTO: appare quando sei nella sezione,
+         scompare quando ti sposti ───────── */
+function initTextFade() {
+    const slides = document.querySelectorAll('.slide');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            const txt = e.target.querySelector('.txt');
+            if (txt) txt.classList.toggle('visible', e.isIntersecting);
+        });
+    }, {
+        threshold: 0.4   // visibile quando il 40% della sezione è in schermo
+    });
+    slides.forEach(s => obs.observe(s));
+}
+
+/* ── PARALLASSE: disegno scorre più lento ─ */
 function runParallax() {
     const vh = window.innerHeight;
     document.querySelectorAll('.slide').forEach(slide => {
-        const bg   = slide.querySelector('.bg');
+        const bg = slide.querySelector('.bg');
         if (!bg) return;
-        const rect = slide.getBoundingClientRect();
-        // progress: +1 when slide is below viewport, -1 when above
+        const rect    = slide.getBoundingClientRect();
+        // progress: +1 = sezione sotto viewport, 0 = centrata, -1 = sopra
         const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
-        bg.style.transform = `translateY(${progress * 14}%)`;
+        const clamp    = Math.max(-1, Math.min(1, progress));
+        bg.style.transform = `translateY(${clamp * 6}%)`;
     });
 }
 
-/* ── CONTO ALLA ROVESCIA ───────────────────── */
+/* ── CONTO ALLA ROVESCIA ──────────────── */
 function updateCountdown() {
     const diff = new Date('2027-07-03T14:00:00') - new Date();
     if (diff <= 0) { document.getElementById('countdown').style.display = 'none'; return; }
     document.getElementById('gg').textContent = Math.floor(diff / 86400000);
     document.getElementById('hh').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
-    document.getElementById('mm').textContent = String(Math.floor((diff % 3600000)  / 60000)).padStart(2,'0');
+    document.getElementById('mm').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
 }
 </script>
 </body>
