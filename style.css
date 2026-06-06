@@ -1,22 +1,22 @@
 /* ================================================================
    ANTONIO & GIULIA · style.css
-   Mobile-first · Parallasse · Testo integrato nel disegno
+   Disegni interi · Parallasse · Testo che appare/scompare
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:wght@200;300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&family=Josefin+Sans:wght@200;300&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap');
 
-/* ── VARIABILI ────────────────────────── */
+/* ── VARIABILI ─────────────────────────── */
 :root {
-    --ink:      #3b4f61;   /* colore principale testi */
-    --ink2:     #697f94;   /* colore secondario */
-    --paper:    #fefbf7;   /* fondo color carta */
-    --nav-h:    54px;
+    --ink:   #3b4f61;
+    --ink2:  #697f94;
+    --paper: #fefbf7;
+    --nav-h: 54px;
 }
 
-/* ── RESET ────────────────────────────── */
+/* ── RESET ─────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+html  { scroll-behavior: smooth; }
+body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 /* ═══════════════════════════════════════
    SCHERMATA PASSWORD
@@ -26,31 +26,25 @@ body { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: ant
     display: flex; align-items: center; justify-content: center;
     background: var(--paper);
 }
-
 .lock-box {
     width: min(88vw, 320px);
-    text-align: center;
     padding: 48px 28px 38px;
-    background: white;
+    background: white; text-align: center;
     border: 1px solid rgba(59,79,97,.13);
     border-radius: 5px;
     box-shadow: 0 12px 48px rgba(0,0,0,.06);
 }
-
 .lock-title {
     font-family: 'WindSong', cursive;
     font-size: 3rem; font-weight: 500;
-    color: var(--ink); line-height: 1;
-    margin-bottom: 8px;
+    color: var(--ink); line-height: 1; margin-bottom: 8px;
 }
-
 .lock-hint {
     font-family: 'Josefin Sans', sans-serif;
     font-size: .58rem; font-weight: 300;
     letter-spacing: .2em; text-transform: uppercase;
     color: var(--ink2); margin-bottom: 24px;
 }
-
 #pwd {
     display: block; width: 100%;
     padding: 11px 14px; margin-bottom: 11px;
@@ -58,72 +52,56 @@ body { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: ant
     border: 1px solid rgba(59,79,97,.22); border-radius: 3px;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: .95rem; letter-spacing: .06em;
-    color: var(--ink); outline: none;
-    transition: border-color .2s;
-    /* touch: area adeguata */
-    min-height: 44px;
+    font-size: .95rem; letter-spacing: .06em; color: var(--ink);
+    outline: none; transition: border-color .2s; min-height: 44px;
 }
 #pwd:focus { border-color: var(--ink2); }
-
 .lock-box button {
-    display: block; width: 100%;
-    padding: 12px; min-height: 44px;
+    display: block; width: 100%; min-height: 44px;
     background: var(--ink); color: white;
     border: none; border-radius: 3px;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: .60rem; font-weight: 300;
-    letter-spacing: .22em; text-transform: uppercase;
+    font-size: .60rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase;
     cursor: pointer; transition: background .2s;
 }
-.lock-box button:active,
-.lock-box button:hover { background: #2a3b4a; }
-
+.lock-box button:hover, .lock-box button:active { background: #2a3b4a; }
 #lock-err {
     display: none; margin-top: 12px;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
-    color: #8f2a2a;
+    font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: #8f2a2a;
 }
-
 #site { display: none; }
 
 /* ═══════════════════════════════════════
    NAVBAR
 ═══════════════════════════════════════ */
 #navbar {
-    position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-h);
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: var(--nav-h);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 22px;
-    background: rgba(254,251,247,.80);
+    padding: 0 24px;
+    background: rgba(254,251,247,.82);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(59,79,97,.09);
-    z-index: 100;
-    transition: transform .32s ease;
+    z-index: 100; transition: transform .32s ease;
 }
 #navbar.hidden { transform: translateY(-100%); }
 
 .nav-logo {
     font-family: 'WindSong', cursive;
     font-size: 1.45rem; font-weight: 500;
-    color: var(--ink); text-decoration: none;
-    /* Garantisce tappabilità su mobile */
-    padding: 8px 0;
+    color: var(--ink); text-decoration: none; padding: 6px 0;
 }
-
 .nav-links { display: flex; gap: 22px; }
 .nav-links a {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: .58rem; font-weight: 300;
-    letter-spacing: .17em; text-transform: uppercase;
-    color: var(--ink2); text-decoration: none;
-    position: relative; padding: 6px 0;
+    font-size: .58rem; font-weight: 300; letter-spacing: .17em; text-transform: uppercase;
+    color: var(--ink2); text-decoration: none; position: relative; padding: 6px 0;
 }
 .nav-links a::after {
-    content: ''; position: absolute;
-    bottom: 2px; left: 50%; width: 0; height: 1px;
-    background: var(--ink2); transform: translateX(-50%);
-    transition: width .24s;
+    content: ''; position: absolute; bottom: 2px; left: 50%;
+    width: 0; height: 1px; background: var(--ink2);
+    transform: translateX(-50%); transition: width .24s;
 }
 .nav-links a:hover::after { width: 100%; }
 
@@ -136,135 +114,147 @@ body { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: ant
 }
 #dots a {
     display: block; width: 7px; height: 7px; border-radius: 50%;
-    border: 1px solid var(--ink2);
-    background: rgba(254,251,247,.6);
+    border: 1px solid var(--ink2); background: rgba(254,251,247,.6);
     transition: background .22s, transform .22s;
-    /* Area di tap più grande */
     position: relative;
 }
-#dots a::before {
-    content: ''; position: absolute;
-    inset: -8px;
-}
-#dots a:hover,
-#dots a.on {
-    background: var(--ink2); transform: scale(1.5);
-}
+/* area di tap più generosa su mobile */
+#dots a::before { content: ''; position: absolute; inset: -9px; }
+#dots a:hover, #dots a.on { background: var(--ink2); transform: scale(1.5); }
 
 /* ═══════════════════════════════════════
    SLIDE (sezioni)
 ═══════════════════════════════════════ */
-#site > nav + nav + section,
-.slide { scroll-margin-top: var(--nav-h); }
+#site {
+    /* La prima sezione parte subito sotto la navbar */
+    padding-top: var(--nav-h);
+}
 
 .slide {
     position: relative;
     width: 100%;
     height: calc(100svh - var(--nav-h));
     overflow: hidden;
+    /* Sfondo color carta: seamless con i disegni su carta bianca */
     background: var(--paper);
+    scroll-margin-top: var(--nav-h);
 }
 
-/* Prima slide parte subito dopo la navbar */
-#site section:first-of-type {
-    margin-top: var(--nav-h);
-}
-
-/* ── BACKGROUND CON PARALLASSE ─────────── */
+/* ══════════════════════════════════════════════
+   DISEGNO DI SFONDO
+   
+   • contain = disegno intero, mai tagliato
+   • center 74% = disegno posizionato verso il basso
+     (le figure sono sempre in basso in tutti e 4 i disegni,
+      il cielo bianco in alto fa da sfondo naturale al testo)
+   • will-change: transform per GPU acceleration
+   
+   Il parallasse sposta il div verticalmente (±6%):
+   poiché il disegno è centrato, lo spostamento non
+   mostra bordi – espone solo carta color crema ai lati.
+══════════════════════════════════════════════ */
 .bg {
     position: absolute;
-    top: -14%; left: 0;
-    width: 100%; height: 128%;
+    inset: 0;
     background-repeat: no-repeat;
-    background-size: cover;      /* riempie tutto */
+    background-size: contain;
+    background-position: center 74%;
     will-change: transform;
     pointer-events: none;
-    /* La posizione specifica (data-pos) è impostata via JS */
 }
 
-/* ── CONTENUTO TESTO ───────────────────── */
-/*
-   mix-blend-mode: multiply = testo "stampato" sul foglio.
-   Su carta bianca: l'inchiostro si vede al 100%.
-   Sui colori dell'acquerello: si fonde elegantemente.
-   Nessun box, nessuna nuvola bianca dietro.
-*/
+/* Desktop: il disegno può essere leggermente più grande
+   perché c'è più spazio verticale */
+@media (min-width: 601px) {
+    .bg {
+        background-size: auto 84%;
+        background-position: center 66%;
+    }
+}
+
+/* ══════════════════════════════════════════════
+   TESTO SOVRAPPOSTO AL DISEGNO
+
+   Parte invisibile (opacity 0 + leggero shift verso il basso).
+   Quando IntersectionObserver aggiunge .visible → appare
+   con una transizione morbida.
+   Quando la sezione esce dallo schermo → .visible viene
+   rimossa e il testo scompare.
+══════════════════════════════════════════════ */
 .txt {
     position: absolute;
     top:  var(--t, 8%);
     left: var(--l, 50%);
-    transform: translateX(-50%);
-    width: var(--w, min(80vw, 480px));
+    /* start: spostato giù di 10px e invisibile */
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+    transition: opacity .65s ease, transform .65s ease;
+    width: var(--w, min(80vw, 460px));
     text-align: center;
     z-index: 2;
-    pointer-events: none;  /* i link e bottoni al loro interno sono re-enabled */
+    pointer-events: none;
 }
+/* Quando il testo è visibile */
+.txt.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+/* Ri-abilita click su link e bottoni dentro .txt */
 .txt a, .txt button { pointer-events: auto; }
 
 /* ═══════════════════════════════════════
-   TIPOGRAFIA — STILE PARTECIPAZIONE
+   TIPOGRAFIA — stile partecipazione
 ═══════════════════════════════════════ */
+
+/*
+   mix-blend-mode: multiply = l'inchiostro si "stampa" sul foglio.
+   Su carta bianca: si vede al 100%.
+   Sulle zone colorate del disegno: si fonde elegantemente.
+   Nessun box bianco, nessuna nuvola. Solo il testo.
+*/
 
 h1 {
     font-family: 'WindSong', cursive;
     font-size: clamp(3rem, 12vw, 7rem);
-    font-weight: 500;
-    color: var(--ink);
-    line-height: .93;
-    margin-bottom: 10px;
-    mix-blend-mode: multiply;
-    /* ombra leggerissima per staccarsi dai colori scuri del disegno */
-    text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 3px 18px rgba(254,251,247,.85);
+    font-weight: 500; line-height: .93; margin-bottom: 10px;
+    color: var(--ink); mix-blend-mode: multiply;
+    text-shadow: 0 2px 18px rgba(254,251,247,.9);
 }
-
 h2 {
     font-family: 'WindSong', cursive;
-    font-size: clamp(2.6rem, 10vw, 6rem);
-    font-weight: 500;
-    color: var(--ink);
-    line-height: .93;
-    margin-bottom: 16px;
-    mix-blend-mode: multiply;
-    text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 3px 18px rgba(254,251,247,.85);
+    font-size: clamp(2.6rem, 10vw, 5.8rem);
+    font-weight: 500; line-height: .93; margin-bottom: 16px;
+    color: var(--ink); mix-blend-mode: multiply;
+    text-shadow: 0 2px 18px rgba(254,251,247,.9);
 }
-
-/* Data (3 · VII · 2027) */
 .date {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(.75rem, 2.4vw, 1rem);
-    font-weight: 200; letter-spacing: .3em; text-transform: uppercase;
-    color: var(--ink2);
-    margin-bottom: 12px;
+    font-size: clamp(.72rem, 2.3vw, .96rem);
+    font-weight: 200; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--ink2); margin-bottom: 12px;
     mix-blend-mode: multiply;
 }
-
-/* Testo corsivo principale (stile invito) */
 .body {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(.9rem, 2.4vw, 1.1rem);
-    font-style: italic; font-weight: 300;
-    color: var(--ink);
-    line-height: 1.65; margin-bottom: 0;
+    font-size: clamp(.88rem, 2.4vw, 1.08rem);
+    font-style: italic; font-weight: 300; line-height: 1.65;
+    color: var(--ink); margin-bottom: 0;
     mix-blend-mode: multiply;
     text-shadow: 0 1px 6px rgba(254,251,247,.7);
 }
-
-/* Etichette (CERIMONIA, RICEVIMENTO…) */
 .label {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(.58rem, 1.6vw, .68rem);
+    font-size: clamp(.56rem, 1.5vw, .68rem);
     font-weight: 300; letter-spacing: .2em; text-transform: uppercase;
     color: var(--ink2); margin-bottom: 3px;
     mix-blend-mode: multiply;
 }
-
-/* Nota pernotto */
 .note {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(.72rem, 1.6vw, .82rem);
+    font-size: clamp(.70rem, 1.5vw, .80rem);
     font-style: italic; font-weight: 300;
-    color: var(--ink2); margin-top: 12px;
-    padding-top: 10px; border-top: 1px solid rgba(105,127,148,.22);
+    color: var(--ink2); margin-top: 12px; padding-top: 10px;
+    border-top: 1px solid rgba(105,127,148,.22);
     mix-blend-mode: multiply;
 }
 
@@ -273,133 +263,86 @@ h2 {
 ═══════════════════════════════════════ */
 #countdown {
     display: flex; align-items: flex-start;
-    justify-content: center; gap: 10px;
-    margin-top: 18px;
+    justify-content: center; gap: 10px; margin-top: 18px;
 }
-
-.cunit {
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-}
-
+.cunit { display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .cunit b {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.7rem, 6vw, 3rem);
-    font-style: italic; font-weight: 400;
-    color: var(--ink); line-height: 1;
-    mix-blend-mode: multiply;
-    text-shadow: 0 1px 8px rgba(254,251,247,.75);
+    font-style: italic; font-weight: 400; color: var(--ink); line-height: 1;
+    mix-blend-mode: multiply; text-shadow: 0 1px 8px rgba(254,251,247,.75);
 }
-
 .cunit small {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(.42rem, 1.1vw, .50rem);
+    font-size: clamp(.40rem, 1.1vw, .48rem);
     letter-spacing: .2em; text-transform: uppercase; font-weight: 300;
     color: var(--ink2); mix-blend-mode: multiply;
 }
-
 .cdot {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.7rem, 6vw, 3rem);
-    font-style: italic; color: var(--ink2);
-    opacity: .35; line-height: 1;
+    font-style: italic; color: var(--ink2); opacity: .35; line-height: 1;
     mix-blend-mode: multiply;
 }
 
 /* ═══════════════════════════════════════
-   LAYOUT DUE COLONNE (sezione 2)
+   DUE COLONNE — sezione 2 (La Promessa)
 ═══════════════════════════════════════ */
 .split {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 18px; align-items: start;
-    margin-top: 16px;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 18px; align-items: start; margin-top: 16px;
 }
-
-.split-divider {
-    width: 1px; align-self: stretch;
-    min-height: 100px;
+.split-line {
+    width: 1px; align-self: stretch; min-height: 90px;
     background: rgba(105,127,148,.3);
 }
-
 .split p:first-child { text-align: right; }
 .split p:last-child  { text-align: left; }
 
 /* ═══════════════════════════════════════
    BOTTONI MAPPA
 ═══════════════════════════════════════ */
-.btns {
-    display: flex; justify-content: center;
-    gap: 10px; margin-top: 16px;
-}
-
+.btns { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
 .btn {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: .58rem; font-weight: 300;
-    letter-spacing: .15em; text-transform: uppercase;
+    font-size: .58rem; font-weight: 300; letter-spacing: .15em; text-transform: uppercase;
     color: white; text-decoration: none;
-    display: inline-flex; align-items: center;
-    padding: 0 18px; min-height: 38px; /* tap-friendly */
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0 18px; min-height: 40px; /* tap-friendly */
     background: rgba(59,79,97,.85);
-    border: 1px solid rgba(255,255,255,.38);
-    border-radius: 999px;
-    box-shadow: 0 4px 14px rgba(59,79,97,.2);
-    transition: background .2s;
+    border: 1px solid rgba(255,255,255,.38); border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(59,79,97,.2); transition: background .2s;
     pointer-events: auto;
 }
-.btn:active,
-.btn:hover { background: #2a3b4a; }
+.btn:hover, .btn:active { background: #2a3b4a; }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — MOBILE (≤ 600px)
-   Priorità assoluta: è il device principale
+   MOBILE ≤ 600px
+   Priorità principale: è come arrivano dal QR code
 ═══════════════════════════════════════ */
 @media (max-width: 600px) {
     :root { --nav-h: 50px; }
 
-    /* Su telefono mostriamo solo il logo nella navbar,
-       i link sono sostituiti dai puntini laterali */
+    /* Solo logo, niente link testuali: ci pensano i puntini */
     .nav-links { display: none; }
+    #navbar { padding: 0 16px; }
 
-    /* Puntini un po' più a destra del bordo */
-    #dots { right: 14px; }
+    /* Due colonne → colonna singola */
+    .split { grid-template-columns: 1fr; gap: 8px; }
+    .split-line { display: none; }
+    .split p:first-child, .split p:last-child { text-align: center; }
 
-    /* Le due colonne diventano una colonna su mobile */
-    .split {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-    .split-divider { display: none; }
-    .split p:first-child,
-    .split p:last-child { text-align: center; }
-
-    /* Posizioni testo ottimizzate per portrait phone */
-    #s1 .txt { --t: 7%;  --l: 50%; --w: 84vw; }
-    #s2 .txt { --t: 8%;  --l: 50%; --w: 84vw; }
-    #s3 .txt { --t: 5%;  --l: 50%; --w: 84vw; }
-    #s4 .txt { --t: 8%;  --l: 50%; --w: 78vw; }
-
-    /* Su mobile il disegno si posiziona diversamente */
-    #s2 .bg { background-position: 65% 55% !important; }
+    /* Posizioni testo su ogni sezione */
+    #s1 .txt { --t: 7%;  --w: 84vw; }
+    #s2 .txt { --t: 7%;  --w: 84vw; }
+    #s3 .txt { --t: 5%;  --w: 86vw; }
+    #s4 .txt { --t: 8%;  --w: 78vw; }
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — TELEFONI MOLTO PICCOLI (≤ 380px)
+   TELEFONI MOLTO PICCOLI ≤ 380px
 ═══════════════════════════════════════ */
 @media (max-width: 380px) {
-    .lock-box { padding: 36px 22px 30px; }
-    #s1 .txt { --w: 88vw; }
-    #s2 .txt { --w: 88vw; }
-    #s3 .txt { --w: 88vw; }
-    #s4 .txt { --w: 84vw; }
-}
-
-/* ═══════════════════════════════════════
-   RESPONSIVE — TABLET e DESKTOP (> 600px)
-═══════════════════════════════════════ */
-@media (min-width: 601px) {
-    #navbar { padding: 0 32px; }
-
-    /* Su desktop il disegno 2 si posiziona a sinistra
-       perché il soggetto è a destra */
-    #s2 .txt { --l: 33%; }
+    .lock-box { padding: 36px 20px 28px; }
+    #s1 .txt, #s2 .txt, #s3 .txt, #s4 .txt { --w: 90vw; }
 }
