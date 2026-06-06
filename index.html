@@ -174,8 +174,8 @@
             <p class="body">Villa Borghi · Varano Borghi, VA</p>
             <p class="note">Per pernottare contatta la reception di Villa Borghi.</p>
             <div class="btns">
-                <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn" target="_blank" rel="noopener">⛪📍 Chiesa</a>
-                <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn" target="_blank" rel="noopener">🏡📍 Villa</a>
+                <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn" target="_blank" rel="noopener">📍 Chiesa</a>
+                <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn" target="_blank" rel="noopener">🍇 Villa</a>
             </div>
         </div>
     </section>
@@ -223,7 +223,7 @@
         <div class="bg" data-img="disegno4.png"></div>
         <div class="txt" style="--t:10%;--l:50%;--w:min(72vw,400px)">
             <h2>Il nostro Sogno</h2>
-            <p class="body">Qui i presenti per gli sposi.</p>
+            <p class="body">Qui inseriremo i dettagli per la lista nozze e le coordinate bancarie.</p>
         </div>
     </section>
 
@@ -279,13 +279,6 @@ function initNavbar() {
 function initDots() {
     const slides = document.querySelectorAll('.slide');
     const dots   = document.querySelectorAll('#dots a');
-    new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting)
-                dots.forEach(d => d.classList.toggle('on',
-                    d.getAttribute('href') === '#' + e.target.id));
-        });
-    }, { threshold: 0.5 }).observe.apply(null, []); // osserva sotto
     const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
             if (e.isIntersecting)
