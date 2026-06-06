@@ -8,235 +8,188 @@
 </head>
 <body>
 
-    <!-- SCHERMATA PASSWORD -->
-    <div id="schermata-blocco">
-        <div class="lock-box">
-            <p class="lock-iniziali">A & G</p>
-            <p class="lock-sub">Inserisci la password per accedere</p>
-            <input type="password" id="password-input" placeholder="· · · · · ·" autocomplete="current-password">
-            <button class="lock-btn" onclick="controllaPassword()">Entra</button>
-            <p id="error-msg">Password errata. Riprova!</p>
+<!-- ═══════════════════════════════════
+     SCHERMATA PASSWORD
+═══════════════════════════════════ -->
+<div id="lock">
+    <div class="lock-box">
+        <p class="lock-title">A & G</p>
+        <p class="lock-hint">inserisci la password</p>
+        <input type="password" id="pwd" placeholder="· · · · · ·" autocomplete="current-password">
+        <button onclick="checkPwd()">Entra</button>
+        <p id="lock-err">Password errata. Riprova!</p>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SITO
+═══════════════════════════════════ -->
+<div id="site">
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="#s1" class="nav-logo">Antonio & Giulia</a>
+        <div class="nav-links">
+            <a href="#s1">Copertina</a>
+            <a href="#s2">Promessa</a>
+            <a href="#s3">Il Giorno</a>
+            <a href="#s4">Regali</a>
         </div>
-    </div>
+    </nav>
 
-    <!-- SITO VERO E PROPRIO -->
-    <div id="sito-vero">
+    <!-- PUNTINI LATERALI -->
+    <nav id="dots">
+        <a href="#s1" aria-label="Copertina"></a>
+        <a href="#s2" aria-label="Promessa"></a>
+        <a href="#s3" aria-label="Il Giorno"></a>
+        <a href="#s4" aria-label="Regali"></a>
+    </nav>
 
-        <!-- NAVBAR -->
-        <nav class="navbar" id="navbar-scorrimento">
-            <a href="#cartoncino1" class="logo">Antonio & Giulia</a>
-            <div class="nav-elegante">
-                <a href="#cartoncino1">Copertina</a>
-                <a href="#cartoncino2">Promessa</a>
-                <a href="#cartoncino3">Il Giorno</a>
-                <a href="#cartoncino4">Regali</a>
+    <!-- ── SEZIONE 1: COPERTINA ── -->
+    <section id="s1" class="slide">
+        <div class="bg" data-img="disegno1.png" data-pos="center bottom"></div>
+        <div class="txt" style="--t:8%;--l:50%;--w:min(78vw,500px)">
+            <h1>Antonio & Giulia</h1>
+            <p class="date">3 · VII · 2027</p>
+            <p class="body">Benvenuti nel sito del nostro matrimonio.<br>Scorri per scoprire tutti i dettagli.</p>
+            <div id="countdown">
+                <span class="cunit"><b id="gg">--</b><small>giorni</small></span>
+                <span class="cdot">·</span>
+                <span class="cunit"><b id="hh">--</b><small>ore</small></span>
+                <span class="cdot">·</span>
+                <span class="cunit"><b id="mm">--</b><small>min</small></span>
             </div>
-        </nav>
+        </div>
+    </section>
 
-        <!-- PUNTINI DI NAVIGAZIONE LATERALI -->
-        <nav class="nav-puntini" aria-label="Navigazione sezioni">
-            <a href="#cartoncino1" aria-label="Copertina"></a>
-            <a href="#cartoncino2" aria-label="Promessa"></a>
-            <a href="#cartoncino3" aria-label="Il Giorno"></a>
-            <a href="#cartoncino4" aria-label="Regali"></a>
-        </nav>
+    <!-- ── SEZIONE 2: LA PROMESSA ── -->
+    <section id="s2" class="slide">
+        <div class="bg" data-img="disegno2.png" data-pos="center 60%"></div>
+        <div class="txt" style="--t:9%;--l:50%;--w:min(82vw,540px)">
+            <h2>La Promessa</h2>
+            <div class="split">
+                <p class="body">Una parola data da ragazzi.<br>Il 30 settembre 2025,<br>nel calore di casa nostra,<br>Antonio l'ha resa realtà.</p>
+                <div class="split-divider"></div>
+                <p class="body">Per tutti i dettagli e per curiosare nella nostra storia, abbiamo preparato una sezione speciale.</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- SEZIONI -->
-        <main class="papiro-container">
+    <!-- ── SEZIONE 3: IL GRANDE GIORNO ── -->
+    <section id="s3" class="slide">
+        <div class="bg" data-img="disegno3.png" data-pos="center bottom"></div>
+        <div class="txt" style="--t:7%;--l:50%;--w:min(78vw,460px)">
+            <h2>Il Grande Giorno</h2>
+            <p class="label">Cerimonia · ore 14:00</p>
+            <p class="body">Santuario di Santa Maria del Monte<br>Varese</p>
+            <p class="label" style="margin-top:.9em">Ricevimento</p>
+            <p class="body">Villa Borghi · Varano Borghi, VA</p>
+            <p class="note">Per pernottare contatta la reception di Villa Borghi.</p>
+            <div class="btns">
+                <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn" target="_blank" rel="noopener">📍 Chiesa</a>
+                <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn" target="_blank" rel="noopener">🍇 Villa</a>
+            </div>
+        </div>
+    </section>
 
-            <!-- SEZIONE 1: COPERTINA -->
-            <section id="cartoncino1" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h1>Antonio & Giulia</h1>
-                    <p class="sottotitolo">3 Luglio 2027</p>
-                    <p class="testo-snello">
-                        Benvenuti nel sito del nostro matrimonio.<br>
-                        Scorri per scoprire tutti i dettagli.
-                    </p>
-                    <div class="countdown" id="countdown">
-                        <div class="countdown-block">
-                            <span id="gg">--</span>
-                            <small>giorni</small>
-                        </div>
-                        <span class="countdown-sep">·</span>
-                        <div class="countdown-block">
-                            <span id="hh">--</span>
-                            <small>ore</small>
-                        </div>
-                        <span class="countdown-sep">·</span>
-                        <div class="countdown-block">
-                            <span id="mm">--</span>
-                            <small>minuti</small>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- ── SEZIONE 4: REGALI ── -->
+    <section id="s4" class="slide">
+        <div class="bg" data-img="disegno4.png" data-pos="center 68%"></div>
+        <div class="txt" style="--t:9%;--l:50%;--w:min(72vw,420px)">
+            <h2>Il nostro Sogno</h2>
+            <p class="body">Qui inseriremo i dettagli per la lista nozze e le coordinate bancarie.</p>
+        </div>
+    </section>
 
-            <!-- SEZIONE 2: LA PROMESSA -->
-            <section id="cartoncino2" class="cartoncino">
-                <div class="contenuto-cartoncino contenuto-colonne">
-                    <h2>La Promessa</h2>
-                    <div class="colonne-partecipazione">
-                        <p>
-                            Una parola data da ragazzi.<br>
-                            Il 30 settembre 2025,<br>
-                            nel calore di casa nostra,<br>
-                            Antonio l'ha resa realtà.
-                        </p>
-                        <p>
-                            Per tutti i dettagli e per curiosare
-                            nella nostra storia, abbiamo
-                            preparato una sezione speciale.
-                        </p>
-                    </div>
-                </div>
-            </section>
+</div><!-- /site -->
 
-            <!-- SEZIONE 3: IL GRANDE GIORNO -->
-            <section id="cartoncino3" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h2>Il Grande Giorno</h2>
+<script>
+/* ── PASSWORD ─────────────────────────────── */
+const PWD = "Ilmioamore2027"; // ← cambia qui
 
-                    <p class="info-blocco">
-                        <strong>Cerimonia · Ore 14:00</strong><br>
-                        Santuario di Santa Maria del Monte, Varese
-                    </p>
+function checkPwd() {
+    if (document.getElementById('pwd').value.trim() === PWD) {
+        document.getElementById('lock').style.display = 'none';
+        document.getElementById('site').style.display = 'block';
+        init();
+    } else {
+        document.getElementById('lock-err').style.display = 'block';
+        document.getElementById('pwd').value = '';
+    }
+}
+document.getElementById('pwd').addEventListener('keypress', e => {
+    if (e.key === 'Enter') checkPwd();
+});
 
-                    <p class="info-blocco">
-                        <strong>Ricevimento</strong><br>
-                        Villa Borghi · Varano Borghi, VA
-                    </p>
+/* ── INIT ─────────────────────────────────── */
+function init() {
+    applyBackgrounds();
+    initNavbar();
+    initDots();
+    updateCountdown();
+    setInterval(updateCountdown, 30000);
 
-                    <p class="nota-pernotto">
-                        Per pernottare contatta la reception di Villa Borghi.
-                    </p>
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.addEventListener('scroll', runParallax, { passive: true });
+        runParallax();
+    }
+}
 
-                    <div class="bottoni-gruppo">
-                        <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7"
-                           class="btn-mappa" target="_blank" rel="noopener">
-                            📍 Chiesa
-                        </a>
-                        <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7"
-                           class="btn-mappa" target="_blank" rel="noopener">
-                            🍇 Villa
-                        </a>
-                    </div>
-                </div>
-            </section>
+/* ── APPLICA LE IMMAGINI COME BACKGROUND ──── */
+function applyBackgrounds() {
+    document.querySelectorAll('.bg').forEach(bg => {
+        bg.style.backgroundImage  = `url('${bg.dataset.img}')`;
+        bg.style.backgroundPosition = bg.dataset.pos;
+    });
+}
 
-            <!-- SEZIONE 4: LISTA NOZZE / REGALI -->
-            <section id="cartoncino4" class="cartoncino">
-                <div class="contenuto-cartoncino">
-                    <h2>Il nostro Sogno</h2>
-                    <p class="testo-snello">
-                        Qui inseriremo i dettagli per la lista nozze
-                        e le coordinate bancarie.
-                    </p>
-                </div>
-            </section>
+/* ── NAVBAR HIDE ON SCROLL ──────────────────── */
+function initNavbar() {
+    const nav = document.getElementById('navbar');
+    let last = 0;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        nav.classList.toggle('hidden', y > last && y > 80);
+        last = y;
+    }, { passive: true });
+}
 
-        </main>
-    </div>
-
-    <script>
-        /* =============================================
-           PASSWORD
-           Cambia il valore qui sotto con la tua password.
-           (Nota: questa è una protezione grafica, non sicurezza vera.)
-        ============================================= */
-        const PASSWORD_CORRETTA = "Ilmioamore2027";
-
-        function controllaPassword() {
-            const input = document.getElementById('password-input').value.trim();
-            const errore = document.getElementById('error-msg');
-
-            if (input === PASSWORD_CORRETTA) {
-                document.getElementById('schermata-blocco').style.display = 'none';
-                document.getElementById('sito-vero').style.display = 'block';
-                avvia();
-            } else {
-                errore.style.display = 'block';
-                document.getElementById('password-input').value = '';
-            }
-        }
-
-        document.getElementById('password-input').addEventListener('keypress', e => {
-            if (e.key === 'Enter') controllaPassword();
+/* ── PUNTINI ATTIVI ────────────────────────── */
+function initDots() {
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('#dots a');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting)
+                dots.forEach(d =>
+                    d.classList.toggle('on', d.getAttribute('href') === '#' + e.target.id)
+                );
         });
+    }, { threshold: 0.5 });
+    slides.forEach(s => obs.observe(s));
+}
 
-        /* =============================================
-           AVVIO — si chiama dopo l'inserimento password
-        ============================================= */
-        function avvia() {
-            inizializzaNavbar();
-            inizializzaPuntini();
-            aggiornaCountdown();
-            setInterval(aggiornaCountdown, 30000);
-        }
+/* ── PARALLASSE ────────────────────────────── */
+function runParallax() {
+    const vh = window.innerHeight;
+    document.querySelectorAll('.slide').forEach(slide => {
+        const bg   = slide.querySelector('.bg');
+        if (!bg) return;
+        const rect = slide.getBoundingClientRect();
+        // progress: +1 when slide is below viewport, -1 when above
+        const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+        bg.style.transform = `translateY(${progress * 14}%)`;
+    });
+}
 
-        /* =============================================
-           NAVBAR: si nasconde scorrendo verso il basso
-        ============================================= */
-        function inizializzaNavbar() {
-            const navbar = document.getElementById('navbar-scorrimento');
-            let ultimoScroll = 0;
-
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                if (y > ultimoScroll && y > 100) {
-                    navbar.classList.add('navbar-nascosta');
-                } else {
-                    navbar.classList.remove('navbar-nascosta');
-                }
-                ultimoScroll = y;
-            }, { passive: true });
-        }
-
-        /* =============================================
-           PUNTINI: il puntino della sezione visibile
-           diventa attivo automaticamente
-        ============================================= */
-        function inizializzaPuntini() {
-            const sezioni  = document.querySelectorAll('.cartoncino');
-            const puntini  = document.querySelectorAll('.nav-puntini a');
-
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        puntini.forEach(p =>
-                            p.classList.toggle(
-                                'active',
-                                p.getAttribute('href') === '#' + entry.target.id
-                            )
-                        );
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            sezioni.forEach(s => observer.observe(s));
-        }
-
-        /* =============================================
-           CONTO ALLA ROVESCIA
-        ============================================= */
-        function aggiornaCountdown() {
-            const traguardo = new Date('2027-07-03T14:00:00');
-            const diff = traguardo - new Date();
-
-            if (diff <= 0) {
-                document.getElementById('countdown').style.display = 'none';
-                return;
-            }
-
-            const giorni  = Math.floor(diff / 86400000);
-            const ore     = Math.floor((diff % 86400000) / 3600000);
-            const minuti  = Math.floor((diff % 3600000)  / 60000);
-
-            document.getElementById('gg').textContent = giorni;
-            document.getElementById('hh').textContent = String(ore).padStart(2, '0');
-            document.getElementById('mm').textContent = String(minuti).padStart(2, '0');
-        }
-    </script>
-
+/* ── CONTO ALLA ROVESCIA ───────────────────── */
+function updateCountdown() {
+    const diff = new Date('2027-07-03T14:00:00') - new Date();
+    if (diff <= 0) { document.getElementById('countdown').style.display = 'none'; return; }
+    document.getElementById('gg').textContent = Math.floor(diff / 86400000);
+    document.getElementById('hh').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    document.getElementById('mm').textContent = String(Math.floor((diff % 3600000)  / 60000)).padStart(2,'0');
+}
+</script>
 </body>
 </html>
