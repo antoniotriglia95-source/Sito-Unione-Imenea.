@@ -187,41 +187,41 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 /* ═══════ TIPOGRAFIA ════════════════════ */
 h1 {
     font-family: 'WindSong', cursive;
-    font-size: clamp(2.6rem, 10vw, 5.4rem);
-    font-weight: 500; color: var(--ink); line-height: .96; margin-bottom: 12px;
+    font-size: clamp(3.4rem, 13vw, 7rem);
+    font-weight: 500; color: var(--ink); line-height: .96; margin-bottom: 14px;
     mix-blend-mode: multiply;
     text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 3px 22px rgba(253,249,243,.95);
 }
 h2 {
     font-family: 'WindSong', cursive;
-    font-size: clamp(2.2rem, 8vw, 4.4rem);
-    font-weight: 500; color: var(--ink); line-height: .96; margin-bottom: 12px;
+    font-size: clamp(2.9rem, 11vw, 6rem);
+    font-weight: 500; color: var(--ink); line-height: .96; margin-bottom: 14px;
     mix-blend-mode: multiply;
     text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 3px 22px rgba(253,249,243,.95);
 }
 .date {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    font-style: italic; font-weight: 400; letter-spacing: .12em;
+    font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+    font-style: italic; font-weight: 500; letter-spacing: .12em;
     color: var(--ink2); margin-bottom: 12px;
     text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 12px rgba(253,249,243,.95);
 }
 .body {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.8vw, 1.2rem);
-    font-style: italic; font-weight: 400; line-height: 1.65; color: var(--ink);
+    font-size: clamp(1.1rem, 3.2vw, 1.4rem);
+    font-style: italic; font-weight: 500; line-height: 1.65; color: var(--ink);
     text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 12px rgba(253,249,243,.95);
 }
 .label {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(.60rem, 1.6vw, .72rem); font-weight: 300;
-    letter-spacing: .22em; text-transform: uppercase; color: var(--ink2);
+    font-size: clamp(.70rem, 2.2vw, .88rem); font-weight: 400;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink2);
     margin-bottom: 3px;
     text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 10px rgba(253,249,243,.95);
 }
 .note {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(.80rem, 1.8vw, .92rem); font-style: italic; font-weight: 400;
+    font-size: clamp(.85rem, 2vw, 1rem); font-style: italic; font-weight: 500;
     color: var(--ink2); margin-top: 12px; padding-top: 10px;
     border-top: 1px solid rgba(96,112,128,.2);
     text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 10px rgba(253,249,243,.95);
@@ -235,17 +235,17 @@ h2 {
 .cunit { display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .cunit b {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 6vw, 3.2rem);
+    font-size: clamp(2rem, 7vw, 3.8rem);
     font-style: italic; font-weight: 500; color: var(--ink); line-height: 1;
     text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 2px 14px rgba(253,249,243,.95);
 }
 .cunit small {
-    font-family: 'Josefin Sans', sans-serif; font-size: clamp(.42rem, 1.1vw, .50rem);
-    letter-spacing: .2em; text-transform: uppercase; font-weight: 300; color: var(--ink2);
+    font-family: 'Josefin Sans', sans-serif; font-size: clamp(.46rem, 1.2vw, .54rem);
+    letter-spacing: .2em; text-transform: uppercase; font-weight: 400; color: var(--ink2);
 }
 .cdot {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 6vw, 3.2rem);
+    font-size: clamp(2rem, 7vw, 3.8rem);
     font-style: italic; color: var(--ink2); opacity: .35; line-height: 1;
 }
 
@@ -304,12 +304,12 @@ h2 {
 }
 .papiro-card.visible { opacity: 1; transform: translateY(0); }
 .papiro-title {
-    font-family: 'WindSong', cursive; font-size: clamp(2rem, 6vw, 3.4rem);
+    font-family: 'WindSong', cursive; font-size: clamp(2.6rem, 7vw, 4.2rem);
     font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 4px;
 }
 .papiro-sub {
-    font-family: 'Cormorant Garamond', serif; font-size: clamp(.82rem, 2vw, .96rem);
-    font-style: italic; font-weight: 400; color: var(--ink2); margin-bottom: 18px;
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(.92rem, 2.2vw, 1.1rem);
+    font-style: italic; font-weight: 500; color: var(--ink2); margin-bottom: 18px;
 }
 
 /* ═══════ GALLERIA ══════════════════════ */
