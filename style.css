@@ -15,7 +15,9 @@
 html  { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
 body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-/* ═══════ PASSWORD ══════════════════════ */
+/* ════════════════════════════════════════
+   PASSWORD
+════════════════════════════════════════ */
 #lock {
     min-height: 100svh; display: flex;
     align-items: center; justify-content: center; background: var(--paper);
@@ -43,9 +45,9 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 #pwd:focus { border-color: var(--ink2); }
 .lock-box button {
     display: block; width: 100%; min-height: 44px; background: var(--ink);
-    color: white; border: none; border-radius: 3px;
-    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 300;
-    letter-spacing: .22em; text-transform: uppercase; cursor: pointer; transition: background .2s;
+    color: white; border: none; border-radius: 3px; font-family: 'Josefin Sans', sans-serif;
+    font-size: .62rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase;
+    cursor: pointer; transition: background .2s;
 }
 .lock-box button:hover { background: #1e2e3f; }
 #lock-err {
@@ -54,7 +56,9 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 }
 #site { display: none; }
 
-/* ═══════ NAVBAR ════════════════════════ */
+/* ════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════ */
 #navbar {
     position: fixed; top: 0; left: 0; width: 100%; height: var(--nav-h);
     display: flex; align-items: center; justify-content: space-between; padding: 0 26px;
@@ -81,7 +85,9 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 }
 .nav-links a:hover::after { width: 100%; }
 
-/* ═══════ PUNTINI ═══════════════════════ */
+/* ════════════════════════════════════════
+   PUNTINI NAVIGAZIONE
+════════════════════════════════════════ */
 #dots {
     position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
     z-index: 101; display: flex; flex-direction: column; gap: 10px;
@@ -94,59 +100,41 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 #dots a::before { content: ''; position: absolute; inset: -9px; }
 #dots a:hover, #dots a.on { background: var(--ink2); transform: scale(1.5); }
 
-/* ═══════════════════════════════════════
-   SLIDE — sezioni a tutto schermo
-   Nessun gap: ogni sezione è 100svh esatto.
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════
+   SEZIONI — 100svh, zero gap tra una e l'altra
+════════════════════════════════════════ */
 .slide {
     position: relative; width: 100%; height: 100svh;
     overflow: hidden; background: var(--paper);
     scroll-margin-top: var(--nav-h);
 }
 
-/* ═══════════════════════════════════════
-   DISEGNO DI SFONDO
+/* ════════════════════════════════════════
+   DISEGNO DI SFONDO  (sezioni con illustrazione)
 
-   background-size: cover  → riempie sempre tutto
-   lo schermo. Zero bande bianche.
-
-   Il div .bg è leggermente più alto (top:-5%,
-   height:110%) per dare spazio al parallasse
-   senza esporre bordi: il colore var(--paper)
-   è identico alla carta dei disegni → seamless.
-
-   background-position orizzontale:
-   calibrata per ogni disegno per tenere
-   i soggetti nel frame anche con il crop laterale.
-═══════════════════════════════════════ */
+   cover = riempie lo schermo, zero bande bianche.
+   Il div .bg è top:-5% height:110% per dare
+   margine al parallasse senza esporre bordi vuoti.
+   Il colore var(--paper) dietro è identico
+   alla carta dei disegni → transizione seamless.
+════════════════════════════════════════ */
 .bg {
-    position: absolute;
-    top: -5%; left: 0;
+    position: absolute; top: -5%; left: 0;
     width: 100%; height: 110%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center bottom;
-    will-change: transform;
-    pointer-events: none;
+    will-change: transform; pointer-events: none;
 }
 
-/*
-  Posizioni orizzontali ottimizzate per mobile:
-  il crop laterale di cover è bilanciato
-  per mostrare i soggetti di ogni disegno.
+/* Posizioni calibrate per ogni disegno:
+   bilanciamento del crop laterale (cover)
+   per tenere i soggetti sempre nel frame. */
+#s1 .bg { background-position: 30% bottom; }  /* luna a sx */
+#s3 .bg { background-position: 68% bottom; }  /* coppia a dx */
+#s4 .bg { background-position: 50% bottom; }  /* centrato  */
+#s6 .bg { background-position: 64% bottom; }  /* "Adesso e sempre" a dx */
 
-  disegno1: luna a sx → shift a sx (30%)
-  disegno2: coppia a dx → shift a dx (68%)
-  disegno3: coppia + casa → centrato (50%)
-  disegno4: "Adesso e sempre" a dx → shift (64%)
-*/
-#s1 .bg { background-position: 30% bottom; }
-#s3 .bg { background-position: 68% bottom; }
-#s4 .bg { background-position: 50% bottom; }
-#s6 .bg { background-position: 64% bottom; }
-
-/* Desktop: immagine leggermente ridotta per
-   headroom parallasse e proporzioni migliori */
 @media (min-width: 601px) {
     .bg { background-size: auto 90%; background-position: center 82%; }
     #s1 .bg { background-position: 32% 80%; }
@@ -155,36 +143,29 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
     #s6 .bg { background-position: 62% 80%; }
 }
 
-/* ═══════════════════════════════════════
-   BLOCCO TESTO
+/* ════════════════════════════════════════
+   BLOCCO TESTO — appare/scompare con la sezione
 
-   Posizionato nel "cielo" di ogni disegno
-   (zona bianca in alto) — mai sui soggetti.
-
-   Ogni sezione ha la propria posizione
-   (--t top, --l left, --w width) passata
-   come inline style nell'HTML.
-
+   Vive nel "cielo bianco" di ogni disegno.
    mix-blend-mode: multiply sui titoli =
-   effetto inchiostro stampato sul cartoncino.
-   Zero sfondino, zero box: il testo fa parte
-   del disegno.
-═══════════════════════════════════════ */
+   inchiostro stampato sul cartoncino.
+   top usa max() per stare sempre sotto la navbar.
+════════════════════════════════════════ */
 .txt {
     position: absolute;
     top:   max(var(--t, 10%), calc(var(--nav-h) + 14px));
     left:  var(--l, 50%);
     width: var(--w, min(72vw, 400px));
     transform: translateX(-50%) translateY(10px);
-    opacity: 0;
-    transition: opacity .65s ease, transform .65s ease;
-    text-align: center;
-    z-index: 2; pointer-events: none;
+    opacity: 0; transition: opacity .65s ease, transform .65s ease;
+    text-align: center; z-index: 2; pointer-events: none;
 }
 .txt.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 .txt a, .txt button { pointer-events: auto; }
 
-/* ═══════ TIPOGRAFIA ════════════════════ */
+/* ════════════════════════════════════════
+   TIPOGRAFIA
+════════════════════════════════════════ */
 h1 {
     font-family: 'WindSong', cursive;
     font-size: clamp(3.4rem, 13vw, 7rem);
@@ -227,7 +208,9 @@ h2 {
     text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 10px rgba(253,249,243,.95);
 }
 
-/* ═══════ COUNTDOWN ═════════════════════ */
+/* ════════════════════════════════════════
+   CONTO ALLA ROVESCIA
+════════════════════════════════════════ */
 #countdown {
     display: flex; align-items: flex-start;
     justify-content: center; gap: 12px; margin-top: 16px;
@@ -249,7 +232,9 @@ h2 {
     font-style: italic; color: var(--ink2); opacity: .35; line-height: 1;
 }
 
-/* ═══════ BOTTONI ═══════════════════════ */
+/* ════════════════════════════════════════
+   BOTTONI MAPPA
+════════════════════════════════════════ */
 .btns { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
 .btn {
     font-family: 'Josefin Sans', sans-serif; font-size: .60rem; font-weight: 300;
@@ -262,7 +247,9 @@ h2 {
 }
 .btn:hover, .btn:active { background: #1e2e3f; }
 
-/* ═══════ BARRA REGALO ══════════════════ */
+/* ════════════════════════════════════════
+   BARRA REGALO
+════════════════════════════════════════ */
 .fund-wrap { margin-top: 16px; width: 100%; }
 .fund-track {
     width: 100%; height: 3px; background: rgba(46,64,85,.15);
@@ -279,14 +266,102 @@ h2 {
     text-shadow: 0 1px 0 rgba(255,255,255,.8);
 }
 
-/* ═══════════════════════════════════════
-   SEZIONI PAPIRO (La Nostra Storia · Quiz)
+/* ════════════════════════════════════════
+   GALLERIA FOTO — schermo intero orizzontale
 
-   Sfondo colore cartoncino — stesso var(--paper)
-   dei disegni. Il foglio al centro è leggermente
-   più chiaro ma nella stessa gamma cromatica:
-   continuità visiva garantita.
-═══════════════════════════════════════ */
+   Swipe ← → = naviga le foto
+   Swipe ↑    = passa alla sezione successiva
+════════════════════════════════════════ */
+.gal-strip {
+    position: absolute; inset: 0;
+    display: flex;
+    overflow-x: scroll; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.gal-strip::-webkit-scrollbar { display: none; }
+
+/* Singola foto — occupa tutto lo schermo */
+.gal-slide {
+    flex: 0 0 100%; height: 100%;
+    position: relative; scroll-snap-align: start; overflow: hidden;
+    background: var(--paper);
+}
+
+/* Foto reale */
+.gal-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+}
+
+/* Gradiente in basso per leggibilità didascalia */
+.gal-slide::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 52%, rgba(0,0,0,.38) 100%);
+    pointer-events: none; z-index: 1;
+}
+
+/* Placeholder (foto non ancora caricata) */
+.gal-ph {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #f5f1eb 0%, #e9e3db 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 14px;
+    color: rgba(96,112,128,.45);
+}
+.gal-ph svg { opacity: .6; }
+.gal-ph span {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: .58rem; letter-spacing: .22em;
+    text-transform: uppercase; font-weight: 300;
+}
+
+/* Didascalia sovrapposta in basso */
+.gal-caption {
+    position: absolute; bottom: 52px; left: 50%;
+    transform: translateX(-50%);
+    width: min(84vw, 480px); text-align: center; z-index: 2;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: white;
+    text-shadow: 0 1px 6px rgba(0,0,0,.5), 0 2px 18px rgba(0,0,0,.3);
+}
+
+/* Frecce laterali */
+.gal-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 3; width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,.2); backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.45);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: white; transition: background .2s;
+}
+.gal-arrow:hover:not(:disabled) { background: rgba(255,255,255,.38); }
+.gal-arrow:disabled { opacity: .18; cursor: default; }
+.gal-arrow-l { left: 14px; }
+.gal-arrow-r { right: 14px; }
+
+/* Puntini in basso */
+.gal-dots {
+    position: absolute; bottom: 18px; left: 50%;
+    transform: translateX(-50%); z-index: 3; display: flex; gap: 8px;
+}
+.gal-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,.45); border: none; padding: 0;
+    cursor: pointer; transition: background .22s, transform .22s; position: relative;
+}
+.gal-dot::before { content: ''; position: absolute; inset: -7px; }
+.gal-dot.on { background: white; transform: scale(1.4); }
+
+/* ════════════════════════════════════════
+   SEZIONI PAPIRO  (Quiz)
+   Sfondo cartoncino — stesso registro cromatico
+   dei disegni. Il foglio al centro è var(--paper).
+════════════════════════════════════════ */
 .slide--papiro {
     background:
         radial-gradient(ellipse 65% 50% at 15% 85%, rgba(170,188,204,.12) 0%, transparent 100%),
@@ -312,55 +387,9 @@ h2 {
     font-style: italic; font-weight: 500; color: var(--ink2); margin-bottom: 18px;
 }
 
-/* ═══════ GALLERIA ══════════════════════ */
-.gallery { display: flex; align-items: center; gap: 10px; width: 100%; flex: 1; min-height: 0; }
-.gal-track {
-    flex: 1; display: flex; overflow-x: scroll;
-    scroll-snap-type: x mandatory; scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none; min-height: 0;
-}
-.gal-track::-webkit-scrollbar { display: none; }
-.gal-slide {
-    flex: 0 0 100%; scroll-snap-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 2px 4px;
-}
-.gal-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; display: block; }
-.photo-ph {
-    width: 100%; aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #f0ece6 0%, #e6e1da 100%);
-    border: 1px dashed rgba(96,112,128,.28); border-radius: 3px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-    color: rgba(96,112,128,.5);
-}
-.photo-ph svg { opacity: .65; }
-.photo-ph span {
-    font-family: 'Josefin Sans', sans-serif; font-size: .54rem;
-    letter-spacing: .2em; text-transform: uppercase; font-weight: 300;
-}
-.gal-caption {
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
-    font-size: clamp(.88rem, 2.2vw, 1.02rem);
-    color: var(--ink); text-align: center; line-height: 1.4; padding: 0 4px;
-}
-.gal-btn {
-    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: none;
-    border: 1px solid rgba(46,64,85,.20); display: flex; align-items: center;
-    justify-content: center; cursor: pointer; color: var(--ink2);
-    transition: background .2s; position: relative;
-}
-.gal-btn::before { content: ''; position: absolute; inset: -8px; }
-.gal-btn:hover:not(:disabled) { background: rgba(46,64,85,.07); }
-.gal-btn:disabled { opacity: .22; cursor: default; }
-.gal-dots { display: flex; justify-content: center; gap: 7px; margin-top: 10px; flex-shrink: 0; }
-.gal-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(46,64,85,.20); border: none; padding: 0;
-    cursor: pointer; transition: background .22s, transform .22s; position: relative;
-}
-.gal-dot::before { content: ''; position: absolute; inset: -6px; }
-.gal-dot.on { background: var(--ink2); transform: scale(1.45); }
-
-/* ═══════ QUIZ ══════════════════════════ */
+/* ════════════════════════════════════════
+   QUIZ
+════════════════════════════════════════ */
 .papiro-card--quiz { text-align: center; }
 .quiz-mark {
     font-family: 'WindSong', cursive; font-size: clamp(3.4rem, 10vw, 5.4rem);
@@ -385,15 +414,18 @@ h2 {
     font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2);
 }
 
-/* ═══════ MOBILE ≤ 600px ════════════════ */
+/* ════════════════════════════════════════
+   MOBILE ≤ 600px
+════════════════════════════════════════ */
 @media (max-width: 600px) {
     :root { --nav-h: 50px; }
     .nav-links { display: none; }
     #navbar { padding: 0 16px; }
     #dots { right: 13px; }
     .papiro-card { padding: 20px 16px 16px; }
-    .gal-btn { width: 30px; height: 30px; }
-    .gallery { gap: 6px; }
+    /* Su mobile le frecce sono meno prominenti
+       perché lo swipe è l'interazione primaria */
+    .gal-arrow { width: 34px; height: 34px; opacity: .7; }
 }
 
 @media (max-width: 380px) {
