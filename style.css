@@ -7,20 +7,21 @@
 :root {
     --ink:   #2e4055;
     --ink2:  #607080;
-    --paper: #fdf9f3;
+    --paper: #d8d3cd;   /* tonalità reale della carta fotografata dei disegni */
+    --bg-cream: #fdf9f3; /* crema più chiaro, usato solo dove non c'è disegno */
     --nav-h: 54px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html  { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
-body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body  { background: var(--bg-cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 /* ════════════════════════════════════════
    PASSWORD
 ════════════════════════════════════════ */
 #lock {
     min-height: 100svh; display: flex;
-    align-items: center; justify-content: center; background: var(--paper);
+    align-items: center; justify-content: center; background: var(--bg-cream);
 }
 .lock-box {
     width: min(88vw, 320px); padding: 50px 28px 40px; background: white;
@@ -37,7 +38,7 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 }
 #pwd {
     display: block; width: 100%; padding: 11px 14px; margin-bottom: 11px;
-    background: var(--paper); border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
+    background: var(--bg-cream); border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
     text-align: center; font-family: 'Josefin Sans', sans-serif;
     font-size: .95rem; letter-spacing: .06em; color: var(--ink);
     outline: none; transition: border-color .2s; min-height: 44px;
@@ -105,51 +106,55 @@ body  { background: var(--paper); overflow-x: hidden; -webkit-font-smoothing: an
 ════════════════════════════════════════ */
 .slide {
     position: relative; width: 100%; height: 100svh;
-    overflow: hidden; background: var(--paper);
+    overflow: hidden;
+    /* Sfondo = tono reale della carta fotografata, NON il crema della UI.
+       Così se il parallasse scopre anche solo 1px di margine,
+       il colore coincide col bordo del disegno: nessuna fessura visibile. */
+    background: var(--paper);
     scroll-margin-top: var(--nav-h);
 }
 
 /* ════════════════════════════════════════
-   DISEGNO DI SFONDO  (sezioni con illustrazione)
+   DISEGNO DI SFONDO
 
-   cover = riempie lo schermo, zero bande bianche.
-   Il div .bg è top:-5% height:110% per dare
-   margine al parallasse senza esporre bordi vuoti.
-   Il colore var(--paper) dietro è identico
-   alla carta dei disegni → transizione seamless.
+   cover = riempie sempre lo schermo, zero bande.
+
+   MARGINE DI SICUREZZA DEL PARALLASSE
+   Il div .bg è più alto della sezione (top:-12%,
+   height:124%): un overscan generoso che garantisce
+   copertura totale anche al massimo spostamento del
+   parallasse (calcolato in JS, ben dentro questo margine).
+   Prima il margine era troppo stretto e ad ogni scroll
+   si apriva una sottile fessura color crema: bug risolto.
 ════════════════════════════════════════ */
 .bg {
-    position: absolute; top: -5%; left: 0;
-    width: 100%; height: 110%;
+    position: absolute; top: -12%; left: 0;
+    width: 100%; height: 124%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center bottom;
     will-change: transform; pointer-events: none;
 }
 
-/* Posizioni calibrate per ogni disegno:
-   bilanciamento del crop laterale (cover)
-   per tenere i soggetti sempre nel frame. */
-#s1 .bg { background-position: 30% bottom; }  /* luna a sx */
-#s3 .bg { background-position: 68% bottom; }  /* coppia a dx */
-#s4 .bg { background-position: 50% bottom; }  /* centrato  */
-#s6 .bg { background-position: 64% bottom; }  /* "Adesso e sempre" a dx */
+/* I disegni sono caricati direttamente qui nel CSS (non via JavaScript):
+   compaiono sempre, anche se lo script avesse un problema o JS
+   fosse disattivato. Le posizioni orizzontali sono calibrate
+   guardando ogni disegno pixel per pixel, per tenere i soggetti
+   nel frame anche col crop laterale di "cover" su schermo stretto. */
+#s1 .bg { background-image: url('disegno1.png'); background-position: 34% bottom; }  /* barca+coppia centrali, luna quasi intera a sx */
+#s3 .bg { background-image: url('disegno2.png'); background-position: 70% bottom; }  /* coppia sulla collina, a destra */
+#s4 .bg { background-image: url('disegno3.png'); background-position: 58% bottom; }  /* coppia + casetta, casetta a destra */
+#s6 .bg { background-image: url('disegno4.png'); background-position: 62% bottom; }  /* sposi + "Adesso e sempre" a destra */
 
 @media (min-width: 601px) {
-    .bg { background-size: auto 90%; background-position: center 82%; }
-    #s1 .bg { background-position: 32% 80%; }
-    #s3 .bg { background-position: 62% 80%; }
-    #s4 .bg { background-position: 50% 82%; }
-    #s6 .bg { background-position: 62% 80%; }
+    #s1 .bg { background-position: 36% 78%; }
+    #s3 .bg { background-position: 64% 78%; }
+    #s4 .bg { background-position: 56% 80%; }
+    #s6 .bg { background-position: 58% 80%; }
 }
 
 /* ════════════════════════════════════════
    BLOCCO TESTO — appare/scompare con la sezione
-
-   Vive nel "cielo bianco" di ogni disegno.
-   mix-blend-mode: multiply sui titoli =
-   inchiostro stampato sul cartoncino.
-   top usa max() per stare sempre sotto la navbar.
 ════════════════════════════════════════ */
 .txt {
     position: absolute;
@@ -271,6 +276,10 @@ h2 {
 
    Swipe ← → = naviga le foto
    Swipe ↑    = passa alla sezione successiva
+
+   overscroll-behavior-x: contain  →  evita che lo swipe
+   orizzontale venga "rubato" dal gesto di sistema
+   (es. swipe-back di Safari su iOS).
 ════════════════════════════════════════ */
 .gal-strip {
     position: absolute; inset: 0;
@@ -278,18 +287,20 @@ h2 {
     overflow-x: scroll; overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
+    background: var(--paper);
 }
 .gal-strip::-webkit-scrollbar { display: none; }
 
-/* Singola foto — occupa tutto lo schermo */
 .gal-slide {
     flex: 0 0 100%; height: 100%;
-    position: relative; scroll-snap-align: start; overflow: hidden;
-    background: var(--paper);
+    position: relative; scroll-snap-align: start; scroll-snap-stop: always;
+    overflow: hidden; background: var(--paper);
 }
 
-/* Foto reale */
+/* Foto reale — sempre visibile da subito, nessuna
+   dipendenza da JavaScript per essere mostrata. */
 .gal-slide img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
@@ -300,21 +311,6 @@ h2 {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(to bottom, transparent 52%, rgba(0,0,0,.38) 100%);
     pointer-events: none; z-index: 1;
-}
-
-/* Placeholder (foto non ancora caricata) */
-.gal-ph {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #f5f1eb 0%, #e9e3db 100%);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 14px;
-    color: rgba(96,112,128,.45);
-}
-.gal-ph svg { opacity: .6; }
-.gal-ph span {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: .58rem; letter-spacing: .22em;
-    text-transform: uppercase; font-weight: 300;
 }
 
 /* Didascalia sovrapposta in basso */
@@ -357,21 +353,29 @@ h2 {
 .gal-dot::before { content: ''; position: absolute; inset: -7px; }
 .gal-dot.on { background: white; transform: scale(1.4); }
 
+/* Contatore foto (1/7) in alto, utile su schermi piccoli */
+.gal-counter {
+    position: absolute; top: calc(var(--nav-h) + 12px); left: 50%;
+    transform: translateX(-50%); z-index: 3;
+    font-family: 'Josefin Sans', sans-serif; font-size: .58rem;
+    letter-spacing: .2em; color: white;
+    background: rgba(0,0,0,.28); backdrop-filter: blur(4px);
+    padding: 4px 11px; border-radius: 999px;
+}
+
 /* ════════════════════════════════════════
    SEZIONI PAPIRO  (Quiz)
-   Sfondo cartoncino — stesso registro cromatico
-   dei disegni. Il foglio al centro è var(--paper).
 ════════════════════════════════════════ */
 .slide--papiro {
     background:
-        radial-gradient(ellipse 65% 50% at 15% 85%, rgba(170,188,204,.12) 0%, transparent 100%),
-        radial-gradient(ellipse 55% 45% at 85% 10%, rgba(210,195,178,.09) 0%, transparent 100%),
-        var(--paper);
+        radial-gradient(ellipse 65% 50% at 15% 85%, rgba(170,188,204,.14) 0%, transparent 100%),
+        radial-gradient(ellipse 55% 45% at 85% 10%, rgba(210,195,178,.11) 0%, transparent 100%),
+        var(--bg-cream);
     display: flex; align-items: center; justify-content: center;
 }
 .papiro-card {
     width: min(92vw, 680px); max-height: calc(100svh - var(--nav-h) - 36px);
-    background: var(--paper); border: 1px solid rgba(46,64,85,.10); border-radius: 5px;
+    background: var(--bg-cream); border: 1px solid rgba(46,64,85,.10); border-radius: 5px;
     box-shadow: 0 3px 10px rgba(46,64,85,.05), 0 12px 44px rgba(46,64,85,.07);
     padding: clamp(22px, 4svh, 42px) clamp(20px, 5vw, 48px);
     display: flex; flex-direction: column; align-items: center; overflow: hidden;
@@ -423,11 +427,14 @@ h2 {
     #navbar { padding: 0 16px; }
     #dots { right: 13px; }
     .papiro-card { padding: 20px 16px 16px; }
-    /* Su mobile le frecce sono meno prominenti
-       perché lo swipe è l'interazione primaria */
     .gal-arrow { width: 34px; height: 34px; opacity: .7; }
 }
 
 @media (max-width: 380px) {
     .lock-box { padding: 36px 20px 28px; }
+}
+
+/* Rispetta la preferenza di movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+    .bg { transition: none !important; }
 }
