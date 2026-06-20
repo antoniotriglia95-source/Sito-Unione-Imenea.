@@ -45,11 +45,9 @@
 
     <!-- ════════════════════════════════════
          S1 · COPERTINA
-         Testo nel cielo in alto al centro.
-         La coppia nella barca è in basso.
     ════════════════════════════════════ -->
     <section id="s1" class="slide">
-        <div class="bg" data-img="disegno1.png"></div>
+        <div class="bg"></div>
         <div class="txt" style="--t:12%; --l:50%; --w:min(70vw,380px)">
             <h1>Antonio & Giulia</h1>
             <p class="date">3 · luglio · 2027</p>
@@ -69,9 +67,6 @@
          Galleria foto a schermo intero.
          Swipe ← → per navigare le foto.
          Swipe ↑   per passare alla sezione dopo.
-
-         PER MODIFICARE LE DIDASCALIE:
-         cerca <p class="gal-caption"> sotto ogni foto.
     ════════════════════════════════════ -->
     <section id="s2" class="slide">
 
@@ -81,46 +76,39 @@
 
         <div class="gal-strip" id="gal-strip">
 
-            <!-- FOTO 1 -->
             <div class="gal-slide">
-                <img src="Foto (1).png" alt="Antonio e Giulia - foto 1">
-                <p class="gal-caption">La nostra storia</p>
-            </div>
-
-            <!-- FOTO 2 -->
-            <div class="gal-slide">
-                <img src="Foto (2).jpg" alt="Antonio e Giulia - foto 2">
-                <p class="gal-caption">Insieme da sempre</p>
-            </div>
-
-            <!-- FOTO 3 -->
-            <div class="gal-slide">
-                <img src="Foto (3).jpg" alt="Antonio e Giulia - foto 3">
+                <img src="Foto (3).jpg" alt="Antonio e Giulia - foto 1" loading="eager" decoding="async">
                 <p class="gal-caption">I nostri momenti</p>
             </div>
 
-            <!-- FOTO 10 -->
             <div class="gal-slide">
-                <img src="Foto (10).jpg" alt="Antonio e Giulia - foto 4">
-                <p class="gal-caption">Ogni avventura insieme</p>
+                <img src="Foto (2).jpg" alt="Antonio e Giulia - foto 2" loading="lazy" decoding="async">
+                <p class="gal-caption">Insieme da sempre</p>
             </div>
 
-            <!-- FOTO 11 -->
             <div class="gal-slide">
-                <img src="Foto (11).jpg" alt="Antonio e Giulia - foto 5">
+                <img src="Foto (1).png" alt="Antonio e Giulia - foto 3" loading="lazy" decoding="async">
+                <p class="gal-caption">La nostra storia</p>
+            </div>
+
+            <div class="gal-slide">
+                <img src="Foto (11).jpg" alt="Antonio e Giulia - foto 4" loading="lazy" decoding="async">
                 <p class="gal-caption">Ricordi che restano</p>
             </div>
 
-            <!-- FOTO 14 -->
             <div class="gal-slide">
-                <img src="Foto (14).jpg" alt="Antonio e Giulia - foto 6">
+                <img src="Foto (14).jpg" alt="Antonio e Giulia - foto 5" loading="lazy" decoding="async">
                 <p class="gal-caption">Il nostro viaggio</p>
             </div>
 
-            <!-- FOTO 15 -->
             <div class="gal-slide">
-                <img src="Foto (15).jpg" alt="Antonio e Giulia - foto 7">
+                <img src="Foto (15).jpg" alt="Antonio e Giulia - foto 6" loading="lazy" decoding="async">
                 <p class="gal-caption">Verso il 3 luglio 2027</p>
+            </div>
+
+            <div class="gal-slide">
+                <img src="Foto (10).jpg" alt="Antonio e Giulia - foto 7" loading="lazy" decoding="async">
+                <p class="gal-caption">Ogni avventura insieme</p>
             </div>
 
         </div>
@@ -132,17 +120,16 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
 
+        <span class="gal-counter" id="gal-counter">1 / 7</span>
         <div class="gal-dots" id="gal-dots"></div>
 
     </section>
 
     <!-- ════════════════════════════════════
          S3 · LA PROMESSA
-         Testo in alto a sinistra.
-         La coppia è in basso a destra.
     ════════════════════════════════════ -->
     <section id="s3" class="slide">
-        <div class="bg" data-img="disegno2.png"></div>
+        <div class="bg"></div>
         <div class="txt" style="--t:12%; --l:30%; --w:min(46vw,240px)">
             <h2>La Promessa</h2>
             <p class="body">Per tutti i dettagli e per curiosare nella nostra storia, abbiamo preparato una sezione speciale.</p>
@@ -151,11 +138,9 @@
 
     <!-- ════════════════════════════════════
          S4 · IL GRANDE GIORNO
-         Testo in alto al centro.
-         Coppia e casetta sono in basso.
     ════════════════════════════════════ -->
     <section id="s4" class="slide">
-        <div class="bg" data-img="disegno3.png"></div>
+        <div class="bg"></div>
         <div class="txt" style="--t:10%; --l:50%; --w:min(72vw,400px)">
             <h2>Il Grande Giorno</h2>
             <p class="label">Cerimonia · ore 14:00</p>
@@ -190,14 +175,9 @@
 
     <!-- ════════════════════════════════════
          S6 · REGALO & VIAGGIO
-         Testo in alto a sinistra.
-         Sposi e "Adesso e sempre" in basso a destra.
-
-         Per aggiornare la barra del sogno:
-         cambia data-fill="0%" con la % reale.
     ════════════════════════════════════ -->
     <section id="s6" class="slide">
-        <div class="bg" data-img="disegno4.png"></div>
+        <div class="bg"></div>
         <div class="txt" style="--t:10%; --l:30%; --w:min(46vw,240px)">
             <h2>Regalo & Viaggio</h2>
             <p class="date">il vostro dono più bello</p>
@@ -233,11 +213,6 @@ document.getElementById('pwd').addEventListener('keypress', e => {
 
 /* ════ INIT ══════════════════════════════ */
 function init() {
-    // Carica i disegni di sfondo
-    document.querySelectorAll('.bg').forEach(bg => {
-        bg.style.backgroundImage = `url('${bg.dataset.img}')`;
-    });
-
     initNavbar();
     initDots();
     initFade();
@@ -283,7 +258,6 @@ function initFade() {
             const el = e.target.querySelector('.txt, .papiro-card');
             if (!el) return;
             el.classList.toggle('visible', e.isIntersecting);
-            // Anima la barra regalo alla prima vista
             if (e.isIntersecting) {
                 const fill = e.target.querySelector('.fund-fill');
                 if (fill && !fill.dataset.animated) {
@@ -296,7 +270,10 @@ function initFade() {
     document.querySelectorAll('.slide').forEach(s => obs.observe(s));
 }
 
-/* ════ PARALLASSE ════════════════════════ */
+/* ════ PARALLASSE ════════════════════════
+   Spostamento massimo ±5% (ben dentro il
+   margine di sicurezza del 12% in style.css:
+   nessuna fessura visibile durante lo scroll). */
 function runParallax() {
     const vh = window.innerHeight;
     document.querySelectorAll('.slide:not(.slide--papiro):not(#s2)').forEach(slide => {
@@ -310,14 +287,14 @@ function runParallax() {
 
 /* ════ GALLERIA FOTO ═════════════════════ */
 function initGallery() {
-    const strip  = document.getElementById('gal-strip');
-    const dotsEl = document.getElementById('gal-dots');
+    const strip   = document.getElementById('gal-strip');
+    const dotsEl  = document.getElementById('gal-dots');
+    const counter = document.getElementById('gal-counter');
     if (!strip || !dotsEl) return;
 
     const slides = strip.querySelectorAll('.gal-slide');
     let current  = 0;
 
-    // Crea i puntini indicatori
     slides.forEach((_, i) => {
         const d = document.createElement('button');
         d.className = 'gal-dot' + (i === 0 ? ' on' : '');
@@ -339,16 +316,26 @@ function initGallery() {
         const next = document.getElementById('gal-next');
         if (prev) prev.disabled = current === 0;
         if (next) next.disabled = current === slides.length - 1;
+        if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
     }
 
-    // Aggiorna puntini su swipe nativo (touch)
+    let scrollTimer = null;
     strip.addEventListener('scroll', () => {
-        const idx = Math.round(strip.scrollLeft / Math.max(1, strip.offsetWidth));
-        if (idx !== current) { current = idx; sync(); }
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            const idx = Math.round(strip.scrollLeft / Math.max(1, strip.offsetWidth));
+            if (idx !== current) { current = idx; sync(); }
+        }, 60);
     }, { passive: true });
 
     document.getElementById('gal-prev')?.addEventListener('click', () => goTo(current - 1));
     document.getElementById('gal-next')?.addEventListener('click', () => goTo(current + 1));
+
+    // Ricalibra la posizione corretta se lo schermo viene ruotato/ridimensionato
+    window.addEventListener('resize', () => {
+        strip.scrollTo({ left: current * strip.offsetWidth });
+    });
+
     sync();
 }
 
