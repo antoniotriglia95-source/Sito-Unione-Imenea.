@@ -27,20 +27,18 @@
         <div class="nav-links">
             <a href="#s1">Inizio</a>
             <a href="#s2">La Storia</a>
-            <a href="#s3">Promessa</a>
-            <a href="#s4">Il Giorno</a>
-            <a href="#s5">Quiz</a>
-            <a href="#s6">Regali</a>
+            <a href="#s3">Il Giorno</a>
+            <a href="#s4">Quiz</a>
+            <a href="#s5">Regali</a>
         </div>
     </nav>
 
     <nav id="dots">
         <a href="#s1" aria-label="Inizio"></a>
         <a href="#s2" aria-label="La Storia"></a>
-        <a href="#s3" aria-label="Promessa"></a>
-        <a href="#s4" aria-label="Il Giorno"></a>
-        <a href="#s5" aria-label="Quiz"></a>
-        <a href="#s6" aria-label="Regali"></a>
+        <a href="#s3" aria-label="Il Giorno"></a>
+        <a href="#s4" aria-label="Quiz"></a>
+        <a href="#s5" aria-label="Regali"></a>
     </nav>
 
     <!-- ════════════════════════════════════
@@ -64,18 +62,25 @@
 
     <!-- ════════════════════════════════════
          S2 · LA NOSTRA STORIA
-         Galleria foto a schermo intero.
-         Swipe ← → per navigare le foto.
-         Swipe ↑   per passare alla sezione dopo.
+         La prima schermata della galleria è una
+         "copertina" interna (La Promessa, sfondo
+         disegno2) — si raggiungono le foto swipando
+         verso destra. Swipe ↑ passa alla sezione dopo.
     ════════════════════════════════════ -->
     <section id="s2" class="slide">
 
-        <div class="txt" style="--t:11%; --l:50%; --w:min(70vw,360px)">
-            <h2>La Nostra Storia</h2>
-        </div>
-
         <div class="gal-strip" id="gal-strip">
 
+            <!-- COPERTINA DELLA GALLERIA -->
+            <div class="gal-slide gal-cover">
+                <div class="bg gal-cover-bg"></div>
+                <div class="txt" style="--t:13%; --l:50%; --w:min(78vw,440px)">
+                    <h2>La Promessa</h2>
+                    <p class="body">Ecco la nostra storia in 7 fotogrammi.</p>
+                </div>
+            </div>
+
+            <!-- 7 FOTO -->
             <div class="gal-slide">
                 <img src="Foto (3).jpg" alt="Antonio e Giulia - foto 1" loading="eager" decoding="async">
                 <p class="gal-caption">I nostri momenti</p>
@@ -106,8 +111,10 @@
                 <p class="gal-caption">Verso il 3 luglio 2027</p>
             </div>
 
+            <!-- ultima foto: object-position ricalibrato al 64%
+                 per centrare la coppia (prima appariva troppo a dx) -->
             <div class="gal-slide">
-                <img src="Foto (10).jpg" alt="Antonio e Giulia - foto 7" loading="lazy" decoding="async">
+                <img src="Foto (10).jpg" alt="Antonio e Giulia - foto 7" loading="lazy" decoding="async" style="object-position: 64% center;">
                 <p class="gal-caption">Ogni avventura insieme</p>
             </div>
 
@@ -120,26 +127,15 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
 
-        <span class="gal-counter" id="gal-counter">1 / 7</span>
+        <span class="gal-counter" id="gal-counter"></span>
         <div class="gal-dots" id="gal-dots"></div>
 
     </section>
 
     <!-- ════════════════════════════════════
-         S3 · LA PROMESSA
+         S3 · IL GRANDE GIORNO
     ════════════════════════════════════ -->
     <section id="s3" class="slide">
-        <div class="bg"></div>
-        <div class="txt" style="--t:12%; --l:30%; --w:min(46vw,240px)">
-            <h2>La Promessa</h2>
-            <p class="body">Per tutti i dettagli e per curiosare nella nostra storia, abbiamo preparato una sezione speciale.</p>
-        </div>
-    </section>
-
-    <!-- ════════════════════════════════════
-         S4 · IL GRANDE GIORNO
-    ════════════════════════════════════ -->
-    <section id="s4" class="slide">
         <div class="bg"></div>
         <div class="txt" style="--t:10%; --l:50%; --w:min(72vw,400px)">
             <h2>Il Grande Giorno</h2>
@@ -156,9 +152,9 @@
     </section>
 
     <!-- ════════════════════════════════════
-         S5 · IL QUIZ
+         S4 · IL QUIZ
     ════════════════════════════════════ -->
-    <section id="s5" class="slide slide--papiro">
+    <section id="s4" class="slide slide--papiro">
         <div class="papiro-card papiro-card--quiz">
             <p class="quiz-mark">?</p>
             <h2 class="papiro-title">Il Quiz degli Sposi</h2>
@@ -174,9 +170,9 @@
     </section>
 
     <!-- ════════════════════════════════════
-         S6 · REGALO & VIAGGIO
+         S5 · REGALO & VIAGGIO
     ════════════════════════════════════ -->
-    <section id="s6" class="slide">
+    <section id="s5" class="slide">
         <div class="bg"></div>
         <div class="txt" style="--t:10%; --l:30%; --w:min(46vw,240px)">
             <h2>Regalo & Viaggio</h2>
@@ -272,8 +268,9 @@ function initFade() {
 
 /* ════ PARALLASSE ════════════════════════
    Spostamento massimo ±5% (ben dentro il
-   margine di sicurezza del 12% in style.css:
-   nessuna fessura visibile durante lo scroll). */
+   margine di sicurezza del 12% in style.css).
+   #s2 (galleria) è esclusa: lo swipe orizzontale
+   non deve interferire col parallasse verticale. */
 function runParallax() {
     const vh = window.innerHeight;
     document.querySelectorAll('.slide:not(.slide--papiro):not(#s2)').forEach(slide => {
@@ -285,38 +282,52 @@ function runParallax() {
     });
 }
 
-/* ════ GALLERIA FOTO ═════════════════════ */
+/* ════ GALLERIA FOTO ═════════════════════
+   La striscia contiene 8 elementi: 1 copertina
+   ("La Promessa") + 7 foto. Puntini e contatore
+   contano solo le 7 foto reali e restano nascosti
+   mentre si è sulla copertina. */
 function initGallery() {
     const strip   = document.getElementById('gal-strip');
     const dotsEl  = document.getElementById('gal-dots');
     const counter = document.getElementById('gal-counter');
     if (!strip || !dotsEl) return;
 
-    const slides = strip.querySelectorAll('.gal-slide');
-    let current  = 0;
+    const allSlides = strip.querySelectorAll('.gal-slide');
+    const photoCount = allSlides.length - 1; // esclude la copertina
+    let current = 0; // indice nello strip: 0 = copertina, 1..7 = foto
 
-    slides.forEach((_, i) => {
+    for (let i = 0; i < photoCount; i++) {
         const d = document.createElement('button');
-        d.className = 'gal-dot' + (i === 0 ? ' on' : '');
+        d.className = 'gal-dot';
         d.setAttribute('aria-label', `Foto ${i + 1}`);
-        d.addEventListener('click', () => goTo(i));
+        d.addEventListener('click', () => goTo(i + 1)); // +1 per saltare la copertina
         dotsEl.appendChild(d);
-    });
+    }
 
     function goTo(i) {
-        current = Math.max(0, Math.min(i, slides.length - 1));
+        current = Math.max(0, Math.min(i, allSlides.length - 1));
         strip.scrollTo({ left: current * strip.offsetWidth, behavior: 'smooth' });
         sync();
     }
 
     function sync() {
+        const onCover  = current === 0;
+        const photoIdx = current - 1;
+
         dotsEl.querySelectorAll('.gal-dot').forEach((d, i) =>
-            d.classList.toggle('on', i === current));
+            d.classList.toggle('on', i === photoIdx));
+        dotsEl.classList.toggle('gal-ui-hidden', onCover);
+
+        if (counter) {
+            counter.textContent = onCover ? '' : `${photoIdx + 1} / ${photoCount}`;
+            counter.classList.toggle('gal-ui-hidden', onCover);
+        }
+
         const prev = document.getElementById('gal-prev');
         const next = document.getElementById('gal-next');
         if (prev) prev.disabled = current === 0;
-        if (next) next.disabled = current === slides.length - 1;
-        if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+        if (next) next.disabled = current === allSlides.length - 1;
     }
 
     let scrollTimer = null;
@@ -331,7 +342,6 @@ function initGallery() {
     document.getElementById('gal-prev')?.addEventListener('click', () => goTo(current - 1));
     document.getElementById('gal-next')?.addEventListener('click', () => goTo(current + 1));
 
-    // Ricalibra la posizione corretta se lo schermo viene ruotato/ridimensionato
     window.addEventListener('resize', () => {
         strip.scrollTo({ left: current * strip.offsetWidth });
     });
