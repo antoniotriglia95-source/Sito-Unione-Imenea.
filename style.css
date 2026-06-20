@@ -223,6 +223,28 @@ h2 {
     text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 10px rgba(253,249,243,.95);
 }
 
+/* Indicazione "scorri per vedere" sulla copertina della
+   galleria: sta dentro il blocco .txt, quindi resta sempre
+   nel cielo del disegno (mai sopra la coppia) e appare/scompare
+   insieme al resto del testo, senza bisogno di JS dedicato. */
+.gal-hint {
+    margin-top: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: .60rem; font-weight: 400;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink2);
+    text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 10px rgba(253,249,243,.95);
+}
+.gal-hint svg { animation: gal-hint-arrow 1.6s ease-in-out infinite; }
+@keyframes gal-hint-arrow {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .gal-hint svg { animation: none; }
+}
+
 /* ════════════════════════════════════════
    CONTO ALLA ROVESCIA
 ════════════════════════════════════════ */
