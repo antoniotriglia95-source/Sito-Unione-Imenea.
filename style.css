@@ -142,15 +142,25 @@ body  { background: var(--bg-cream); overflow-x: hidden; -webkit-font-smoothing:
    guardando ogni disegno pixel per pixel, per tenere i soggetti
    nel frame anche col crop laterale di "cover" su schermo stretto. */
 #s1 .bg { background-image: url('disegno1.png'); background-position: 34% bottom; }  /* barca+coppia centrali, luna quasi intera a sx */
-#s3 .bg { background-image: url('disegno2.png'); background-position: 70% bottom; }  /* coppia sulla collina, a destra */
-#s4 .bg { background-image: url('disegno3.png'); background-position: 58% bottom; }  /* coppia + casetta, casetta a destra */
-#s6 .bg { background-image: url('disegno4.png'); background-position: 62% bottom; }  /* sposi + "Adesso e sempre" a destra */
+#s3 .bg { background-image: url('disegno3.png'); background-position: 58% bottom; }  /* coppia + casetta, casetta a destra */
+#s5 .bg { background-image: url('disegno4.png'); background-position: 62% bottom; }  /* sposi + "Adesso e sempre" a destra */
 
 @media (min-width: 601px) {
     #s1 .bg { background-position: 36% 78%; }
-    #s3 .bg { background-position: 64% 78%; }
-    #s4 .bg { background-position: 56% 80%; }
-    #s6 .bg { background-position: 58% 80%; }
+    #s3 .bg { background-position: 56% 80%; }
+    #s5 .bg { background-position: 58% 80%; }
+}
+
+/* Sfondo della copertina interna alla galleria foto
+   ("La Promessa") — stesso disegno2 usato in precedenza
+   per la sezione dedicata, ora qui dentro come prima
+   schermata della galleria swipeabile. */
+.gal-cover-bg {
+    background-image: url('disegno2.png');
+    background-position: 70% bottom;
+}
+@media (min-width: 601px) {
+    .gal-cover-bg { background-position: 64% 78%; }
 }
 
 /* ════════════════════════════════════════
@@ -306,8 +316,11 @@ h2 {
     object-fit: cover; display: block;
 }
 
-/* Gradiente in basso per leggibilità didascalia */
-.gal-slide::after {
+/* Gradiente in basso per leggibilità didascalia.
+   Escluso dalla copertina (.gal-cover): lì il testo
+   usa già lo stile "stampato sul cartoncino" come
+   nel resto del sito, niente overlay scuro necessario. */
+.gal-slide:not(.gal-cover)::after {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(to bottom, transparent 52%, rgba(0,0,0,.38) 100%);
     pointer-events: none; z-index: 1;
@@ -340,11 +353,16 @@ h2 {
 .gal-arrow-l { left: 14px; }
 .gal-arrow-r { right: 14px; }
 
-/* Puntini in basso */
+/* Puntini in basso.
+   Restano nascosti mentre si è sulla copertina "La Promessa"
+   (non hanno senso finché non si inizia a sfogliare le foto),
+   appaiono con una dissolvenza al primo swipe. */
 .gal-dots {
     position: absolute; bottom: 18px; left: 50%;
     transform: translateX(-50%); z-index: 3; display: flex; gap: 8px;
+    transition: opacity .3s ease;
 }
+.gal-dots.gal-ui-hidden { opacity: 0; pointer-events: none; }
 .gal-dot {
     width: 7px; height: 7px; border-radius: 50%;
     background: rgba(255,255,255,.45); border: none; padding: 0;
@@ -353,7 +371,8 @@ h2 {
 .gal-dot::before { content: ''; position: absolute; inset: -7px; }
 .gal-dot.on { background: white; transform: scale(1.4); }
 
-/* Contatore foto (1/7) in alto, utile su schermi piccoli */
+/* Contatore foto (es. "1 / 7") in alto.
+   Stessa logica di comparsa dei puntini. */
 .gal-counter {
     position: absolute; top: calc(var(--nav-h) + 12px); left: 50%;
     transform: translateX(-50%); z-index: 3;
@@ -361,7 +380,9 @@ h2 {
     letter-spacing: .2em; color: white;
     background: rgba(0,0,0,.28); backdrop-filter: blur(4px);
     padding: 4px 11px; border-radius: 999px;
+    transition: opacity .3s ease;
 }
+.gal-counter.gal-ui-hidden { opacity: 0; }
 
 /* ════════════════════════════════════════
    SEZIONI PAPIRO  (Quiz)
