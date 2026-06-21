@@ -152,26 +152,24 @@ body  { background: var(--bg-cream); overflow-x: hidden; -webkit-font-smoothing:
 }
 
 /* Sfondo della copertina interna alla galleria foto
-   ("La Promessa") — stesso disegno2 usato in precedenza
-   per la sezione dedicata, ora qui dentro come prima
-   schermata della galleria swipeabile.
-
-   A differenza delle altre sezioni, qui il disegno è
-   mostrato INTERO (contain, non cover): essendo solo
-   una copertina che si scorre via subito verso destra,
-   non serve il pieno schermo ritagliato — meglio far
-   vedere tutta l'illustrazione. Stile indipendente da
-   .bg: niente overscan/parallasse, non necessari qui. */
+   ("La Nostra Storia") — stesso disegno2 usato in
+   precedenza per la sezione "La Promessa", ora qui
+   come prima schermata della galleria swipeabile.
+   A tutto schermo come le altre sezioni illustrate
+   (cover, non contain): coerenza visiva col resto
+   del sito. Margine di sicurezza (-12%/124%) per il
+   leggero respiro del crop, stessa logica di .bg. */
 .gal-cover-bg {
-    position: absolute; inset: 0;
-    background-image: url('disegno2.png');
+    position: absolute; top: -12%; left: 0;
+    width: 100%; height: 124%;
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center 88%;
+    background-size: cover;
+    background-image: url('disegno2.png');
+    background-position: 70% bottom;
     pointer-events: none;
 }
 @media (min-width: 601px) {
-    .gal-cover-bg { background-size: auto 92%; background-position: center 80%; }
+    .gal-cover-bg { background-position: 64% 78%; }
 }
 
 /* ════════════════════════════════════════
@@ -343,33 +341,46 @@ h2 {
     overflow: hidden; background: var(--paper);
 }
 
-/* Foto reale — sempre visibile da subito, nessuna
-   dipendenza da JavaScript per essere mostrata. */
+/* Foto reale — mostrata per intero (contain), non
+   ritagliata: meglio vedere tutta la foto con eventuali
+   bordi vuoti ai lati/sopra-sotto, piuttosto che zoomata
+   e tagliata. Lo sfondo del bordo è var(--paper), in
+   tono con la carta dei disegni, quindi i bordi vuoti
+   risultano comunque eleganti e coerenti col resto.
+   Sempre visibile da subito, nessuna dipendenza da
+   JavaScript per essere mostrata. */
 .gal-slide img {
     width: 100%; height: 100%;
-    object-fit: cover; display: block;
+    object-fit: contain; display: block;
 }
 
 /* Gradiente in basso per leggibilità didascalia.
    Escluso dalla copertina (.gal-cover): lì il testo
    usa già lo stile "stampato sul cartoncino" come
    nel resto del sito, niente overlay scuro necessario. */
-.gal-slide:not(.gal-cover)::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 52%, rgba(0,0,0,.38) 100%);
-    pointer-events: none; z-index: 1;
-}
+/* Le foto mostrate "per intero" (contain) lasciano
+   bordi color carta sopra/sotto: niente più overlay
+   scuro qui, lo sfondo della slide (var(--paper)) basta
+   già a riempire elegantemente quei bordi. */
 
-/* Didascalia sovrapposta in basso */
+/* Con le foto mostrate per intero (contain) non c'è
+   più garanzia che il bordo inferiore dello schermo
+   sia coperto dalla foto: spesso lì c'è la carta color
+   var(--paper). Niente più overlay scuro: la didascalia
+   ora usa lo stesso stile "inchiostro su carta" del
+   resto del sito, leggibile sia sulla foto che sul bordo. */
 .gal-caption {
-    position: absolute; bottom: 52px; left: 50%;
+    position: absolute; bottom: 40px; left: 50%;
     transform: translateX(-50%);
     width: min(84vw, 480px); text-align: center; z-index: 2;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic; font-weight: 500;
     font-size: clamp(1rem, 3vw, 1.3rem);
-    color: white;
-    text-shadow: 0 1px 6px rgba(0,0,0,.5), 0 2px 18px rgba(0,0,0,.3);
+    color: var(--ink);
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.85),
+        0 2px 14px rgba(253,249,243,.95),
+        0 0 26px rgba(253,249,243,.92);
 }
 
 /* Frecce laterali */
@@ -399,11 +410,15 @@ h2 {
 .gal-dots.gal-ui-hidden { opacity: 0; pointer-events: none; }
 .gal-dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: rgba(255,255,255,.45); border: none; padding: 0;
+    background: rgba(255,255,255,.75); border: none; padding: 0;
+    /* Anello sottile scuro: i puntini restano visibili sia
+       sopra la foto sia sul bordo color carta lasciato da
+       "contain" — il bianco puro da solo sparirebbe sulla carta chiara. */
+    box-shadow: 0 0 0 1px rgba(46,64,85,.30), 0 1px 4px rgba(0,0,0,.18);
     cursor: pointer; transition: background .22s, transform .22s; position: relative;
 }
 .gal-dot::before { content: ''; position: absolute; inset: -7px; }
-.gal-dot.on { background: white; transform: scale(1.4); }
+.gal-dot.on { background: white; box-shadow: 0 0 0 1px rgba(46,64,85,.4), 0 1px 6px rgba(0,0,0,.22); transform: scale(1.4); }
 
 /* Contatore foto (es. "1 / 7") in alto.
    Stessa logica di comparsa dei puntini. */
