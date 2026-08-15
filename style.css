@@ -575,7 +575,11 @@ h2 {
 
 #classifica-list-wrap { width: 100%; margin-bottom: 14px; }
 
+#classifica-step-detail { display: flex; flex-direction: column; align-items: center; }
+
 .classifica-table { width: 100%; border-collapse: collapse; text-align: left; }
+.classifica-table tr { cursor: pointer; transition: background .15s; }
+.classifica-table tr:hover { background: rgba(46,64,85,.05); }
 .classifica-table td {
     padding: 9px 6px; border-bottom: 1px solid rgba(46,64,85,.1);
     font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
@@ -586,6 +590,44 @@ h2 {
 .classifica-gold  .classifica-pos { color: #a8842a; }
 .classifica-silver .classifica-pos { color: #7c8896; }
 .classifica-bronze .classifica-pos { color: #a06a3e; }
+
+.classifica-tap-hint {
+    margin-top: 4px; text-align: center;
+    font-family: 'Josefin Sans', sans-serif; font-size: .56rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); opacity: .7;
+}
+
+/* Vista dettaglio: risposte di un singolo invitato,
+   domanda per domanda, con evidenza corretto/sbagliato. */
+.classifica-back {
+    align-self: flex-start; background: none; border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: .6rem; font-weight: 300;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink2);
+    margin-bottom: 14px; padding: 4px 0;
+}
+.classifica-back:hover { color: var(--ink); }
+
+#classifica-detail-score { margin-bottom: 18px; }
+
+#classifica-detail-list { width: 100%; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+.classifica-detail-item {
+    padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(46,64,85,.1);
+    background: rgba(46,64,85,.03);
+}
+.classifica-detail-item.is-correct { border-left: 3px solid #4a7a52; }
+.classifica-detail-item.is-wrong   { border-left: 3px solid #a13d3d; }
+.classifica-detail-q {
+    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 400;
+    letter-spacing: .04em; color: var(--ink2); margin-bottom: 4px;
+}
+.classifica-detail-a {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .96rem; color: var(--ink);
+}
+.classifica-detail-correct {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .84rem; color: #a13d3d; margin-top: 2px;
+}
 
 /* ════════════════════════════════════════
    MOBILE ≤ 600px
