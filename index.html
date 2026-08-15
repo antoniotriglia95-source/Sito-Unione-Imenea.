@@ -201,19 +201,62 @@
 
     <!-- ════════════════════════════════════
          S4 · IL QUIZ
+
+         Flusso: nome → 12 domande (una alla volta,
+         con barra di avanzamento) → risultato finale.
+         Le risposte vengono salvate su Firestore usando
+         il nome (normalizzato) come ID del documento:
+         chi ha già risposto non può rifarlo, perché le
+         regole di sicurezza bloccano la sovrascrittura.
+         Nessun punteggio "in diretta" mostrato agli
+         invitati: solo il proprio, a fine quiz.
     ════════════════════════════════════ -->
     <section id="s4" class="slide slide--papiro">
-        <div class="papiro-card papiro-card--quiz">
+        <div class="papiro-card papiro-card--quiz" id="quiz-card">
             <p class="quiz-mark">?</p>
             <h2 class="papiro-title">Il Quiz degli Sposi</h2>
             <p class="papiro-sub">Quanto ci conosci davvero?</p>
             <div class="quiz-divider"></div>
-            <div class="quiz-preview">
-                <div class="quiz-q"><span class="quiz-n">1</span><span>Dove si sono conosciuti Antonio e Giulia?</span><span class="quiz-lock">🔒</span></div>
-                <div class="quiz-q"><span class="quiz-n">2</span><span>Qual è stato il loro primo viaggio insieme?</span><span class="quiz-lock">🔒</span></div>
-                <div class="quiz-q"><span class="quiz-n">3</span><span>Qual è il piatto preferito di Giulia?</span><span class="quiz-lock">🔒</span></div>
+
+            <!-- STEP · NOME -->
+            <div class="quiz-step" id="quiz-step-name">
+                <p class="quiz-intro">12 domande su di noi. Scrivi il tuo nome e comincia — una sola possibilità a testa!</p>
+                <input type="text" id="quiz-name" class="quiz-input" placeholder="Nome e Cognome" autocomplete="name" maxlength="59">
+                <p class="quiz-error" id="quiz-name-error">Scrivi nome e cognome per continuare</p>
+                <button type="button" class="quiz-btn" id="quiz-start-btn">Inizia il quiz</button>
             </div>
-            <p class="quiz-coming">Il quiz sarà disponibile prossimamente!</p>
+
+            <!-- STEP · DOMANDE (una alla volta) -->
+            <div class="quiz-step" id="quiz-step-questions" style="display:none">
+                <div class="quiz-progress"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
+                <p class="quiz-counter" id="quiz-counter"></p>
+                <p class="quiz-question" id="quiz-question-text"></p>
+                <div class="quiz-options" id="quiz-options"></div>
+                <button type="button" class="quiz-btn" id="quiz-next-btn" disabled>Avanti</button>
+            </div>
+
+            <!-- STEP · INVIO IN CORSO -->
+            <div class="quiz-step quiz-step--center" id="quiz-step-sending" style="display:none">
+                <p class="quiz-result-msg">Invio le tue risposte…</p>
+            </div>
+
+            <!-- STEP · RISULTATO -->
+            <div class="quiz-step quiz-step--center" id="quiz-step-result" style="display:none">
+                <p class="quiz-result-score" id="quiz-result-score"></p>
+                <p class="quiz-result-msg" id="quiz-result-msg">Grazie per aver giocato! Il vincitore sarà svelato il giorno del matrimonio 💛</p>
+            </div>
+
+            <!-- STEP · GIÀ RISPOSTO -->
+            <div class="quiz-step quiz-step--center" id="quiz-step-duplicate" style="display:none">
+                <p class="quiz-result-msg">Risulta che questo nome abbia già risposto al quiz!<br>Se pensi sia un errore, scrivi il nome in modo leggermente diverso (es. aggiungi il cognome) o contatta gli sposi.</p>
+            </div>
+
+            <!-- STEP · ERRORE -->
+            <div class="quiz-step quiz-step--center" id="quiz-step-error" style="display:none">
+                <p class="quiz-result-msg">Ops, qualcosa è andato storto durante l'invio.<br>Controlla la connessione e riprova tra poco.</p>
+                <button type="button" class="quiz-btn" id="quiz-retry-btn">Riprova</button>
+            </div>
+
         </div>
     </section>
 
@@ -236,6 +279,38 @@
     </section>
 
 </div><!-- /site -->
+
+<!-- ══ CLASSIFICA (riservata agli sposi) ══════════════
+     Nascosta di proposito: nessun link visibile nel sito.
+     Si apre solo aggiungendo #classifica all'indirizzo del
+     sito, e comunque richiede una seconda password.
+     Va aperta DOPO aver sbloccato il sito con la password
+     principale. ═══════════════════════════════════════ -->
+<div id="classifica-overlay">
+    <div class="classifica-box">
+        <button type="button" class="classifica-close" id="classifica-close" aria-label="Chiudi">✕</button>
+
+        <div id="classifica-step-pwd">
+            <p class="lock-title" style="font-size:2.2rem">Classifica</p>
+            <p class="lock-hint">riservata agli sposi</p>
+            <input type="password" id="classifica-pwd" placeholder="· · · · · ·" autocomplete="off">
+            <button type="button" class="quiz-btn" id="classifica-pwd-btn">Entra</button>
+            <p class="quiz-error" id="classifica-pwd-error">Password errata. Riprova!</p>
+        </div>
+
+        <div id="classifica-step-list" style="display:none">
+            <p class="lock-title" style="font-size:2.2rem">Classifica</p>
+            <p class="lock-hint" id="classifica-count"></p>
+            <div id="classifica-list-wrap">
+                <p class="quiz-result-msg" id="classifica-loading">Carico i risultati…</p>
+                <table class="classifica-table" id="classifica-table" style="display:none">
+                    <tbody id="classifica-tbody"></tbody>
+                </table>
+            </div>
+            <button type="button" class="quiz-btn" id="classifica-refresh-btn">Aggiorna</button>
+        </div>
+    </div>
+</div>
 
 <script>
 /* ════ PASSWORD ══════════════════════════ */
@@ -263,6 +338,9 @@ function init() {
     initGallery();
     updateCountdown();
     setInterval(updateCountdown, 30000);
+    initQuiz();
+    checkClassificaHash();
+    window.addEventListener('hashchange', checkClassificaHash);
 
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         window.addEventListener('scroll', runParallax, { passive: true });
@@ -407,6 +485,307 @@ function updateCountdown() {
     document.getElementById('hh').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
     document.getElementById('mm').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
 }
+
+/* ════════════════════════════════════════
+   QUIZ DEGLI SPOSI
+════════════════════════════════════════ */
+
+/* Seconda password, solo per la classifica.
+   Cambiala pure quando vuoi: non ha nessun legame
+   con la password principale del sito. */
+const CLASSIFICA_PWD = "Classifica2027";
+
+const QUIZ_QUESTIONS = [
+    { q: "In che anno si sono conosciuti Antonio e Giulia?",
+      options: ["2013", "2011", "2012", "2015"], correct: 0 },
+    { q: "Dove è avvenuto il loro primo incontro?",
+      options: ["Al 18° compleanno di un'amica, allo Spazio Lavit", "A una festa di laurea", "A un matrimonio di amici comuni", "In discoteca"], correct: 0 },
+    { q: "Chi dei due ha fatto la prima mossa?",
+      options: ["Antonio", "Giulia", "Nessuno dei due, è successo per caso", "Un amico in comune"], correct: 0 },
+    { q: "Chi dei due cucina meglio?",
+      options: ["Giulia", "Antonio", "Nessuno dei due, ordinano sempre", "Cucinano allo stesso livello"], correct: 0 },
+    { q: "Chi dei due russa di più?",
+      options: ["Antonio", "Giulia", "Nessuno dei due", "Entrambi, è un disastro"], correct: 0 },
+    { q: "Che tipo di film guardano sempre insieme?",
+      options: ["Film Disney classici d'animazione", "Film horror", "Documentari", "Commedie romantiche"], correct: 0 },
+    { q: "Qual è il loro peccato di gola preferito?",
+      options: ["Patatine di McDonald's", "Gelato alla nutella", "Pizza a fette da asporto", "Croissant alla crema"], correct: 0 },
+    { q: "Dove si sposano Antonio e Giulia?",
+      options: ["Sacro Monte di Varese", "Villa Cocca", "Sant'Ambrogio", "Masnago"], correct: 0 },
+    { q: "Circa quanti invitati ci sono al matrimonio?",
+      options: ["101-150", "Fino a 100", "151-200", "Oltre 200"], correct: 0 },
+    { q: "Che pietra ha l'anello di fidanzamento?",
+      options: ["Pietra di luna", "Diamante", "Zaffiro", "Smeraldo"], correct: 0 },
+    { q: "Qual è la meta del loro viaggio di nozze?",
+      options: ["Giappone", "Thailandia", "Maldive", "Bali"], correct: 0 },
+    { q: "Chi dei due è più disordinato?",
+      options: ["Antonio", "Giulia", "Nessuno dei due", "Entrambi"], correct: 0 },
+];
+
+let quizShuffled = [];   // domande con opzioni mescolate, generate a ogni "Inizia il quiz"
+let quizIndex    = 0;
+let quizScore    = 0;
+let quizSelected = null; // indice (nello shuffle) selezionato per la domanda corrente
+
+function shuffleArray(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function slugifyName(name) {
+    return name
+        .trim()
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
+
+function quizShowStep(id) {
+    document.querySelectorAll('#quiz-card .quiz-step').forEach(el => {
+        el.style.display = (el.id === id) ? '' : 'none';
+    });
+}
+
+function initQuiz() {
+    document.getElementById('quiz-start-btn').addEventListener('click', quizStart);
+    document.getElementById('quiz-name').addEventListener('keypress', e => {
+        if (e.key === 'Enter') quizStart();
+    });
+    document.getElementById('quiz-next-btn').addEventListener('click', quizNext);
+    document.getElementById('quiz-retry-btn').addEventListener('click', quizSubmit);
+}
+
+function quizStart() {
+    const nameInput = document.getElementById('quiz-name');
+    const name = nameInput.value.trim();
+    const errEl = document.getElementById('quiz-name-error');
+
+    if (!name || slugifyName(name).length === 0) {
+        errEl.style.display = 'block';
+        return;
+    }
+    errEl.style.display = 'none';
+
+    quizShuffled = QUIZ_QUESTIONS.map(item => {
+        const correctText = item.options[item.correct];
+        const options = shuffleArray(item.options);
+        return { q: item.q, options, correctIndex: options.indexOf(correctText) };
+    });
+    quizIndex = 0;
+    quizScore = 0;
+    quizSelected = null;
+
+    quizShowStep('quiz-step-questions');
+    quizRenderQuestion();
+}
+
+function quizRenderQuestion() {
+    const total = quizShuffled.length;
+    const item  = quizShuffled[quizIndex];
+    quizSelected = null;
+
+    document.getElementById('quiz-progress-fill').style.width = `${(quizIndex / total) * 100}%`;
+    document.getElementById('quiz-counter').textContent = `Domanda ${quizIndex + 1} di ${total}`;
+    document.getElementById('quiz-question-text').textContent = item.q;
+
+    const optsWrap = document.getElementById('quiz-options');
+    optsWrap.innerHTML = '';
+    item.options.forEach((opt, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'quiz-option';
+        b.textContent = opt;
+        b.addEventListener('click', () => quizSelectOption(i, b));
+        optsWrap.appendChild(b);
+    });
+
+    const nextBtn = document.getElementById('quiz-next-btn');
+    nextBtn.disabled = true;
+    nextBtn.textContent = (quizIndex === total - 1) ? 'Invia le risposte' : 'Avanti';
+}
+
+function quizSelectOption(i, btnEl) {
+    quizSelected = i;
+    document.querySelectorAll('#quiz-options .quiz-option').forEach(b => b.classList.remove('selected'));
+    btnEl.classList.add('selected');
+    document.getElementById('quiz-next-btn').disabled = false;
+}
+
+function quizNext() {
+    if (quizSelected === null) return;
+    if (quizSelected === quizShuffled[quizIndex].correctIndex) quizScore++;
+
+    quizIndex++;
+    if (quizIndex < quizShuffled.length) {
+        quizRenderQuestion();
+    } else {
+        document.getElementById('quiz-progress-fill').style.width = '100%';
+        quizSubmit();
+    }
+}
+
+async function quizSubmit() {
+    quizShowStep('quiz-step-sending');
+    const name = document.getElementById('quiz-name').value.trim();
+    const id = slugifyName(name);
+
+    try {
+        await window.quizSaveScore(id, name, quizScore);
+        document.getElementById('quiz-result-score').textContent = `${quizScore} / ${quizShuffled.length}`;
+        quizShowStep('quiz-step-result');
+    } catch (err) {
+        if (err && err.code === 'permission-denied') {
+            quizShowStep('quiz-step-duplicate');
+        } else {
+            quizShowStep('quiz-step-error');
+        }
+    }
+}
+
+/* ════════════════════════════════════════
+   CLASSIFICA (riservata agli sposi)
+════════════════════════════════════════ */
+function checkClassificaHash() {
+    if (window.location.hash === '#classifica') {
+        openClassifica();
+    } else {
+        closeClassifica();
+    }
+}
+
+function openClassifica() {
+    document.getElementById('classifica-overlay').classList.add('open');
+    document.getElementById('classifica-step-pwd').style.display = '';
+    document.getElementById('classifica-step-list').style.display = 'none';
+    document.getElementById('classifica-pwd').value = '';
+    document.getElementById('classifica-pwd-error').style.display = 'none';
+}
+
+function closeClassifica() {
+    document.getElementById('classifica-overlay').classList.remove('open');
+}
+
+function initClassifica() {
+    document.getElementById('classifica-close').addEventListener('click', () => {
+        window.location.hash = '';
+    });
+    document.getElementById('classifica-pwd-btn').addEventListener('click', classificaCheckPwd);
+    document.getElementById('classifica-pwd').addEventListener('keypress', e => {
+        if (e.key === 'Enter') classificaCheckPwd();
+    });
+    document.getElementById('classifica-refresh-btn').addEventListener('click', classificaLoad);
+}
+
+function classificaCheckPwd() {
+    const val = document.getElementById('classifica-pwd').value;
+    if (val === CLASSIFICA_PWD) {
+        document.getElementById('classifica-step-pwd').style.display = 'none';
+        document.getElementById('classifica-step-list').style.display = '';
+        classificaLoad();
+    } else {
+        document.getElementById('classifica-pwd-error').style.display = 'block';
+    }
+}
+
+async function classificaLoad() {
+    const loadingEl = document.getElementById('classifica-loading');
+    const tableEl   = document.getElementById('classifica-table');
+    const tbody     = document.getElementById('classifica-tbody');
+    const countEl   = document.getElementById('classifica-count');
+
+    loadingEl.style.display = 'block';
+    loadingEl.textContent = 'Carico i risultati…';
+    tableEl.style.display = 'none';
+
+    try {
+        const rows = await window.quizFetchResults();
+        rows.sort((a, b) => (b.punteggio - a.punteggio) || (a.ts - b.ts));
+
+        countEl.textContent = `${rows.length} risposta${rows.length === 1 ? '' : 'e'} finora`;
+        tbody.innerHTML = '';
+        rows.forEach((r, i) => {
+            const tr = document.createElement('tr');
+            if (i === 0) tr.className = 'classifica-gold';
+            else if (i === 1) tr.className = 'classifica-silver';
+            else if (i === 2) tr.className = 'classifica-bronze';
+            tr.innerHTML = `<td class="classifica-pos">${i + 1}</td><td class="classifica-nome">${r.nome}</td><td class="classifica-punti">${r.punteggio}/12</td>`;
+            tbody.appendChild(tr);
+        });
+
+        loadingEl.style.display = 'none';
+        tableEl.style.display = rows.length ? 'table' : 'none';
+        if (!rows.length) {
+            loadingEl.style.display = 'block';
+            loadingEl.textContent = 'Nessuna risposta ancora.';
+        }
+    } catch (err) {
+        loadingEl.style.display = 'block';
+        loadingEl.textContent = 'Errore nel caricamento. Riprova.';
+    }
+}
+</script>
+
+<!-- ════ FIREBASE (Firestore) ═══════════════════════
+     Modulo separato: salva le risposte del quiz e,
+     solo per la classifica riservata, le legge tutte.
+     Le regole di sicurezza su Firestore impediscono
+     comunque a chiunque di modificare o cancellare
+     risposte altrui, quindi qui non serve altra
+     protezione lato client. ═══════════════════════ -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import {
+        getFirestore, doc, setDoc, getDocs, collection, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC1nZs9nEcLzvtZlNnDcYwXemJgWaGM1BQ",
+        authDomain: "matrimag.firebaseapp.com",
+        projectId: "matrimag",
+        storageBucket: "matrimag.firebasestorage.app",
+        messagingSenderId: "679150371590",
+        appId: "1:679150371590:web:18d153898c7c98a8f75487"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    // Salva una risposta. Se il nome (id) esiste già,
+    // le regole Firestore rifiutano la scrittura con
+    // "permission-denied" — lo gestiamo lato UI come duplicato.
+    window.quizSaveScore = async function (id, nome, punteggio) {
+        const ref = doc(db, 'risposteQuiz', id);
+        await setDoc(ref, {
+            nome: nome,
+            punteggio: punteggio,
+            timestamp: serverTimestamp()
+        });
+    };
+
+    // Legge tutte le risposte per la classifica.
+    window.quizFetchResults = async function () {
+        const snap = await getDocs(collection(db, 'risposteQuiz'));
+        const rows = [];
+        snap.forEach(d => {
+            const data = d.data();
+            rows.push({
+                nome: data.nome || d.id,
+                punteggio: typeof data.punteggio === 'number' ? data.punteggio : 0,
+                ts: data.timestamp ? data.timestamp.toMillis() : 0
+            });
+        });
+        return rows;
+    };
+
+    // La classifica va inizializzata solo dopo che
+    // Firebase è pronto, quindi il collegamento dei
+    // pulsanti avviene qui.
+    initClassifica();
 </script>
 </body>
 </html>
