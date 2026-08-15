@@ -196,6 +196,9 @@
                 <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn" target="_blank" rel="noopener">⛪ 📍 Chiesa</a>
                 <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn" target="_blank" rel="noopener">🏡 📍 Villa</a>
             </div>
+            <div class="btns" style="margin-top:10px">
+                <button type="button" class="btn" id="rsvp-open-btn">💌 Conferma la tua presenza</button>
+            </div>
         </div>
     </section>
 
@@ -280,6 +283,77 @@
 
 </div><!-- /site -->
 
+<!-- ══ RSVP — CONFERMA PRESENZA ════════════════════════
+     Si apre automaticamente una sola volta per dispositivo,
+     al primo passaggio dalla copertina alla galleria
+     (osservato su #s2), e resta comunque riapribile a mano
+     dal bottone "Conferma la tua presenza" dentro
+     "Il Grande Giorno". Stesso principio anti-duplicati del
+     quiz: nome normalizzato come ID del documento.
+     ═══════════════════════════════════════════════════ -->
+<div id="rsvp-overlay">
+    <div class="rsvp-box">
+        <button type="button" class="rsvp-close" id="rsvp-close" aria-label="Chiudi">✕</button>
+
+        <p class="lock-title" style="font-size:2.2rem">Ci sarai?</p>
+        <p class="lock-hint">confermaci la tua presenza</p>
+
+        <!-- STEP · NOME + PRESENZA -->
+        <div class="rsvp-step" id="rsvp-step-ask">
+            <input type="text" id="rsvp-name" class="quiz-input" placeholder="Nome e Cognome" autocomplete="name" maxlength="59">
+            <div class="rsvp-toggle">
+                <button type="button" class="quiz-option rsvp-toggle-btn" id="rsvp-yes-btn">🎉 Sì, ci sarò</button>
+                <button type="button" class="quiz-option rsvp-toggle-btn" id="rsvp-no-btn">😔 Purtroppo no</button>
+            </div>
+            <p class="quiz-error" id="rsvp-ask-error">Scrivi il tuo nome e scegli un'opzione</p>
+            <button type="button" class="quiz-btn" id="rsvp-ask-next-btn">Avanti</button>
+        </div>
+
+        <!-- STEP · DETTAGLI (solo se presente) -->
+        <div class="rsvp-step" id="rsvp-step-details" style="display:none">
+            <p class="label">Vieni con un accompagnatore?</p>
+            <div class="rsvp-toggle">
+                <button type="button" class="quiz-option rsvp-toggle-btn" id="rsvp-plusone-yes-btn">Sì</button>
+                <button type="button" class="quiz-option rsvp-toggle-btn" id="rsvp-plusone-no-btn">No</button>
+            </div>
+            <input type="text" id="rsvp-plusone-name" class="quiz-input" placeholder="Nome dell'accompagnatore" style="display:none" maxlength="59">
+
+            <p class="label" style="margin-top:.6em">Hai restrizioni alimentari?</p>
+            <div class="rsvp-checkboxes" id="rsvp-checkboxes">
+                <label class="rsvp-check"><input type="checkbox" value="Vegetariano"> Vegetariano</label>
+                <label class="rsvp-check"><input type="checkbox" value="Vegano"> Vegano</label>
+                <label class="rsvp-check"><input type="checkbox" value="Senza glutine"> Senza glutine</label>
+                <label class="rsvp-check"><input type="checkbox" value="Senza lattosio"> Senza lattosio</label>
+                <label class="rsvp-check"><input type="checkbox" value="Altro"> Altro</label>
+            </div>
+            <textarea id="rsvp-notes" class="rsvp-textarea" placeholder="Altre allergie, intolleranze o richieste (facoltativo)" maxlength="300"></textarea>
+
+            <button type="button" class="quiz-btn" id="rsvp-submit-btn">Conferma la presenza</button>
+        </div>
+
+        <!-- STEP · INVIO -->
+        <div class="rsvp-step rsvp-step--center" id="rsvp-step-sending" style="display:none">
+            <p class="quiz-result-msg">Invio la tua conferma…</p>
+        </div>
+
+        <!-- STEP · RISULTATO -->
+        <div class="rsvp-step rsvp-step--center" id="rsvp-step-result" style="display:none">
+            <p class="quiz-result-msg" id="rsvp-result-msg"></p>
+        </div>
+
+        <!-- STEP · GIÀ RISPOSTO -->
+        <div class="rsvp-step rsvp-step--center" id="rsvp-step-duplicate" style="display:none">
+            <p class="quiz-result-msg">Risulta che questo nome abbia già confermato!<br>Se vuoi correggere qualcosa, contatta direttamente gli sposi.</p>
+        </div>
+
+        <!-- STEP · ERRORE -->
+        <div class="rsvp-step rsvp-step--center" id="rsvp-step-error" style="display:none">
+            <p class="quiz-result-msg">Ops, qualcosa è andato storto durante l'invio.<br>Controlla la connessione e riprova tra poco.</p>
+            <button type="button" class="quiz-btn" id="rsvp-retry-btn">Riprova</button>
+        </div>
+    </div>
+</div>
+
 <!-- ══ CLASSIFICA (riservata agli sposi) ══════════════
      Nascosta di proposito: nessun link visibile nel sito.
      Si apre solo aggiungendo #classifica all'indirizzo del
@@ -321,6 +395,35 @@
     </div>
 </div>
 
+<!-- ══ INVITATI — RSVP (riservata agli sposi) ══════════
+     Stessa logica della classifica: nascosta, nessun link
+     visibile. Si apre solo con #invitati nell'indirizzo,
+     stessa password riservata usata per la classifica.
+     ═══════════════════════════════════════════════════ -->
+<div id="invitati-overlay">
+    <div class="invitati-box">
+        <button type="button" class="invitati-close" id="invitati-close" aria-label="Chiudi">✕</button>
+
+        <div id="invitati-step-pwd">
+            <p class="lock-title" style="font-size:2.2rem">Invitati</p>
+            <p class="lock-hint">riservata agli sposi</p>
+            <input type="password" id="invitati-pwd" placeholder="· · · · · ·" autocomplete="off">
+            <button type="button" class="quiz-btn" id="invitati-pwd-btn">Entra</button>
+            <p class="quiz-error" id="invitati-pwd-error">Password errata. Riprova!</p>
+        </div>
+
+        <div id="invitati-step-list" style="display:none">
+            <p class="lock-title" style="font-size:2.2rem">Invitati</p>
+            <p class="lock-hint" id="invitati-summary"></p>
+            <div id="invitati-list-wrap">
+                <p class="quiz-result-msg" id="invitati-loading">Carico i dati…</p>
+                <div id="invitati-groups" style="display:none"></div>
+            </div>
+            <button type="button" class="quiz-btn" id="invitati-refresh-btn">Aggiorna</button>
+        </div>
+    </div>
+</div>
+
 <script>
 /* ════ PASSWORD ══════════════════════════ */
 const PWD = "Ilmioamore2027"; // ← cambia qui la password
@@ -348,8 +451,9 @@ function init() {
     updateCountdown();
     setInterval(updateCountdown, 30000);
     initQuiz();
-    checkClassificaHash();
-    window.addEventListener('hashchange', checkClassificaHash);
+    initRsvp();
+    checkHashOverlays();
+    window.addEventListener('hashchange', checkHashOverlays);
 
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         window.addEventListener('scroll', runParallax, { passive: true });
@@ -662,11 +766,16 @@ async function quizSubmit() {
 /* ════════════════════════════════════════
    CLASSIFICA (riservata agli sposi)
 ════════════════════════════════════════ */
-function checkClassificaHash() {
+function checkHashOverlays() {
     if (window.location.hash === '#classifica') {
         openClassifica();
     } else {
         closeClassifica();
+    }
+    if (window.location.hash === '#invitati') {
+        openInvitati();
+    } else {
+        closeInvitati();
     }
 }
 
@@ -810,6 +919,277 @@ function classificaBackToList() {
     document.getElementById('classifica-step-detail').style.display = 'none';
     document.getElementById('classifica-step-list').style.display = '';
 }
+
+/* ════════════════════════════════════════
+   RSVP — CONFERMA PRESENZA
+   Popup che si apre automaticamente una sola volta
+   per dispositivo (localStorage), oppure a mano dal
+   bottone in "Il Grande Giorno". Stesso principio
+   anti-duplicati del quiz: nome normalizzato come ID
+   del documento su Firestore.
+════════════════════════════════════════ */
+const RSVP_RESTRIZIONI_OPZIONI = ["Vegetariano", "Vegano", "Senza glutine", "Senza lattosio", "Altro"];
+
+let rsvpPresente = null;   // true / false — scelto nello step 1
+let rsvpPlusOne  = null;   // true / false — scelto nello step 2
+
+function rsvpShowStep(id) {
+    document.querySelectorAll('#rsvp-overlay .rsvp-step').forEach(el => {
+        el.style.display = (el.id === id) ? '' : 'none';
+    });
+}
+
+function initRsvp() {
+    document.getElementById('rsvp-close').addEventListener('click', rsvpClose);
+    document.getElementById('rsvp-open-btn').addEventListener('click', () => rsvpOpen(false));
+
+    document.getElementById('rsvp-yes-btn').addEventListener('click', () => rsvpSelectPresence(true));
+    document.getElementById('rsvp-no-btn').addEventListener('click', () => rsvpSelectPresence(false));
+    document.getElementById('rsvp-ask-next-btn').addEventListener('click', rsvpAskNext);
+
+    document.getElementById('rsvp-plusone-yes-btn').addEventListener('click', () => rsvpSelectPlusOne(true));
+    document.getElementById('rsvp-plusone-no-btn').addEventListener('click', () => rsvpSelectPlusOne(false));
+    document.getElementById('rsvp-submit-btn').addEventListener('click', rsvpSubmit);
+    document.getElementById('rsvp-retry-btn').addEventListener('click', rsvpSubmit);
+
+    // Apertura automatica, una sola volta per dispositivo,
+    // al primo passaggio dalla copertina (#s1) alla galleria (#s2).
+    const s2 = document.getElementById('s2');
+    if (s2 && !localStorage.getItem('rsvpPromptShown')) {
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    localStorage.setItem('rsvpPromptShown', '1');
+                    rsvpOpen(true);
+                    obs.disconnect();
+                }
+            });
+        }, { threshold: 0.6 });
+        obs.observe(s2);
+    }
+}
+
+function rsvpOpen(isAuto) {
+    // Se ha già confermato da questo dispositivo, non riapriamo
+    // automaticamente (ma il bottone manuale resta comunque utile
+    // nel raro caso in cui volesse correggere qualcosa a mano).
+    if (isAuto && localStorage.getItem('rsvpDone')) return;
+
+    rsvpResetForm();
+    document.getElementById('rsvp-overlay').classList.add('open');
+}
+
+function rsvpClose() {
+    document.getElementById('rsvp-overlay').classList.remove('open');
+}
+
+function rsvpResetForm() {
+    rsvpPresente = null;
+    rsvpPlusOne = null;
+    document.getElementById('rsvp-name').value = '';
+    document.getElementById('rsvp-ask-error').style.display = 'none';
+    document.getElementById('rsvp-plusone-name').value = '';
+    document.getElementById('rsvp-plusone-name').style.display = 'none';
+    document.getElementById('rsvp-notes').value = '';
+    document.querySelectorAll('#rsvp-checkboxes input[type=checkbox]').forEach(c => c.checked = false);
+    document.querySelectorAll('#rsvp-yes-btn, #rsvp-no-btn, #rsvp-plusone-yes-btn, #rsvp-plusone-no-btn')
+        .forEach(b => b.classList.remove('selected'));
+    document.getElementById('rsvp-ask-next-btn').textContent = 'Avanti';
+    rsvpShowStep('rsvp-step-ask');
+}
+
+function rsvpSelectPresence(val) {
+    rsvpPresente = val;
+    document.getElementById('rsvp-yes-btn').classList.toggle('selected', val === true);
+    document.getElementById('rsvp-no-btn').classList.toggle('selected', val === false);
+    document.getElementById('rsvp-ask-next-btn').textContent = val ? 'Avanti' : 'Conferma';
+}
+
+function rsvpSelectPlusOne(val) {
+    rsvpPlusOne = val;
+    document.getElementById('rsvp-plusone-yes-btn').classList.toggle('selected', val === true);
+    document.getElementById('rsvp-plusone-no-btn').classList.toggle('selected', val === false);
+    document.getElementById('rsvp-plusone-name').style.display = val ? '' : 'none';
+    if (!val) document.getElementById('rsvp-plusone-name').value = '';
+}
+
+function rsvpAskNext() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const errEl = document.getElementById('rsvp-ask-error');
+
+    if (!name || slugifyName(name).length === 0 || rsvpPresente === null) {
+        errEl.style.display = 'block';
+        return;
+    }
+    errEl.style.display = 'none';
+
+    if (rsvpPresente === false) {
+        rsvpSubmit();
+    } else {
+        rsvpShowStep('rsvp-step-details');
+    }
+}
+
+async function rsvpSubmit() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const id = slugifyName(name);
+    if (!id) { rsvpShowStep('rsvp-step-ask'); return; }
+
+    const data = { nome: name, presente: !!rsvpPresente };
+
+    if (rsvpPresente) {
+        data.accompagnatore = rsvpPlusOne === true;
+        const plusOneName = document.getElementById('rsvp-plusone-name').value.trim();
+        if (data.accompagnatore && plusOneName) data.nomeAccompagnatore = plusOneName;
+
+        data.restrizioni = Array.from(document.querySelectorAll('#rsvp-checkboxes input:checked')).map(c => c.value);
+        const note = document.getElementById('rsvp-notes').value.trim();
+        if (note) data.note = note;
+    }
+
+    rsvpShowStep('rsvp-step-sending');
+
+    try {
+        await window.rsvpSave(id, data);
+        localStorage.setItem('rsvpDone', '1');
+        document.getElementById('rsvp-result-msg').textContent = rsvpPresente
+            ? 'Grazie! La tua presenza è confermata 🎉 Non vediamo l\'ora di festeggiare con te.'
+            : 'Grazie per averci avvisato 💛 Ci mancherai!';
+        rsvpShowStep('rsvp-step-result');
+    } catch (err) {
+        if (err && err.code === 'permission-denied') {
+            rsvpShowStep('rsvp-step-duplicate');
+        } else {
+            rsvpShowStep('rsvp-step-error');
+        }
+    }
+}
+
+/* ════════════════════════════════════════
+   INVITATI — pannello RSVP riservato agli sposi
+════════════════════════════════════════ */
+function openInvitati() {
+    document.getElementById('invitati-overlay').classList.add('open');
+    document.getElementById('invitati-step-pwd').style.display = '';
+    document.getElementById('invitati-step-list').style.display = 'none';
+    document.getElementById('invitati-pwd').value = '';
+    document.getElementById('invitati-pwd-error').style.display = 'none';
+}
+
+function closeInvitati() {
+    document.getElementById('invitati-overlay').classList.remove('open');
+}
+
+function initInvitati() {
+    document.getElementById('invitati-close').addEventListener('click', () => {
+        window.location.hash = '';
+    });
+    document.getElementById('invitati-pwd-btn').addEventListener('click', invitatiCheckPwd);
+    document.getElementById('invitati-pwd').addEventListener('keypress', e => {
+        if (e.key === 'Enter') invitatiCheckPwd();
+    });
+    document.getElementById('invitati-refresh-btn').addEventListener('click', invitatiLoad);
+}
+
+function invitatiCheckPwd() {
+    const val = document.getElementById('invitati-pwd').value;
+    if (val === CLASSIFICA_PWD) {
+        document.getElementById('invitati-step-pwd').style.display = 'none';
+        document.getElementById('invitati-step-list').style.display = '';
+        invitatiLoad();
+    } else {
+        document.getElementById('invitati-pwd-error').style.display = 'block';
+    }
+}
+
+function invitatiPersonRow(r) {
+    const row = document.createElement('div');
+    row.className = 'invitati-person';
+
+    const nome = document.createElement('p');
+    nome.className = 'invitati-nome';
+    nome.textContent = r.nome;
+    row.appendChild(nome);
+
+    if (r.presente) {
+        const chips = document.createElement('div');
+        chips.className = 'invitati-chips';
+
+        if (r.accompagnatore) {
+            const c = document.createElement('span');
+            c.className = 'invitati-chip';
+            c.textContent = r.nomeAccompagnatore ? `+1 · ${r.nomeAccompagnatore}` : '+1';
+            chips.appendChild(c);
+        }
+        (r.restrizioni || []).forEach(rr => {
+            const c = document.createElement('span');
+            c.className = 'invitati-chip';
+            c.textContent = rr;
+            chips.appendChild(c);
+        });
+        if (chips.childNodes.length) row.appendChild(chips);
+
+        if (r.note) {
+            const note = document.createElement('p');
+            note.className = 'invitati-note';
+            note.textContent = r.note;
+            row.appendChild(note);
+        }
+    }
+
+    return row;
+}
+
+async function invitatiLoad() {
+    const loadingEl = document.getElementById('invitati-loading');
+    const groupsEl  = document.getElementById('invitati-groups');
+    const summaryEl = document.getElementById('invitati-summary');
+
+    loadingEl.style.display = 'block';
+    loadingEl.textContent = 'Carico i dati…';
+    groupsEl.style.display = 'none';
+    groupsEl.innerHTML = '';
+
+    try {
+        const rows = await window.rsvpFetchAll();
+        const presenti = rows.filter(r => r.presente).sort((a, b) => a.ts - b.ts);
+        const assenti  = rows.filter(r => !r.presente).sort((a, b) => a.ts - b.ts);
+        const plusOneCount = presenti.filter(r => r.accompagnatore).length;
+
+        summaryEl.textContent = `${presenti.length} confermati${plusOneCount ? ` (+${plusOneCount} accompagnatori)` : ''} · ${assenti.length} assenti`;
+
+        const titlePresenti = document.createElement('p');
+        titlePresenti.className = 'invitati-group-title';
+        titlePresenti.textContent = `Ci saranno (${presenti.length})`;
+        groupsEl.appendChild(titlePresenti);
+        presenti.forEach(r => groupsEl.appendChild(invitatiPersonRow(r)));
+        if (!presenti.length) {
+            const p = document.createElement('p');
+            p.className = 'quiz-result-msg';
+            p.textContent = 'Nessuna conferma ancora.';
+            groupsEl.appendChild(p);
+        }
+
+        const titleAssenti = document.createElement('p');
+        titleAssenti.className = 'invitati-group-title';
+        titleAssenti.style.marginTop = '18px';
+        titleAssenti.textContent = `Non ci saranno (${assenti.length})`;
+        groupsEl.appendChild(titleAssenti);
+        assenti.forEach(r => groupsEl.appendChild(invitatiPersonRow(r)));
+        if (!assenti.length) {
+            const p = document.createElement('p');
+            p.className = 'quiz-result-msg';
+            p.textContent = 'Nessuna disdetta ancora.';
+            groupsEl.appendChild(p);
+        }
+
+        loadingEl.style.display = 'none';
+        groupsEl.style.display = 'block';
+    } catch (err) {
+        loadingEl.style.display = 'block';
+        loadingEl.textContent = 'Errore nel caricamento. Riprova.';
+    }
+}
 </script>
 
 <!-- ════ FIREBASE (Firestore) ═══════════════════════
@@ -871,10 +1251,41 @@ function classificaBackToList() {
         return rows;
     };
 
-    // La classifica va inizializzata solo dopo che
-    // Firebase è pronto, quindi il collegamento dei
-    // pulsanti avviene qui.
+    // Salva una conferma RSVP. Stesso principio anti-duplicati
+    // del quiz: se il nome (id) esiste già, le regole Firestore
+    // rifiutano la scrittura con "permission-denied".
+    window.rsvpSave = async function (id, data) {
+        const ref = doc(db, 'rsvp', id);
+        await setDoc(ref, {
+            ...data,
+            timestamp: serverTimestamp()
+        });
+    };
+
+    // Legge tutte le conferme RSVP per il pannello riservato "Invitati".
+    window.rsvpFetchAll = async function () {
+        const snap = await getDocs(collection(db, 'rsvp'));
+        const rows = [];
+        snap.forEach(d => {
+            const data = d.data();
+            rows.push({
+                nome: data.nome || d.id,
+                presente: !!data.presente,
+                accompagnatore: !!data.accompagnatore,
+                nomeAccompagnatore: data.nomeAccompagnatore || '',
+                restrizioni: Array.isArray(data.restrizioni) ? data.restrizioni : [],
+                note: data.note || '',
+                ts: data.timestamp ? data.timestamp.toMillis() : 0
+            });
+        });
+        return rows;
+    };
+
+    // La classifica e il pannello invitati vanno inizializzati
+    // solo dopo che Firebase è pronto, quindi il collegamento
+    // dei pulsanti avviene qui.
     initClassifica();
+    initInvitati();
 </script>
 </body>
 </html>
