@@ -630,6 +630,113 @@ h2 {
 }
 
 /* ════════════════════════════════════════
+   RSVP — popup conferma presenza
+   Stesso guscio a schermo intero della classifica
+   (overlay scuro + card cream centrata), riusa le
+   classi .quiz-input / .quiz-btn / .quiz-error /
+   .quiz-option / .quiz-result-msg / .label già definite.
+════════════════════════════════════════ */
+#rsvp-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#rsvp-overlay.open { display: flex; }
+
+.rsvp-box {
+    position: relative; width: min(92vw, 460px); max-height: 88svh; overflow-y: auto;
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 30px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.rsvp-close {
+    position: absolute; top: 12px; right: 14px; width: 30px; height: 30px;
+    background: transparent; border: none; color: var(--ink2);
+    font-size: 1rem; cursor: pointer; line-height: 1;
+}
+
+.rsvp-step { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 6px; }
+.rsvp-step--center { gap: 10px; padding: 10px 0; }
+
+.rsvp-toggle { width: 100%; max-width: 340px; display: flex; gap: 8px; margin-bottom: 8px; }
+.rsvp-toggle-btn { flex: 1; width: auto; text-align: center; }
+
+.rsvp-checkboxes {
+    width: 100%; max-width: 340px; display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin: 10px 0 12px;
+}
+.rsvp-check {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 12px; background: rgba(46,64,85,.04); border: 1px solid rgba(46,64,85,.14);
+    border-radius: 999px; font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-weight: 500; font-size: .88rem; color: var(--ink); cursor: pointer;
+}
+.rsvp-check input { accent-color: var(--ink); cursor: pointer; }
+
+.rsvp-textarea {
+    display: block; width: 100%; max-width: 340px; min-height: 64px; padding: 10px 14px; margin-bottom: 10px;
+    background: white; border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .92rem; color: var(--ink); resize: vertical; outline: none;
+    transition: border-color .2s;
+}
+.rsvp-textarea:focus { border-color: var(--ink2); }
+
+/* Bottoni <button> con classe .btn (es. "Conferma la tua
+   presenza") ereditano lo stile ma serve reset base browser. */
+button.btn { cursor: pointer; font: inherit; }
+
+/* ════════════════════════════════════════
+   INVITATI — pannello RSVP riservato agli sposi
+   Stesso guscio della classifica.
+════════════════════════════════════════ */
+#invitati-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#invitati-overlay.open { display: flex; }
+
+.invitati-box {
+    position: relative; width: min(92vw, 460px); max-height: 84svh; overflow-y: auto;
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 30px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.invitati-close {
+    position: absolute; top: 12px; right: 14px; width: 30px; height: 30px;
+    background: transparent; border: none; color: var(--ink2);
+    font-size: 1rem; cursor: pointer; line-height: 1;
+}
+
+#invitati-summary { margin-bottom: 18px; }
+#invitati-list-wrap { width: 100%; margin-bottom: 14px; text-align: left; }
+
+.invitati-group-title {
+    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 400;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink2);
+    margin-bottom: 8px; text-align: center;
+}
+.invitati-person {
+    padding: 9px 12px; margin-bottom: 7px; border-radius: 4px;
+    border: 1px solid rgba(46,64,85,.1); background: rgba(46,64,85,.03);
+}
+.invitati-nome {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .96rem; color: var(--ink);
+}
+.invitati-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.invitati-chip {
+    font-family: 'Josefin Sans', sans-serif; font-size: .56rem; font-weight: 400;
+    letter-spacing: .04em; color: var(--ink2);
+    background: rgba(46,64,85,.08); border-radius: 999px; padding: 3px 9px;
+}
+.invitati-note {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .84rem; color: var(--ink2); margin-top: 5px;
+}
+
+/* ════════════════════════════════════════
    MOBILE ≤ 600px
 ════════════════════════════════════════ */
 @media (max-width: 600px) {
