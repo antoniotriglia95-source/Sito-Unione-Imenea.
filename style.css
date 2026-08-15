@@ -36,14 +36,14 @@ body  { background: var(--bg-cream); overflow-x: hidden; -webkit-font-smoothing:
     font-family: 'Josefin Sans', sans-serif; font-size: .58rem; font-weight: 300;
     letter-spacing: .22em; text-transform: uppercase; color: var(--ink2); margin-bottom: 26px;
 }
-#pwd {
+#pwd, #classifica-pwd {
     display: block; width: 100%; padding: 11px 14px; margin-bottom: 11px;
     background: var(--bg-cream); border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
     text-align: center; font-family: 'Josefin Sans', sans-serif;
     font-size: .95rem; letter-spacing: .06em; color: var(--ink);
     outline: none; transition: border-color .2s; min-height: 44px;
 }
-#pwd:focus { border-color: var(--ink2); }
+#pwd:focus, #classifica-pwd:focus { border-color: var(--ink2); }
 .lock-box button {
     display: block; width: 100%; min-height: 44px; background: var(--ink);
     color: white; border: none; border-radius: 3px; font-family: 'Josefin Sans', sans-serif;
@@ -358,21 +358,6 @@ h2 {
     image-orientation: from-image;
 }
 
-/* Gradiente in basso per leggibilità didascalia.
-   Escluso dalla copertina (.gal-cover): lì il testo
-   usa già lo stile "stampato sul cartoncino" come
-   nel resto del sito, niente overlay scuro necessario. */
-/* Le foto mostrate "per intero" (contain) lasciano
-   bordi color carta sopra/sotto: niente più overlay
-   scuro qui, lo sfondo della slide (var(--paper)) basta
-   già a riempire elegantemente quei bordi. */
-
-/* Con le foto mostrate per intero (contain) non c'è
-   più garanzia che il bordo inferiore dello schermo
-   sia coperto dalla foto: spesso lì c'è la carta color
-   var(--paper). Niente più overlay scuro: la didascalia
-   ora usa lo stesso stile "inchiostro su carta" del
-   resto del sito, leggibile sia sulla foto che sul bordo. */
 .gal-caption {
     position: absolute; bottom: 40px; left: 50%;
     transform: translateX(-50%);
@@ -463,7 +448,7 @@ h2 {
     background: var(--bg-cream); border: 1px solid rgba(46,64,85,.10); border-radius: 5px;
     box-shadow: 0 3px 10px rgba(46,64,85,.05), 0 12px 44px rgba(46,64,85,.07);
     padding: clamp(22px, 4svh, 42px) clamp(20px, 5vw, 48px);
-    display: flex; flex-direction: column; align-items: center; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; overflow-y: auto;
     opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;
 }
 .papiro-card.visible { opacity: 1; transform: translateY(0); }
@@ -477,7 +462,7 @@ h2 {
 }
 
 /* ════════════════════════════════════════
-   QUIZ
+   QUIZ — interattivo, una domanda alla volta
 ════════════════════════════════════════ */
 .papiro-card--quiz { text-align: center; }
 .quiz-mark {
@@ -485,23 +470,122 @@ h2 {
     font-weight: 500; color: var(--ink2); line-height: 1; margin-bottom: 4px; opacity: .50;
 }
 .quiz-divider { width: 40px; height: 1px; background: rgba(96,112,128,.28); margin: 14px auto; }
-.quiz-preview { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-.quiz-q {
-    display: flex; align-items: center; gap: 10px; padding: 10px 14px;
-    background: rgba(46,64,85,.04); border: 1px solid rgba(46,64,85,.07); border-radius: 4px;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: clamp(.84rem, 2vw, 1rem); color: var(--ink); text-align: left;
-    filter: blur(2.5px); user-select: none;
+
+.quiz-step { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.quiz-step--center { gap: 10px; padding: 10px 0; }
+
+.quiz-intro {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(.92rem, 2.2vw, 1.08rem); color: var(--ink); line-height: 1.55;
+    margin-bottom: 18px;
 }
-.quiz-n {
-    font-family: 'Josefin Sans', sans-serif; font-style: normal; font-size: .58rem;
-    font-weight: 300; letter-spacing: .12em; color: var(--ink2); flex-shrink: 0;
+
+.quiz-input {
+    display: block; width: 100%; max-width: 340px; padding: 11px 14px; margin-bottom: 8px;
+    background: white; border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
+    text-align: center; font-family: 'Josefin Sans', sans-serif;
+    font-size: .92rem; letter-spacing: .03em; color: var(--ink);
+    outline: none; transition: border-color .2s; min-height: 44px;
 }
-.quiz-lock { margin-left: auto; font-style: normal; opacity: .55; flex-shrink: 0; }
-.quiz-coming {
-    font-family: 'Josefin Sans', sans-serif; font-size: clamp(.58rem, 1.4vw, .68rem);
-    font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2);
+.quiz-input:focus { border-color: var(--ink2); }
+
+.quiz-error {
+    display: none; margin-bottom: 10px; font-family: 'Josefin Sans', sans-serif;
+    font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: #8b2a2a;
 }
+
+.quiz-btn {
+    display: block; width: 100%; max-width: 340px; min-height: 44px; margin-top: 6px;
+    background: var(--ink); color: white; border: none; border-radius: 3px;
+    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 300;
+    letter-spacing: .22em; text-transform: uppercase; cursor: pointer; transition: background .2s, opacity .2s;
+}
+.quiz-btn:hover:not(:disabled) { background: #1e2e3f; }
+.quiz-btn:disabled { opacity: .4; cursor: default; }
+
+.quiz-progress {
+    width: 100%; height: 3px; background: rgba(46,64,85,.12);
+    border-radius: 99px; overflow: hidden; margin-bottom: 10px;
+}
+.quiz-progress-fill {
+    height: 100%; width: 0%; background: linear-gradient(90deg, var(--ink2), var(--ink));
+    border-radius: 99px; transition: width .4s ease;
+}
+.quiz-counter {
+    font-family: 'Josefin Sans', sans-serif; font-size: .58rem; font-weight: 300;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); margin-bottom: 14px;
+}
+.quiz-question {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--ink); line-height: 1.4;
+    margin-bottom: 18px;
+}
+
+.quiz-options { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+.quiz-option {
+    width: 100%; padding: 11px 16px; background: rgba(46,64,85,.04);
+    border: 1px solid rgba(46,64,85,.14); border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(.9rem, 2.2vw, 1.02rem); color: var(--ink); text-align: left;
+    cursor: pointer; transition: background .18s, border-color .18s;
+}
+.quiz-option:hover { background: rgba(46,64,85,.08); }
+.quiz-option.selected {
+    background: var(--ink); color: white; border-color: var(--ink);
+}
+.quiz-option:focus-visible { outline: 2px solid var(--ink2); outline-offset: 2px; }
+
+.quiz-result-score {
+    font-family: 'WindSong', cursive; font-size: clamp(2.6rem, 8vw, 4rem);
+    font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 6px;
+}
+.quiz-result-msg {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(.9rem, 2.2vw, 1.05rem); color: var(--ink2); line-height: 1.55;
+}
+
+/* ════════════════════════════════════════
+   CLASSIFICA — riservata agli sposi
+   Overlay a schermo intero, nascosto di default
+   e mostrato solo con #classifica nell'URL +
+   password dedicata. Nessun link visibile nel sito.
+════════════════════════════════════════ */
+#classifica-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#classifica-overlay.open { display: flex; }
+
+.classifica-box {
+    position: relative; width: min(92vw, 460px); max-height: 84svh; overflow-y: auto;
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 30px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.classifica-close {
+    position: absolute; top: 12px; right: 14px; width: 30px; height: 30px;
+    background: transparent; border: none; color: var(--ink2);
+    font-size: 1rem; cursor: pointer; line-height: 1;
+}
+
+#classifica-count {
+    margin-bottom: 18px;
+}
+
+#classifica-list-wrap { width: 100%; margin-bottom: 14px; }
+
+.classifica-table { width: 100%; border-collapse: collapse; text-align: left; }
+.classifica-table td {
+    padding: 9px 6px; border-bottom: 1px solid rgba(46,64,85,.1);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .96rem; color: var(--ink);
+}
+.classifica-pos { width: 28px; font-family: 'Josefin Sans', sans-serif; font-style: normal; font-size: .8rem; color: var(--ink2); }
+.classifica-punti { text-align: right; font-style: normal; font-family: 'Josefin Sans', sans-serif; font-size: .82rem; letter-spacing: .04em; }
+.classifica-gold  .classifica-pos { color: #a8842a; }
+.classifica-silver .classifica-pos { color: #7c8896; }
+.classifica-bronze .classifica-pos { color: #a06a3e; }
 
 /* ════════════════════════════════════════
    MOBILE ≤ 600px
