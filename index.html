@@ -306,8 +306,17 @@
                 <table class="classifica-table" id="classifica-table" style="display:none">
                     <tbody id="classifica-tbody"></tbody>
                 </table>
+                <p class="classifica-tap-hint" id="classifica-tap-hint" style="display:none">tocca un nome per vedere le sue risposte</p>
             </div>
             <button type="button" class="quiz-btn" id="classifica-refresh-btn">Aggiorna</button>
+        </div>
+
+        <!-- Dettaglio risposte di un singolo invitato -->
+        <div id="classifica-step-detail" style="display:none">
+            <button type="button" class="classifica-back" id="classifica-back-btn">← Classifica</button>
+            <p class="lock-title" style="font-size:1.9rem" id="classifica-detail-name"></p>
+            <p class="lock-hint" id="classifica-detail-score"></p>
+            <div id="classifica-detail-list"></div>
         </div>
     </div>
 </div>
@@ -497,35 +506,36 @@ const CLASSIFICA_PWD = "Classifica2027";
 
 const QUIZ_QUESTIONS = [
     { q: "In che anno si sono conosciuti Antonio e Giulia?",
-      options: ["2013", "2011", "2012", "2015"], correct: 0 },
-    { q: "Dove è avvenuto il loro primo incontro?",
-      options: ["Al 18° compleanno di un'amica, allo Spazio Lavit", "A una festa di laurea", "A un matrimonio di amici comuni", "In discoteca"], correct: 0 },
-    { q: "Chi dei due ha fatto la prima mossa?",
-      options: ["Antonio", "Giulia", "Nessuno dei due, è successo per caso", "Un amico in comune"], correct: 0 },
-    { q: "Chi dei due cucina meglio?",
-      options: ["Giulia", "Antonio", "Nessuno dei due, ordinano sempre", "Cucinano allo stesso livello"], correct: 0 },
-    { q: "Chi dei due russa di più?",
-      options: ["Antonio", "Giulia", "Nessuno dei due", "Entrambi, è un disastro"], correct: 0 },
-    { q: "Che tipo di film guardano sempre insieme?",
-      options: ["Film Disney classici d'animazione", "Film horror", "Documentari", "Commedie romantiche"], correct: 0 },
-    { q: "Qual è il loro peccato di gola preferito?",
-      options: ["Patatine di McDonald's", "Gelato alla nutella", "Pizza a fette da asporto", "Croissant alla crema"], correct: 0 },
-    { q: "Dove si sposano Antonio e Giulia?",
-      options: ["Sacro Monte di Varese", "Villa Cocca", "Sant'Ambrogio", "Masnago"], correct: 0 },
-    { q: "Circa quanti invitati ci sono al matrimonio?",
-      options: ["101-150", "Fino a 100", "151-200", "Oltre 200"], correct: 0 },
+      options: ["2013", "2012", "2015", "2014"], correct: 0 },
+    { q: "Quale canzone trash cantano a squarciagola in macchina?",
+      options: ["\u201cSettimana bianca\u201d \u2013 Il Pagante", "\u201cAsereje\u201d \u2013 Las Ketchup", "\u201cDespacito\u201d \u2013 Luis Fonsi", "\u201cRoma-Bangkok\u201d \u2013 Baby K"], correct: 0 },
+    { q: "Chi ha fatto la prima mossa?",
+      options: ["Antonio", "Giulia", "Nessuno dei due, \u00e8 successo per caso", "Un amico in comune"], correct: 0 },
+    { q: "Qual \u00e8 il piatto cucinato da Antonio che Giulia preferisce?",
+      options: ["Carbonara", "Amatriciana", "Piadina", "Cotoletta e patatine"], correct: 0 },
+    { q: "Cosa ordinano Antonio e Giulia quando non hanno voglia di cucinare?",
+      options: ["Indiano", "Sushi", "McDonald's", "Pizza"], correct: 0 },
+    { q: "Qual \u00e8 il cartone Disney visto pi\u00f9 volte insieme?",
+      options: ["Encanto", "Il Re Leone", "Lilo & Stitch", "Coco"], correct: 0 },
+    { q: "Qual \u00e8 il loro peccato di gola preferito?",
+      options: ["Patatine di McDonald's", "Gelato dell'Argentina", "Cornetto di Colombo", "Focaccine dell'Esselunga"], correct: 0 },
+    { q: "Qual \u00e8 stato il loro primo viaggio insieme?",
+      options: ["Verona", "Barcellona", "Reggio Calabria", "Roma"], correct: 0 },
+    { q: "Qual \u00e8 il personaggio di Dragon Ball preferito di Giulia?",
+      options: ["Vegeta", "Ma quale Dragon Ball?!", "C18", "Trunks"], correct: 0 },
+    { q: "Qual \u00e8 il personaggio di Dragon Ball preferito di Antonio?",
+      options: ["Gohan", "Goku", "Vegeta", "Crilin"], correct: 0 },
     { q: "Che pietra ha l'anello di fidanzamento?",
-      options: ["Pietra di luna", "Diamante", "Zaffiro", "Smeraldo"], correct: 0 },
-    { q: "Qual è la meta del loro viaggio di nozze?",
-      options: ["Giappone", "Thailandia", "Maldive", "Bali"], correct: 0 },
-    { q: "Chi dei due è più disordinato?",
-      options: ["Antonio", "Giulia", "Nessuno dei due", "Entrambi"], correct: 0 },
+      options: ["Acquamarina", "Pietra di luna", "Zaffiro", "Smeraldo"], correct: 0 },
+    { q: "Qual \u00e8 il primo libro che Giulia ha regalato ad Antonio?",
+      options: ["Il Piccolo Principe", "Moby Dick", "Prosciutto e uova verdi", "Zerocalcare \u2013 La profezia dell'armadillo"], correct: 0 },
 ];
 
 let quizShuffled = [];   // domande con opzioni mescolate, generate a ogni "Inizia il quiz"
 let quizIndex    = 0;
 let quizScore    = 0;
 let quizSelected = null; // indice (nello shuffle) selezionato per la domanda corrente
+let quizAnswers  = [];   // testo della risposta scelta per ogni domanda, stesso ordine di QUIZ_QUESTIONS
 
 function shuffleArray(arr) {
     const a = arr.slice();
@@ -579,6 +589,7 @@ function quizStart() {
     quizIndex = 0;
     quizScore = 0;
     quizSelected = null;
+    quizAnswers = [];
 
     quizShowStep('quiz-step-questions');
     quizRenderQuestion();
@@ -619,6 +630,7 @@ function quizSelectOption(i, btnEl) {
 function quizNext() {
     if (quizSelected === null) return;
     if (quizSelected === quizShuffled[quizIndex].correctIndex) quizScore++;
+    quizAnswers[quizIndex] = quizShuffled[quizIndex].options[quizSelected];
 
     quizIndex++;
     if (quizIndex < quizShuffled.length) {
@@ -635,7 +647,7 @@ async function quizSubmit() {
     const id = slugifyName(name);
 
     try {
-        await window.quizSaveScore(id, name, quizScore);
+        await window.quizSaveScore(id, name, quizScore, quizAnswers);
         document.getElementById('quiz-result-score').textContent = `${quizScore} / ${quizShuffled.length}`;
         quizShowStep('quiz-step-result');
     } catch (err) {
@@ -662,6 +674,7 @@ function openClassifica() {
     document.getElementById('classifica-overlay').classList.add('open');
     document.getElementById('classifica-step-pwd').style.display = '';
     document.getElementById('classifica-step-list').style.display = 'none';
+    document.getElementById('classifica-step-detail').style.display = 'none';
     document.getElementById('classifica-pwd').value = '';
     document.getElementById('classifica-pwd-error').style.display = 'none';
 }
@@ -679,6 +692,7 @@ function initClassifica() {
         if (e.key === 'Enter') classificaCheckPwd();
     });
     document.getElementById('classifica-refresh-btn').addEventListener('click', classificaLoad);
+    document.getElementById('classifica-back-btn').addEventListener('click', classificaBackToList);
 }
 
 function classificaCheckPwd() {
@@ -692,19 +706,24 @@ function classificaCheckPwd() {
     }
 }
 
+let classificaRows = []; // ultimo elenco caricato, usato anche dalla vista dettaglio
+
 async function classificaLoad() {
-    const loadingEl = document.getElementById('classifica-loading');
-    const tableEl   = document.getElementById('classifica-table');
-    const tbody     = document.getElementById('classifica-tbody');
-    const countEl   = document.getElementById('classifica-count');
+    const loadingEl  = document.getElementById('classifica-loading');
+    const tableEl    = document.getElementById('classifica-table');
+    const tbody      = document.getElementById('classifica-tbody');
+    const countEl    = document.getElementById('classifica-count');
+    const tapHintEl  = document.getElementById('classifica-tap-hint');
 
     loadingEl.style.display = 'block';
     loadingEl.textContent = 'Carico i risultati…';
     tableEl.style.display = 'none';
+    tapHintEl.style.display = 'none';
 
     try {
         const rows = await window.quizFetchResults();
         rows.sort((a, b) => (b.punteggio - a.punteggio) || (a.ts - b.ts));
+        classificaRows = rows;
 
         countEl.textContent = `${rows.length} risposta${rows.length === 1 ? '' : 'e'} finora`;
         tbody.innerHTML = '';
@@ -713,12 +732,27 @@ async function classificaLoad() {
             if (i === 0) tr.className = 'classifica-gold';
             else if (i === 1) tr.className = 'classifica-silver';
             else if (i === 2) tr.className = 'classifica-bronze';
-            tr.innerHTML = `<td class="classifica-pos">${i + 1}</td><td class="classifica-nome">${r.nome}</td><td class="classifica-punti">${r.punteggio}/12</td>`;
+
+            const tdPos    = document.createElement('td');
+            tdPos.className = 'classifica-pos';
+            tdPos.textContent = i + 1;
+
+            const tdNome   = document.createElement('td');
+            tdNome.className = 'classifica-nome';
+            tdNome.textContent = r.nome; // textContent: mai eseguito come HTML, anche se il nome contenesse simboli strani
+
+            const tdPunti  = document.createElement('td');
+            tdPunti.className = 'classifica-punti';
+            tdPunti.textContent = `${r.punteggio}/12`;
+
+            tr.append(tdPos, tdNome, tdPunti);
+            tr.addEventListener('click', () => classificaShowDetail(i));
             tbody.appendChild(tr);
         });
 
         loadingEl.style.display = 'none';
         tableEl.style.display = rows.length ? 'table' : 'none';
+        tapHintEl.style.display = rows.length ? 'block' : 'none';
         if (!rows.length) {
             loadingEl.style.display = 'block';
             loadingEl.textContent = 'Nessuna risposta ancora.';
@@ -727,6 +761,54 @@ async function classificaLoad() {
         loadingEl.style.display = 'block';
         loadingEl.textContent = 'Errore nel caricamento. Riprova.';
     }
+}
+
+function classificaShowDetail(i) {
+    const r = classificaRows[i];
+    if (!r) return;
+
+    document.getElementById('classifica-detail-name').textContent = r.nome;
+    document.getElementById('classifica-detail-score').textContent = `${r.punteggio} / 12 risposte corrette`;
+
+    const listEl = document.getElementById('classifica-detail-list');
+    listEl.innerHTML = '';
+
+    QUIZ_QUESTIONS.forEach((item, idx) => {
+        const correctText = item.options[item.correct];
+        const givenText = (r.risposte && r.risposte[idx]) ? r.risposte[idx] : '—';
+        const isCorrect = givenText === correctText;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'classifica-detail-item' + (isCorrect ? ' is-correct' : ' is-wrong');
+
+        const q = document.createElement('p');
+        q.className = 'classifica-detail-q';
+        q.textContent = `${idx + 1}. ${item.q}`;
+
+        const a = document.createElement('p');
+        a.className = 'classifica-detail-a';
+        a.textContent = `${isCorrect ? '✅' : '❌'} ${givenText}`;
+
+        wrap.appendChild(q);
+        wrap.appendChild(a);
+
+        if (!isCorrect) {
+            const c = document.createElement('p');
+            c.className = 'classifica-detail-correct';
+            c.textContent = `Corretta: ${correctText}`;
+            wrap.appendChild(c);
+        }
+
+        listEl.appendChild(wrap);
+    });
+
+    document.getElementById('classifica-step-list').style.display = 'none';
+    document.getElementById('classifica-step-detail').style.display = '';
+}
+
+function classificaBackToList() {
+    document.getElementById('classifica-step-detail').style.display = 'none';
+    document.getElementById('classifica-step-list').style.display = '';
 }
 </script>
 
@@ -758,16 +840,22 @@ async function classificaLoad() {
     // Salva una risposta. Se il nome (id) esiste già,
     // le regole Firestore rifiutano la scrittura con
     // "permission-denied" — lo gestiamo lato UI come duplicato.
-    window.quizSaveScore = async function (id, nome, punteggio) {
+    // "risposte" contiene il testo scelto per ogni domanda,
+    // nello stesso ordine di QUIZ_QUESTIONS — serve alla vista
+    // dettaglio della classifica per mostrare cosa ha risposto
+    // ciascun invitato, domanda per domanda.
+    window.quizSaveScore = async function (id, nome, punteggio, risposte) {
         const ref = doc(db, 'risposteQuiz', id);
         await setDoc(ref, {
             nome: nome,
             punteggio: punteggio,
+            risposte: risposte || [],
             timestamp: serverTimestamp()
         });
     };
 
-    // Legge tutte le risposte per la classifica.
+    // Legge tutte le risposte per la classifica (nome, punteggio
+    // e il dettaglio delle risposte data-per-domanda).
     window.quizFetchResults = async function () {
         const snap = await getDocs(collection(db, 'risposteQuiz'));
         const rows = [];
@@ -776,6 +864,7 @@ async function classificaLoad() {
             rows.push({
                 nome: data.nome || d.id,
                 punteggio: typeof data.punteggio === 'number' ? data.punteggio : 0,
+                risposte: Array.isArray(data.risposte) ? data.risposte : [],
                 ts: data.timestamp ? data.timestamp.toMillis() : 0
             });
         });
