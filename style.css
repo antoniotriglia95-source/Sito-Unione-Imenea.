@@ -233,23 +233,30 @@ h2 {
 }
 
 /* Indicazione "scorri per vedere" sulla copertina della
-   galleria: sta dentro il blocco .txt, quindi resta sempre
-   nel cielo del disegno (mai sopra la coppia) e appare/scompare
-   insieme al resto del testo, senza bisogno di JS dedicato. */
+   galleria. PRIMA: solo testo con text-shadow, troppo
+   piccolo e si perdeva sopra lo sfondo illustrato.
+   ORA: testo più grande + pillola di sfondo semi-opaca
+   con leggero blur, così resta leggibile sempre,
+   indipendentemente da cosa c'è dietro nel disegno. */
 .gal-hint {
-    margin-top: 10px;
-    display: inline-flex; align-items: center; gap: 7px;
+    margin-top: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 18px;
+    background: rgba(253,249,243,.72);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(46,64,85,.14);
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(46,64,85,.08);
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(.82rem, 2.1vw, 1rem);
-    font-style: italic; font-weight: 500;
+    font-size: clamp(.95rem, 2.6vw, 1.15rem);
+    font-style: italic; font-weight: 600;
     letter-spacing: .02em;
-    color: var(--ink2);
-    text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 2px 10px rgba(253,249,243,.95);
+    color: var(--ink);
 }
 .gal-hint svg {
     flex-shrink: 0;
-    width: clamp(22px, 5.5vw, 32px);
-    height: clamp(22px, 5.5vw, 32px);
+    width: clamp(20px, 5vw, 28px);
+    height: clamp(20px, 5vw, 28px);
     color: var(--ink);
     animation: gal-hint-arrow 1.6s ease-in-out infinite;
 }
@@ -286,17 +293,30 @@ h2 {
 }
 
 /* ════════════════════════════════════════
-   BOTTONI MAPPA
+   BOTTONI MAPPA / AZIONI
+
+   Tutti i bottoni dentro .btns (Chiesa, Villa,
+   Conferma presenza, e in futuro Parcheggio) hanno
+   ora la stessa larghezza minima e lo stesso stile,
+   che siano <a> o <button>: coerenza visiva garantita
+   indipendentemente dalla lunghezza del testo.
+   Vanno a capo in automatico su schermi stretti.
 ════════════════════════════════════════ */
-.btns { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
+.btns {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px; margin-top: 16px;
+}
 .btn {
     font-family: 'Josefin Sans', sans-serif; font-size: .60rem; font-weight: 300;
     letter-spacing: .14em; text-transform: uppercase; color: white; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 0 16px; min-height: 40px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    min-width: 152px; padding: 0 16px; min-height: 40px;
     background: rgba(46,64,85,.80); border: 1px solid rgba(255,255,255,.36);
     border-radius: 999px; box-shadow: 0 4px 16px rgba(46,64,85,.22);
     transition: background .2s; pointer-events: auto;
+    cursor: pointer; font: inherit;
+    font-family: 'Josefin Sans', sans-serif; font-size: .60rem; font-weight: 300;
+    letter-spacing: .14em; text-transform: uppercase;
 }
 .btn:hover, .btn:active { background: #1e2e3f; }
 
@@ -317,6 +337,44 @@ h2 {
     font-family: 'Josefin Sans', sans-serif; font-size: clamp(.54rem, 1.4vw, .64rem);
     font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2);
     text-shadow: 0 1px 0 rgba(255,255,255,.8);
+}
+
+/* ════════════════════════════════════════
+   IBAN — popup con copia rapida
+
+   Nel sito compare solo un piccolo bottone "💳 IBAN"
+   (usa già .btn), che apre questo popup con il numero
+   grande, ben leggibile, e un tasto per copiarlo negli
+   appunti in un tap. Stesso guscio a schermo intero
+   degli altri overlay (RSVP, Classifica, Invitati).
+════════════════════════════════════════ */
+#iban-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#iban-overlay.open { display: flex; }
+
+.iban-popup-box {
+    position: relative; width: min(92vw, 420px);
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 34px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.iban-popup-value {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+    font-weight: 400; letter-spacing: .06em; word-break: break-all;
+    color: var(--ink);
+    background: white; border: 1px solid rgba(46,64,85,.16); border-radius: 4px;
+    padding: 14px 12px; margin: 22px 0 14px;
+}
+
+.iban-popup-holder {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(.85rem, 2.2vw, .98rem); color: var(--ink2);
 }
 
 /* ════════════════════════════════════════
@@ -677,6 +735,14 @@ h2 {
 .rsvp-toggle { width: 100%; max-width: 340px; display: flex; gap: 8px; margin-bottom: 8px; }
 .rsvp-toggle-btn { flex: 1; width: auto; text-align: center; }
 
+.rsvp-later-btn {
+    display: block; margin-top: 10px; background: none; border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: .58rem; font-weight: 300;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink2);
+    padding: 6px 0; transition: color .18s;
+}
+.rsvp-later-btn:hover { color: var(--ink); text-decoration: underline; }
+
 .rsvp-checkboxes {
     width: 100%; max-width: 340px; display: flex; flex-wrap: wrap; gap: 8px;
     justify-content: center; margin: 10px 0 12px;
@@ -697,10 +763,6 @@ h2 {
     transition: border-color .2s;
 }
 .rsvp-textarea:focus { border-color: var(--ink2); }
-
-/* Bottoni <button> con classe .btn (es. "Conferma la tua
-   presenza") ereditano lo stile ma serve reset base browser. */
-button.btn { cursor: pointer; font: inherit; }
 
 /* ════════════════════════════════════════
    INVITATI — pannello RSVP riservato agli sposi
@@ -766,6 +828,7 @@ button.btn { cursor: pointer; font: inherit; }
        si stringono un po' per restare tutti su una riga. */
     .gal-dots { gap: 5px; }
     .gal-dot  { width: 6px; height: 6px; }
+    .btn { min-width: 130px; }
 }
 
 @media (max-width: 380px) {
