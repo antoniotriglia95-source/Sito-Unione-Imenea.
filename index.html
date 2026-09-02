@@ -48,7 +48,7 @@
         <div class="bg"></div>
         <div class="txt" style="--t:12%; --l:50%; --w:min(70vw,380px)">
             <h1>Antonio & Giulia</h1>
-            <p class="date">3 · luglio · 2027</p>
+            <p class="date date-strong">3 · luglio · 2027</p>
             <p class="body">Benvenuti nel sito del nostro matrimonio.<br>Scorri per scoprire tutti i dettagli.</p>
             <div id="countdown">
                 <span class="cunit"><b id="gg">--</b><small>giorni</small></span>
@@ -205,11 +205,14 @@
             <p class="body">Santuario di Santa Maria del Monte<br>Varese</p>
             <p class="label" style="margin-top:.7em">Ricevimento</p>
             <p class="body">Villa Borghi · Varano Borghi, VA</p>
-            <p class="note">Parcheggia qui: da qui parte la navetta per la chiesa.<br>Per pernottare contatta la reception di Villa Borghi.</p>
-            <div class="btns">
+            <div class="btns-grid">
                 <a href="https://maps.app.goo.gl/Hn8XA9ZxA6RnSPSF7" class="btn" target="_blank" rel="noopener">⛪ 📍 Chiesa</a>
                 <a href="https://maps.app.goo.gl/8pRVQGBtmvEubfcb7" class="btn" target="_blank" rel="noopener">🏡 📍 Villa</a>
-                <a href="https://maps.app.goo.gl/6WZkWdti2MfBTt4M6?g_st=ac" class="btn" target="_blank" rel="noopener">🅿️ Parcheggio</a>
+                <a href="https://maps.app.goo.gl/6WZkWdti2MfBTt4M6?g_st=ac" class="btn" target="_blank" rel="noopener">🚌 Navetta</a>
+                <a href="https://maps.app.goo.gl/KBuDSqW4Kyey41eE8?g_st=ac" class="btn" target="_blank" rel="noopener">🅿️ Parch. Sacro Monte</a>
+            </div>
+            <p class="note">🚌 La navetta parte dal parcheggio di Villa Borghi verso la chiesa. In alternativa puoi parcheggiare direttamente al Sacro Monte.<br>Per pernottare contatta la reception di Villa Borghi.</p>
+            <div class="btns" style="margin-top:14px">
                 <button type="button" class="btn" id="rsvp-open-btn">💌 Conferma presenza</button>
             </div>
         </div>
@@ -591,6 +594,8 @@ function initGallery() {
         sync();
     }
 
+    let counterFadeTimer = null;
+
     function sync() {
         const onCover  = current === 0;
         const photoIdx = current - 1;
@@ -602,6 +607,17 @@ function initGallery() {
         if (counter) {
             counter.textContent = onCover ? '' : `${photoIdx + 1} / ${photoCount}`;
             counter.classList.toggle('gal-ui-hidden', onCover);
+
+            // Il numero compare a ogni cambio foto e poi
+            // sparisce da solo dopo un istante, così non
+            // resta mai a coprire la foto stabilmente.
+            clearTimeout(counterFadeTimer);
+            counter.classList.remove('gal-counter-faded');
+            if (!onCover) {
+                counterFadeTimer = setTimeout(() => {
+                    counter.classList.add('gal-counter-faded');
+                }, 1400);
+            }
         }
 
         const prev = document.getElementById('gal-prev');
