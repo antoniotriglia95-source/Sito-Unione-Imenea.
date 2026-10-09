@@ -486,4 +486,352 @@ h2 {
     font-family: 'Josefin Sans', sans-serif; font-size: .58rem;
     letter-spacing: .2em; color: white;
     background: rgba(0,0,0,.28); backdrop-filter: blur(4px);
-    
+    padding: 4px 11px; border-radius: 999px;
+    transition: opacity .3s ease;
+}
+.gal-counter.gal-ui-hidden { opacity: 0; }
+.gal-counter.gal-counter-faded { opacity: 0; }
+
+/* ════════════════════════════════════════
+   SEZIONI PAPIRO  (Quiz)
+
+   Sfondo: il "cielo" del primo disegno (luna + stelle,
+   ritagliato sopra alla barca) — stesso elemento
+   illustrato del resto del sito, ma senza ripetere
+   la scena intera. Si ripete verticalmente per coprire
+   qualunque altezza di schermo: essendo perlopiù
+   carta bianca con poche stelle sparse, la ripetizione
+   è impercettibile.
+════════════════════════════════════════ */
+.slide--papiro {
+    background-image:
+        radial-gradient(ellipse 65% 50% at 15% 85%, rgba(170,188,204,.10) 0%, transparent 100%),
+        radial-gradient(ellipse 55% 45% at 85% 10%, rgba(210,195,178,.08) 0%, transparent 100%),
+        url('cielo-stelle.jpg');
+    background-repeat: no-repeat, no-repeat, repeat-y;
+    background-size: 100% 100%, 100% 100%, 100% auto;
+    background-position: center, center, center top;
+    display: flex; align-items: center; justify-content: center;
+}
+.papiro-card {
+    width: min(92vw, 680px); max-height: calc(100svh - var(--nav-h) - 36px);
+    background: var(--bg-cream); border: 1px solid rgba(46,64,85,.10); border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(46,64,85,.05), 0 12px 44px rgba(46,64,85,.07);
+    padding: clamp(22px, 4svh, 42px) clamp(20px, 5vw, 48px);
+    display: flex; flex-direction: column; align-items: center; overflow-y: auto;
+    opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;
+}
+.papiro-card.visible { opacity: 1; transform: translateY(0); }
+.papiro-title {
+    font-family: 'WindSong', cursive; font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 4px;
+}
+.papiro-sub {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(.92rem, 2.2vw, 1.1rem);
+    font-style: italic; font-weight: 500; color: var(--ink2); margin-bottom: 18px;
+}
+
+/* ════════════════════════════════════════
+   QUIZ — interattivo, una domanda alla volta
+════════════════════════════════════════ */
+.papiro-card--quiz { text-align: center; }
+.quiz-mark {
+    font-family: 'WindSong', cursive; font-size: clamp(3.4rem, 10vw, 5.4rem);
+    font-weight: 500; color: var(--ink2); line-height: 1; margin-bottom: 4px; opacity: .50;
+}
+.quiz-divider { width: 40px; height: 1px; background: rgba(96,112,128,.28); margin: 14px auto; }
+
+.quiz-step { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.quiz-step--center { gap: 10px; padding: 10px 0; }
+
+.quiz-intro {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1.02rem, 2.5vw, 1.18rem); color: var(--ink); line-height: 1.55;
+    margin-bottom: 18px;
+}
+
+.quiz-input {
+    display: block; width: 100%; max-width: 340px; padding: 11px 14px; margin-bottom: 8px;
+    background: white; border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
+    text-align: center; font-family: 'Josefin Sans', sans-serif;
+    font-size: .92rem; letter-spacing: .03em; color: var(--ink);
+    outline: none; transition: border-color .2s; min-height: 44px;
+}
+.quiz-input:focus { border-color: var(--ink2); }
+
+.quiz-error {
+    display: none; margin-bottom: 10px; font-family: 'Josefin Sans', sans-serif;
+    font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: #8b2a2a;
+}
+
+.quiz-btn {
+    display: block; width: 100%; max-width: 340px; min-height: 44px; margin-top: 6px;
+    background: var(--ink); color: white; border: none; border-radius: 3px;
+    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 300;
+    letter-spacing: .22em; text-transform: uppercase; cursor: pointer; transition: background .2s, opacity .2s;
+}
+.quiz-btn:hover:not(:disabled) { background: #1e2e3f; }
+.quiz-btn:disabled { opacity: .4; cursor: default; }
+
+.quiz-progress {
+    width: 100%; height: 3px; background: rgba(46,64,85,.12);
+    border-radius: 99px; overflow: hidden; margin-bottom: 10px;
+}
+.quiz-progress-fill {
+    height: 100%; width: 0%; background: linear-gradient(90deg, var(--ink2), var(--ink));
+    border-radius: 99px; transition: width .4s ease;
+}
+.quiz-counter {
+    font-family: 'Josefin Sans', sans-serif; font-size: .58rem; font-weight: 300;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); margin-bottom: 14px;
+}
+.quiz-question {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1.2rem, 3.3vw, 1.5rem); color: var(--ink); line-height: 1.4;
+    margin-bottom: 18px;
+}
+
+.quiz-options { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+.quiz-option {
+    width: 100%; padding: 11px 16px; background: rgba(46,64,85,.04);
+    border: 1px solid rgba(46,64,85,.14); border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1rem, 2.4vw, 1.12rem); color: var(--ink); text-align: left;
+    cursor: pointer; transition: background .18s, border-color .18s;
+}
+.quiz-option:hover { background: rgba(46,64,85,.08); }
+.quiz-option.selected {
+    background: var(--ink); color: white; border-color: var(--ink);
+}
+.quiz-option:focus-visible { outline: 2px solid var(--ink2); outline-offset: 2px; }
+
+.quiz-result-score {
+    font-family: 'WindSong', cursive; font-size: clamp(2.6rem, 8vw, 4rem);
+    font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 6px;
+}
+.quiz-result-msg {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1rem, 2.4vw, 1.15rem); color: var(--ink2); line-height: 1.55;
+}
+
+/* ════════════════════════════════════════
+   CLASSIFICA — riservata agli sposi
+   Overlay a schermo intero, nascosto di default
+   e mostrato solo con #classifica nell'URL +
+   password dedicata. Nessun link visibile nel sito.
+════════════════════════════════════════ */
+#classifica-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#classifica-overlay.open { display: flex; }
+
+.classifica-box {
+    position: relative; width: min(92vw, 460px); max-height: 84svh; overflow-y: auto;
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 30px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.classifica-close {
+    position: absolute; top: 12px; right: 14px; width: 30px; height: 30px;
+    background: transparent; border: none; color: var(--ink2);
+    font-size: 1rem; cursor: pointer; line-height: 1;
+}
+
+#classifica-count {
+    margin-bottom: 18px;
+}
+
+#classifica-list-wrap { width: 100%; margin-bottom: 14px; }
+
+#classifica-step-detail { display: flex; flex-direction: column; align-items: center; }
+
+.classifica-table { width: 100%; border-collapse: collapse; text-align: left; }
+.classifica-table tr { cursor: pointer; transition: background .15s; }
+.classifica-table tr:hover { background: rgba(46,64,85,.05); }
+.classifica-table td {
+    padding: 9px 6px; border-bottom: 1px solid rgba(46,64,85,.1);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .96rem; color: var(--ink);
+}
+.classifica-pos { width: 28px; font-family: 'Josefin Sans', sans-serif; font-style: normal; font-size: .8rem; color: var(--ink2); }
+.classifica-punti { text-align: right; font-style: normal; font-family: 'Josefin Sans', sans-serif; font-size: .82rem; letter-spacing: .04em; }
+.classifica-gold  .classifica-pos { color: #a8842a; }
+.classifica-silver .classifica-pos { color: #7c8896; }
+.classifica-bronze .classifica-pos { color: #a06a3e; }
+
+.classifica-tap-hint {
+    margin-top: 4px; text-align: center;
+    font-family: 'Josefin Sans', sans-serif; font-size: .56rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); opacity: .7;
+}
+
+/* Vista dettaglio: risposte di un singolo invitato,
+   domanda per domanda, con evidenza corretto/sbagliato. */
+.classifica-back {
+    align-self: flex-start; background: none; border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: .6rem; font-weight: 300;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink2);
+    margin-bottom: 14px; padding: 4px 0;
+}
+.classifica-back:hover { color: var(--ink); }
+
+#classifica-detail-score { margin-bottom: 18px; }
+
+#classifica-detail-list { width: 100%; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+.classifica-detail-item {
+    padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(46,64,85,.1);
+    background: rgba(46,64,85,.03);
+}
+.classifica-detail-item.is-correct { border-left: 3px solid #4a7a52; }
+.classifica-detail-item.is-wrong   { border-left: 3px solid #a13d3d; }
+.classifica-detail-q {
+    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 400;
+    letter-spacing: .04em; color: var(--ink2); margin-bottom: 4px;
+}
+.classifica-detail-a {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .96rem; color: var(--ink);
+}
+.classifica-detail-correct {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .84rem; color: #a13d3d; margin-top: 2px;
+}
+
+/* ════════════════════════════════════════
+   RSVP — popup conferma presenza
+   Stesso guscio a schermo intero della classifica
+   (overlay scuro + card cream centrata), riusa le
+   classi .quiz-input / .quiz-btn / .quiz-error /
+   .quiz-option / .quiz-result-msg / .label già definite.
+════════════════════════════════════════ */
+#rsvp-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#rsvp-overlay.open { display: flex; }
+
+.rsvp-box {
+    position: relative; width: min(92vw, 460px); max-height: 88svh; overflow-y: auto;
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 30px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.rsvp-close {
+    position: absolute; top: 12px; right: 14px; width: 30px; height: 30px;
+    background: transparent; border: none; color: var(--ink2);
+    font-size: 1rem; cursor: pointer; line-height: 1;
+}
+
+.rsvp-step { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 6px; }
+.rsvp-step--center { gap: 10px; padding: 10px 0; }
+
+.rsvp-toggle { width: 100%; max-width: 340px; display: flex; gap: 8px; margin-bottom: 8px; }
+.rsvp-toggle-btn { flex: 1; width: auto; text-align: center; }
+
+.rsvp-later-btn {
+    display: block; margin-top: 10px; background: none; border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: .58rem; font-weight: 300;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink2);
+    padding: 6px 0; transition: color .18s;
+}
+.rsvp-later-btn:hover { color: var(--ink); text-decoration: underline; }
+
+.rsvp-checkboxes {
+    width: 100%; max-width: 340px; display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin: 10px 0 12px;
+}
+.rsvp-check {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 12px; background: rgba(46,64,85,.04); border: 1px solid rgba(46,64,85,.14);
+    border-radius: 999px; font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-weight: 500; font-size: .98rem; color: var(--ink); cursor: pointer;
+}
+.rsvp-check input { accent-color: var(--ink); cursor: pointer; }
+
+.rsvp-textarea {
+    display: block; width: 100%; max-width: 340px; min-height: 64px; padding: 10px 14px; margin-bottom: 10px;
+    background: white; border: 1px solid rgba(46,64,85,.2); border-radius: 3px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .92rem; color: var(--ink); resize: vertical; outline: none;
+    transition: border-color .2s;
+}
+.rsvp-textarea:focus { border-color: var(--ink2); }
+
+/* ════════════════════════════════════════
+   INVITATI — pannello RSVP riservato agli sposi
+   Stesso guscio della classifica.
+════════════════════════════════════════ */
+#invitati-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(46,64,85,.55);
+    align-items: center; justify-content: center; padding: 20px;
+}
+#invitati-overlay.open { display: flex; }
+
+.invitati-box {
+    position: relative; width: min(92vw, 460px); max-height: 84svh; overflow-y: auto;
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 30px;
+    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+.invitati-close {
+    position: absolute; top: 12px; right: 14px; width: 30px; height: 30px;
+    background: transparent; border: none; color: var(--ink2);
+    font-size: 1rem; cursor: pointer; line-height: 1;
+}
+
+#invitati-summary { margin-bottom: 18px; }
+#invitati-list-wrap { width: 100%; margin-bottom: 14px; text-align: left; }
+
+.invitati-group-title {
+    font-family: 'Josefin Sans', sans-serif; font-size: .62rem; font-weight: 400;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink2);
+    margin-bottom: 8px; text-align: center;
+}
+.invitati-person {
+    padding: 9px 12px; margin-bottom: 7px; border-radius: 4px;
+    border: 1px solid rgba(46,64,85,.1); background: rgba(46,64,85,.03);
+}
+.invitati-nome {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .96rem; color: var(--ink);
+}
+.invitati-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.invitati-chip {
+    font-family: 'Josefin Sans', sans-serif; font-size: .56rem; font-weight: 400;
+    letter-spacing: .04em; color: var(--ink2);
+    background: rgba(46,64,85,.08); border-radius: 999px; padding: 3px 9px;
+}
+.invitati-note {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .84rem; color: var(--ink2); margin-top: 5px;
+}
+
+/* ════════════════════════════════════════
+   MOBILE ≤ 600px
+════════════════════════════════════════ */
+@media (max-width: 600px) {
+    :root { --nav-h: 50px; }
+    .nav-links { display: none; }
+    #navbar { padding: 0 16px; }
+    #dots { right: 13px; }
+    .papiro-card { padding: 20px 16px 16px; }
+    .gal-arrow { width: 34px; height: 34px; opacity: .7; }
+    /* Con 15 foto i puntini sono 15: su schermi stretti
+       si stringono un po' per restare tutti su una riga. */
+    .gal-dots { gap: 5px; }
+    .gal-dot  { width: 6px; height: 6px; }
+    .btn { min-width: 130px; }
+}
+
+@media (max-width: 380px) {
+    .lock-box { padding: 36px 20px 28px; }
+}
+
+/* Rispetta la preferenza di movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+    .bg { transition: none !important; }
+}
