@@ -352,18 +352,20 @@ h2 {
 #iban-overlay.open { display: flex; }
 
 .iban-popup-box {
-    position: relative; width: min(92vw, 420px);
-    background: var(--bg-cream); border-radius: 6px; padding: 40px 26px 34px;
+    position: relative; width: min(96vw, 480px);
+    background: var(--bg-cream); border-radius: 6px; padding: 40px 14px 34px;
     text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25);
 }
 
 .iban-popup-value {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
-    font-weight: 400; letter-spacing: .06em; word-break: break-all;
+    /* IBAN sempre su una riga sola: niente a capo, carattere
+       che si adatta alla larghezza dello schermo. */
+    font-size: clamp(.8rem, 3.9vw, 1.3rem);
+    font-weight: 400; letter-spacing: .02em; white-space: nowrap; overflow-x: auto;
     color: var(--ink);
     background: white; border: 1px solid rgba(46,64,85,.16); border-radius: 4px;
-    padding: 14px 12px; margin: 22px 0 14px;
+    padding: 14px 8px; margin: 22px 0 14px;
 }
 
 .iban-popup-holder {
@@ -742,6 +744,10 @@ h2 {
 .rsvp-checkboxes {
     width: 100%; max-width: 340px; display: flex; flex-wrap: wrap; gap: 8px;
     justify-content: center; margin: 10px 0 12px;
+}
+.rsvp-sub {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: .92rem; color: var(--ink2); margin-bottom: 10px;
 }
 .rsvp-check {
     display: inline-flex; align-items: center; gap: 6px;
