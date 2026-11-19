@@ -68,9 +68,8 @@
          verso destra. Swipe ↑ passa alla sezione dopo.
          Foto: 1..14 + BARCELLONA (tra la 4 e la 5) = 15.
 
-         NB: didascalie (.gal-caption) ancora da
-         aggiornare con i nuovi testi di Antonio —
-         per ora sono le stesse di prima.
+         Didascalie (.gal-caption) aggiornate con i
+         testi scelti da Antonio e Giulia.
     ════════════════════════════════════ -->
     <section id="s2" class="slide">
 
@@ -112,22 +111,22 @@
 
             <div class="gal-slide">
                 <img src="4.jpg" alt="Antonio e Giulia si baciano, i primi tempi insieme" loading="lazy" decoding="async">
-                <p class="gal-caption">I primi baci a capodanno 🎆</p>
+                <p class="gal-caption">Capodanno 2016 🎆</p>
             </div>
 
             <div class="gal-slide">
                 <img src="BARCELLONA.jpg" alt="Antonio e Giulia si baciano sulla terrazza di Casa Batlló a Barcellona" loading="lazy" decoding="async">
-                <p class="gal-caption">Primo viaggio a Barcellona ✈️</p>
+                <p class="gal-caption">Barcellona 2016 ✈️</p>
             </div>
 
             <div class="gal-slide">
                 <img src="5.jpg" alt="Antonio e Giulia da ragazzi nella scultura a cuore di Verona" loading="lazy" decoding="async">
-                <p class="gal-caption">Verona, dove il nostro cuore ha preso forma 💗</p>
+                <p class="gal-caption">Verona, la nostra prima gita insieme 💗</p>
             </div>
 
             <div class="gal-slide">
                 <img src="6.jpg" alt="Antonio e Giulia nella scultura a cuore davanti all'Arena di Verona" loading="lazy" decoding="async">
-                <p class="gal-caption">Lo stesso cuore, la stessa Verona, ancora noi 💕</p>
+                <p class="gal-caption">Stesso posto, qualche anno dopo: stavolta dal lato giusto 💕</p>
             </div>
 
             <div class="gal-slide">
@@ -137,17 +136,17 @@
 
             <div class="gal-slide">
                 <img src="8.jpg" alt="Antonio e Giulia al tornio durante una lezione di ceramica" loading="lazy" decoding="async">
-                <p class="gal-caption">Nuove passioni, un tornio alla volta 🏺</p>
+                <p class="gal-caption">Nuove passioni scoperte insieme 🏺</p>
             </div>
 
             <div class="gal-slide">
                 <img src="9.jpg" alt="Antonio e Giulia mangiano un cannolo per le strade della Sicilia" loading="lazy" decoding="async">
-                <p class="gal-caption">La Sicilia, i cannoli, e la nostra vera passione: mangiare 🍮</p>
+                <p class="gal-caption">La nostra vera passione: mangiare 🍮</p>
             </div>
 
             <div class="gal-slide">
                 <img src="10.jpg" alt="Antonio e Giulia in controluce davanti a un grande cerchio luminoso" loading="lazy" decoding="async">
-                <p class="gal-caption">Due sagome, una sola luce ✨</p>
+                <p class="gal-caption">In mezzo a tutta questa luce, vedo solo te ✨</p>
             </div>
 
             <div class="gal-slide">
@@ -162,7 +161,7 @@
 
             <div class="gal-slide">
                 <img src="13.jpg" alt="Antonio e Giulia si baciano in spiaggia al tramonto" loading="lazy" decoding="async">
-                <p class="gal-caption">Il tramonto che sa di noi 🌅</p>
+                <p class="gal-caption">Ogni tramonto è più bello se lo guardo con te 🌅</p>
             </div>
 
             <div class="gal-slide">
@@ -291,7 +290,7 @@
         <div class="txt" style="--t:10%; --l:30%; --w:min(46vw,240px)">
             <h2>Il Regalo</h2>
             <p class="body">Il regalo più grande è avervi con noi.</p>
-            <p class="body" style="margin-top:.7em">Se avete piacere di farci un pensiero, il nostro conto è questo:</p>
+            <p class="body" style="margin-top:.7em">Se avete piacere di farci un pensiero, potete farlo qui:</p>
             <div class="btns" style="margin-top:18px">
                 <button type="button" class="btn" id="iban-open-btn">💳 IBAN</button>
             </div>
@@ -310,7 +309,6 @@
         <button type="button" class="rsvp-close" id="iban-close" aria-label="Chiudi">✕</button>
 
         <p class="lock-title" style="font-size:2.2rem">IBAN</p>
-        <p class="lock-hint">per chi preferisse un bonifico</p>
 
         <p class="iban-popup-value" id="iban-popup-value">IT23L0311510801000000016050</p>
         <button type="button" class="quiz-btn" id="iban-copy-btn">Copia IBAN</button>
@@ -351,7 +349,15 @@
 
         <!-- STEP · DETTAGLI (solo se presente) -->
         <div class="rsvp-step" id="rsvp-step-details" style="display:none">
-            <p class="label">Hai restrizioni alimentari?</p>
+            <p class="label">Pensi di aver bisogno della navetta per venire al Sacro Monte?</p>
+            <p class="rsvp-sub">stadio di Varese ⇄ Sacro Monte, andata e ritorno</p>
+            <div class="rsvp-toggle">
+                <button type="button" class="quiz-option rsvp-toggle-btn" id="rsvp-navetta-yes-btn">🚌 Sì</button>
+                <button type="button" class="quiz-option rsvp-toggle-btn" id="rsvp-navetta-no-btn">No, grazie</button>
+            </div>
+            <p class="quiz-error" id="rsvp-navetta-error">Dicci se ti serve la navetta</p>
+
+            <p class="label" style="margin-top:14px">Hai restrizioni alimentari?</p>
             <div class="rsvp-checkboxes" id="rsvp-checkboxes">
                 <label class="rsvp-check"><input type="checkbox" value="Vegetariano"> Vegetariano</label>
                 <label class="rsvp-check"><input type="checkbox" value="Vegano"> Vegano</label>
@@ -1012,6 +1018,7 @@ function classificaBackToList() {
 const RSVP_RESTRIZIONI_OPZIONI = ["Vegetariano", "Vegano", "Senza glutine", "Senza lattosio", "Altro"];
 
 let rsvpPresente = null;   // true / false — scelto nello step 1
+let rsvpNavetta  = null;   // true / false — scelto nello step 2 (solo se presente)
 
 function rsvpShowStep(id) {
     document.querySelectorAll('#rsvp-overlay .rsvp-step').forEach(el => {
@@ -1027,8 +1034,16 @@ function initRsvp() {
     document.getElementById('rsvp-yes-btn').addEventListener('click', () => rsvpSelectPresence(true));
     document.getElementById('rsvp-no-btn').addEventListener('click', () => rsvpSelectPresence(false));
     document.getElementById('rsvp-ask-next-btn').addEventListener('click', rsvpAskNext);
+    document.getElementById('rsvp-navetta-yes-btn').addEventListener('click', () => rsvpSelectNavetta(true));
+    document.getElementById('rsvp-navetta-no-btn').addEventListener('click', () => rsvpSelectNavetta(false));
 
-    document.getElementById('rsvp-submit-btn').addEventListener('click', rsvpSubmit);
+    document.getElementById('rsvp-submit-btn').addEventListener('click', () => {
+        if (rsvpNavetta === null) {
+            document.getElementById('rsvp-navetta-error').style.display = 'block';
+            return;
+        }
+        rsvpSubmit();
+    });
     document.getElementById('rsvp-retry-btn').addEventListener('click', rsvpSubmit);
 
     // Apertura automatica: NON all'ingresso nel sito, ma solo
@@ -1070,13 +1085,22 @@ function rsvpClose() {
     document.getElementById('rsvp-overlay').classList.remove('open');
 }
 
+function rsvpSelectNavetta(val) {
+    rsvpNavetta = val;
+    document.getElementById('rsvp-navetta-yes-btn').classList.toggle('selected', val === true);
+    document.getElementById('rsvp-navetta-no-btn').classList.toggle('selected', val === false);
+    document.getElementById('rsvp-navetta-error').style.display = 'none';
+}
+
 function rsvpResetForm() {
     rsvpPresente = null;
+    rsvpNavetta = null;
+    document.getElementById('rsvp-navetta-error').style.display = 'none';
     document.getElementById('rsvp-name').value = '';
     document.getElementById('rsvp-ask-error').style.display = 'none';
     document.getElementById('rsvp-notes').value = '';
     document.querySelectorAll('#rsvp-checkboxes input[type=checkbox]').forEach(c => c.checked = false);
-    document.querySelectorAll('#rsvp-yes-btn, #rsvp-no-btn')
+    document.querySelectorAll('#rsvp-yes-btn, #rsvp-no-btn, #rsvp-navetta-yes-btn, #rsvp-navetta-no-btn')
         .forEach(b => b.classList.remove('selected'));
     document.getElementById('rsvp-ask-next-btn').textContent = 'Avanti';
     rsvpShowStep('rsvp-step-ask');
@@ -1114,6 +1138,7 @@ async function rsvpSubmit() {
     const data = { nome: name, presente: !!rsvpPresente };
 
     if (rsvpPresente) {
+        data.navetta = !!rsvpNavetta;
         data.restrizioni = Array.from(document.querySelectorAll('#rsvp-checkboxes input:checked')).map(c => c.value);
         const note = document.getElementById('rsvp-notes').value.trim();
         if (note) data.note = note;
@@ -1188,6 +1213,13 @@ function invitatiPersonRow(r) {
         const chips = document.createElement('div');
         chips.className = 'invitati-chips';
 
+        if (r.navetta) {
+            const c = document.createElement('span');
+            c.className = 'invitati-chip';
+            c.textContent = '🚌 Navetta';
+            chips.appendChild(c);
+        }
+
         (r.restrizioni || []).forEach(rr => {
             const c = document.createElement('span');
             c.className = 'invitati-chip';
@@ -1222,7 +1254,8 @@ async function invitatiLoad() {
         const presenti = rows.filter(r => r.presente).sort((a, b) => a.ts - b.ts);
         const assenti  = rows.filter(r => !r.presente).sort((a, b) => a.ts - b.ts);
 
-        summaryEl.textContent = `${presenti.length} confermati · ${assenti.length} assenti`;
+        const inNavetta = presenti.filter(r => r.navetta).length;
+        summaryEl.textContent = `${presenti.length} confermati · ${assenti.length} assenti · ${inNavetta} in navetta`;
 
         const titlePresenti = document.createElement('p');
         titlePresenti.className = 'invitati-group-title';
@@ -1331,6 +1364,7 @@ async function invitatiLoad() {
             rows.push({
                 nome: data.nome || d.id,
                 presente: !!data.presente,
+                navetta: !!data.navetta,
                 restrizioni: Array.isArray(data.restrizioni) ? data.restrizioni : [],
                 note: data.note || '',
                 ts: data.timestamp ? data.timestamp.toMillis() : 0
